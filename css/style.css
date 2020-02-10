@@ -14,21 +14,6 @@ body {
     height: 170px;
     display: block;
     position: absolute;
-    background-image: url("../img/der-0-0.png");
-}
-
-.andaDerecha {
-    animation: andaDer linear 0.1s infinite;
-}
-
-@keyframes andaDer {
-    0% {
-        background-image: url("../img/der-0-1.png");
-    }
-
-    100% {
-        background-image: url("../img/der-0-2.png");
-    }
-
-
+    background-image: url("../img/caperucita/idle_right_0.png");
+    background-size: contain;
 }

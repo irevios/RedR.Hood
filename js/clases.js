@@ -14,6 +14,8 @@ class Personaje {
         this.puntosDer = pCaperucitaDer;
         this.puntosIzq = pCaperucitaIzq;
         this.puntos = this.puntosDer;
+        this.direccion = "right";
+        this.img = "idle_" + this.direccion + "_0";
     }
     colisionaPorAbajo(px) {
         if (negro(personaje.izquierda, personaje.arriba + px, this.puntos)) {
@@ -50,34 +52,48 @@ class Personaje {
         this.velocidadY = -10;
         this.actualizaCoordenadas();
     }
-    moverAbajo() {
-        this.velocidadY = 0;
-        this.actualizaCoordenadas();
+    agachate() {
+        if (!pressedRight && !pressedLeft) {
+            this.estatica("down_" + this.direccion + "_0");
+        }
     }
     moverDerecha() {
         this.puntos = this.puntosDer;
-        this.animacionDerecha();
         this.velocidadX = 10;
+        this.animacion(pressedDown ? "down_right" : "run_right");
+        this.direccion = "right";
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
         this.actualizaCoordenadas();
     }
     moverIzquierda() {
         this.puntos = this.puntosIzq;
         this.velocidadX = -10;
+        this.direccion = "left";
+        this.animacion(pressedDown ? "down_left" : "run_left");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
         this.actualizaCoordenadas();
     }
     salta() {
         if (this.colisionaPorAbajo(10)) {
             this.velocidadY = -30;
+            this.estatica("jump_" + this.direccion + "_0");
         }
         this.actualizaCoordenadas();
+    }
+    bayesta() {
+        if(!pressedRight && !pressedLeft)
+        this.estatica("arr_" + this.direccion + "_0");
+    }
+    pulsera() {
+        if(!pressedRight && !pressedLeft)
+        this.estatica("fire_" + this.direccion + "_0");
     }
     actualizaCoordenadas() {
         this.derecha = this.izquierda + this.anchura;
         this.abajo = this.arriba + this.altura;
     }
     gravedad() {
+        this.compruebaImg();
         if (!this.colisionaPorAbajo(this.velocidadY + this.gravity)) {
             this.gravity = 3;
             this.velocidadY += this.gravity;
@@ -87,9 +103,21 @@ class Personaje {
             this.velocidadY = 0;
         }
         this.actualizaCoordenadas();
+        
 
     }
-    animacionDerecha(){
-        //this.capa.addClass("andaDerecha");
+    animacion(img) {
+        this.capa.css("background-image", "url('img/caperucita/" + img + ".gif')");
+        this.img = img;
+    }
+    estatica(img) {
+        this.capa.css("background-image", "url('img/caperucita/" + img + ".png')");
+        this.img = img;
+    }
+    compruebaImg() {
+        if ((!pressedUp && !pressedRight && !pressedDown && !pressedLeft && !spacePressed && !qPressed && !ePressed && this.colisionaPorAbajo(10)
+            || this.img == ("jump_" + this.direccion + "_0")) && this.colisionaPorAbajo(10) && !qPressed && !ePressed) {
+            this.estatica("idle_" + this.direccion + "_0");
+        }
     }
 }

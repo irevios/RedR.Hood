@@ -5,6 +5,9 @@ let pressedRight = false;
 let pressedDown = false;
 let pressedLeft = false;
 let spacePressed = false;
+let qPressed = false;
+let ePressed = false;
+
 $(document).ready(function() {
     cargaCanvas();
     personaje = new Personaje($('#personaje'));
@@ -42,6 +45,12 @@ function controlaTeclas() {
             case 32:
                 spacePressed = true;
                 break;
+            case 81:
+                qPressed = true;
+                break;
+            case 69:
+                ePressed = true;
+                break;
         }
 
         mueve();
@@ -67,6 +76,12 @@ function controlaTeclas() {
             case 32:
                 spacePressed = false;
                 break;
+            case 81:
+                qPressed = false;
+                break;
+            case 69:
+                ePressed = false;
+                break;
         }
 
     });
@@ -78,7 +93,6 @@ function mueve() {
             personaje.moverIzquierda();
         } else if (!personaje.colisionaPorIzquierdaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(10)) {
             personaje.moverArriba();
-            console.log("inclinadoIzquierda");
             personaje.moverIzquierda();
         } else if (personaje.colisionaPorIzquierdaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(10)) {
             personaje.velocidadX = -10;
@@ -95,7 +109,6 @@ function mueve() {
             personaje.moverDerecha();
         } else if (!personaje.colisionaPorDerechaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(10)) {
             personaje.moverArriba();
-            console.log("inclinadoIzquierda");
             personaje.moverDerecha();
         } else if (personaje.colisionaPorDerechaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(10)) {
             personaje.velocidadX = 10;
@@ -105,14 +118,19 @@ function mueve() {
         personaje.velocidadX = 0;
     }
     if (pressedDown) {
-        if (!personaje.colisionaPorAbajo(5)) {
-
-            personaje.moverAbajo();
-
+        if (personaje.colisionaPorAbajo(5)) {
+            personaje.agachate();
         }
     }
     if (spacePressed) {
         personaje.salta();
         spacePressed = false;
     }
+    if (ePressed) {
+        personaje.pulsera();
+    }
+    if (qPressed) {
+        personaje.bayesta();
+    }
+
 }
