@@ -1,71 +1,48 @@
 "use strict";
-function dibujaFondo(interiorCanvas) {
 
-     // capa1/Grupo
-      interiorCanvas.save();
+function dibujaFondo(interiorCanvas, nivel) {
+    switch (nivel) {
+        case "nivel1-0":
+        dibujaNivel1_0(interiorCanvas);
+        break;
+    }
+}
 
-      // capa1/Grupo/Trazado
+function dibujaNivel1_0(interiorCanvas) {
       interiorCanvas.save();
       interiorCanvas.beginPath();
-      interiorCanvas.moveTo(1.2, 0.4);
-      interiorCanvas.lineTo(1919.6, 0.4);
-      interiorCanvas.bezierCurveTo(1920.0, 0.4, 1920.4, 0.8, 1920.4, 1.2);
-      interiorCanvas.lineTo(1920.4, 1079.6);
-      interiorCanvas.bezierCurveTo(1920.4, 1080.0, 1920.0, 1080.4, 1919.6, 1080.4);
-      interiorCanvas.lineTo(1.2, 1080.4);
-      interiorCanvas.bezierCurveTo(0.8, 1080.4, 0.4, 1080.0, 0.4, 1079.6);
-      interiorCanvas.lineTo(0.4, 1.2);
-      interiorCanvas.bezierCurveTo(0.4, 0.8, 0.8, 0.4, 1.2, 0.4);
-      interiorCanvas.lineTo(1.2, 0.4);
+      interiorCanvas.moveTo(0.5, 0.0);
+      interiorCanvas.lineTo(1920.5, 0.0);
+      interiorCanvas.lineTo(1920.5, 1080.0);
+      interiorCanvas.lineTo(0.5, 1080.0);
+      interiorCanvas.lineTo(0.5, 0.0);
       interiorCanvas.closePath();
       interiorCanvas.fillStyle = "rgb(255, 255, 255)";
       interiorCanvas.fill();
 
-      // capa1/Grupo/Trazado compuesto
       interiorCanvas.beginPath();
-
-      // capa1/Grupo/Trazado compuesto/Trazado
-      interiorCanvas.moveTo(758.0, 0.4);
-      interiorCanvas.lineTo(774.1, 204.6);
-      interiorCanvas.lineTo(849.2, 163.2);
-      interiorCanvas.lineTo(851.7, 15.7);
-      interiorCanvas.lineTo(882.4, 0.4);
-      interiorCanvas.lineTo(758.0, 0.4);
-      interiorCanvas.closePath();
-
-      // capa1/Grupo/Trazado compuesto/Trazado
-      interiorCanvas.moveTo(1203.8, 0.4);
-      interiorCanvas.lineTo(1278.7, 15.7);
-      interiorCanvas.lineTo(1327.8, 403.8);
-      interiorCanvas.lineTo(1374.4, 582.4);
-      interiorCanvas.lineTo(1472.7, 522.8);
-      interiorCanvas.bezierCurveTo(1472.7, 522.8, 1754.7, 486.6, 1770.2, 484.0);
-      interiorCanvas.bezierCurveTo(1775.1, 483.2, 1838.6, 478.5, 1920.4, 472.6);
-      interiorCanvas.lineTo(1920.4, 1.2);
-      interiorCanvas.bezierCurveTo(1920.4, 0.8, 1920.0, 0.4, 1919.6, 0.4);
-      interiorCanvas.lineTo(1203.8, 0.4);
-      interiorCanvas.closePath();
-
-      // capa1/Grupo/Trazado compuesto/Trazado
-      interiorCanvas.moveTo(0.4, 779.4);
-      interiorCanvas.lineTo(0.4, 886.8);
-      interiorCanvas.bezierCurveTo(2.9, 1080.9, -0.1, 1080.9, 67.8, 1080.4);
-      interiorCanvas.lineTo(1919.6, 1080.4);
-      interiorCanvas.bezierCurveTo(1920.0, 1080.4, 1920.4, 1080.0, 1920.4, 1079.6);
-      interiorCanvas.lineTo(1920.4, 839.6);
-      interiorCanvas.bezierCurveTo(1801.7, 866.0, 1659.8, 893.4, 1563.2, 898.0);
-      interiorCanvas.bezierCurveTo(1374.7, 905.5, 1204.9, 823.6, 1007.0, 792.0);
-      interiorCanvas.bezierCurveTo(910.0, 785.6, 814.0, 816.1, 717.2, 825.6);
-      interiorCanvas.bezierCurveTo(488.6, 848.8, 239.5, 872.8, 0.4, 779.4);
+      interiorCanvas.moveTo(0.5, 236.3);
+      interiorCanvas.lineTo(0.5, 1080.0);
+      interiorCanvas.lineTo(1920.5, 1080.0);
+      interiorCanvas.lineTo(1920.5, 955.8);
+      interiorCanvas.bezierCurveTo(1719.9, 956.2, 1540.3, 947.8, 1387.3, 890.1);
+      interiorCanvas.bezierCurveTo(1356.0, 876.1, 1326.3, 865.8, 1295.6, 858.0);
+      interiorCanvas.bezierCurveTo(1270.5, 851.6, 1244.4, 845.9, 1216.6, 841.4);
+      interiorCanvas.bezierCurveTo(1139.1, 824.3, 1065.5, 832.0, 990.1, 838.3);
+      interiorCanvas.bezierCurveTo(946.2, 841.8, 903.8, 843.0, 860.0, 841.9);
+      interiorCanvas.bezierCurveTo(608.9, 835.5, 388.2, 840.9, 205.2, 647.6);
+      interiorCanvas.lineTo(205.3, 647.5);
+      interiorCanvas.lineTo(199.8, 263.3);
+      interiorCanvas.lineTo(165.1, 257.6);
+      interiorCanvas.lineTo(0.5, 236.3);
       interiorCanvas.closePath();
       interiorCanvas.fillStyle = "rgb(0, 0, 0)";
       interiorCanvas.fill();
-      interiorCanvas.lineWidth = 0.7;
+      interiorCanvas.lineWidth = 1.0;
       interiorCanvas.lineJoin = "miter";
-      interiorCanvas.miterLimit = 4.0;
+      interiorCanvas.miterLimit = 15.1;
       interiorCanvas.stroke();
       interiorCanvas.restore();
       interiorCanvas.restore();
-    
-
+      interiorCanvas.restore();
 }

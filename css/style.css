@@ -4,16 +4,28 @@ body {
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    background: #435322;
+    background: #7ac7b7;
 }
 
 #personaje {
-    top: 400px;
-    left: 650px;
+    top: 555px;
+    left: 202px;
     width: 150px;
     height: 170px;
     display: block;
     position: absolute;
     background-image: url("../img/caperucita/idle_right_0.png");
     background-size: contain;
+    z-index: 1;
+}
+
+#fondo{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 0;
+    background-image: url("../img/fondo/nivel1-0.png");
 }

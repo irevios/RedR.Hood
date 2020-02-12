@@ -19,7 +19,6 @@ class Personaje {
     }
     colisionaPorAbajo(px) {
         if (negro(personaje.izquierda, personaje.arriba + px, this.puntos)) {
-            this.velocidadY = 0;
             return true;
         }
         return false;
@@ -49,7 +48,6 @@ class Personaje {
         return negro(personaje.izquierda + pxA, personaje.arriba - pxB, this.puntos);
     }
     moverArriba() {
-        this.velocidadY = -10;
         this.actualizaCoordenadas();
     }
     agachate() {
@@ -75,35 +73,37 @@ class Personaje {
     }
     salta() {
         if (this.colisionaPorAbajo(10)) {
-            this.velocidadY = -30;
+            this.velocidadY = -25;
             this.estatica("jump_" + this.direccion + "_0");
         }
         this.actualizaCoordenadas();
     }
     bayesta() {
-        if(!pressedRight && !pressedLeft)
-        this.estatica("arr_" + this.direccion + "_0");
+        if (!pressedRight && !pressedLeft)
+            this.estatica("arr_" + this.direccion + "_0");
     }
     pulsera() {
-        if(!pressedRight && !pressedLeft)
-        this.estatica("fire_" + this.direccion + "_0");
+        if (!pressedRight && !pressedLeft)
+            this.estatica("fire_" + this.direccion + "_0");
     }
     actualizaCoordenadas() {
         this.derecha = this.izquierda + this.anchura;
         this.abajo = this.arriba + this.altura;
     }
     gravedad() {
+        console.log(this.velocidadY);
         this.compruebaImg();
         if (!this.colisionaPorAbajo(this.velocidadY + this.gravity)) {
             this.gravity = 3;
             this.velocidadY += this.gravity;
             this.capa.animate({ top: this.arriba += this.velocidadY, left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
         }
-        if (this.colisionaPorAbajo(this.velocidadY + this.gravity)) {
+        if (this.colisionaPorAbajo(this.velocidadY + this.gravity) && this.velocidadY > 0) {
+            console.log("here1");
             this.velocidadY = 0;
         }
         this.actualizaCoordenadas();
-        
+
 
     }
     animacion(img) {
@@ -115,8 +115,8 @@ class Personaje {
         this.img = img;
     }
     compruebaImg() {
-        if ((!pressedUp && !pressedRight && !pressedDown && !pressedLeft && !spacePressed && !qPressed && !ePressed && this.colisionaPorAbajo(10)
-            || this.img == ("jump_" + this.direccion + "_0")) && this.colisionaPorAbajo(10) && !qPressed && !ePressed) {
+        if ((!pressedUp && !pressedRight && !pressedDown && !pressedLeft && !spacePressed && !qPressed && !ePressed && this.colisionaPorAbajo(10) 
+            || !spacePressed && this.img == ("jump_" + this.direccion + "_0")) && this.colisionaPorAbajo(10) && !qPressed && !ePressed) {
             this.estatica("idle_" + this.direccion + "_0");
         }
     }

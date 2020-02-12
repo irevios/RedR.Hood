@@ -20,25 +20,25 @@ function cargaCanvas() {
     let canvas = document.getElementById("canvas");
     let interiorCanvas = canvas.getContext("2d");
 
-    dibujaFondo(interiorCanvas);
+    dibujaFondo(interiorCanvas,"nivel1-0");
 }
 
 function controlaTeclas() {
     $(document).keydown(function(e) {
         switch (e.keyCode) {
-            case 38:
+            case 87:
                 pressedUp = true;
                 break;
 
-            case 39:
+            case 68:
                 pressedRight = true;
                 break;
 
-            case 40:
+            case 83:
                 pressedDown = true;
                 break;
 
-            case 37:
+            case 65:
                 pressedLeft = true;
                 break;
 
@@ -57,19 +57,19 @@ function controlaTeclas() {
     });
     $(document).keyup(function(e) {
         switch (e.keyCode) {
-            case 38:
+            case 87:
                 pressedUp = false;
                 break;
 
-            case 39:
+            case 68:
                 pressedRight = false;
                 break;
 
-            case 40:
+            case 83:
                 pressedDown = false;
                 break;
 
-            case 37:
+            case 65:
                 pressedLeft = false;
                 break;
 
@@ -101,7 +101,6 @@ function mueve() {
     if (pressedUp) {
         if (!personaje.colisionaPorArriba(10)) {
             personaje.moverArriba();
-            personaje.gravity = 0;
         }
     }
     if (pressedRight) {
@@ -124,7 +123,7 @@ function mueve() {
     }
     if (spacePressed) {
         personaje.salta();
-        spacePressed = false;
+        //spacePressed = false;
     }
     if (ePressed) {
         personaje.pulsera();
