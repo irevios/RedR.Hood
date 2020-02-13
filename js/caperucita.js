@@ -14,6 +14,7 @@ class Caperucita {
         this.velocidadX = 1;
         this.velocidadY = 0;
         this.gravity = 3;
+        this.rectificaciones = 0;
 
         // Colisión
         this.contornoDer = pCaperucitaDer;
@@ -51,6 +52,7 @@ class Caperucita {
         if (enSuelo && this.velocidadY > 0) {
             this.velocidadY = 0;
         }
+        this.moverArriba();
     }
     // Colisiones
     colisionaPorAbajo(px) { return colision(this.izquierda, this.arriba + px, this.contorno, "terreno"); }
@@ -67,7 +69,7 @@ class Caperucita {
         this.mirar = "right";
         this.direccion = "right";
         this.contorno = this.contornoDer;
-        this.velocidadX = 10;
+        this.velocidadX = 5;
         this.animacion(teclas.agacharse.on ? "down_right" : "run_right");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
     }
@@ -75,12 +77,17 @@ class Caperucita {
         this.mirar = "left";
         this.direccion = "left";
         this.contorno = this.contornoIzq;
-        this.velocidadX = -10;
+        this.velocidadX = -5;
         this.animacion(teclas.agacharse.on ? "down_left" : "run_left");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
     }
     moverArriba() { // Evita problemas con las inclinaciones
-        this.velocidadY = -10;
+        if ((this.colisionaPorIzquierda(5) || this.colisionaPorDerecha(5)) && this.rectificaciones < 7) {
+            //this.velocidadY = -5;
+            this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
+            this.rectificaciones++;
+        }
+
     }
     mirarArriba() {
         this.mirar = "up";
@@ -93,7 +100,7 @@ class Caperucita {
     }
     salta() {
         if (this.colisionaPorAbajo(10)) {
-            this.velocidadY = -25;
+            this.velocidadY = -30;
             this.estatica("jump_" + this.direccion + "_0");
         }
     }
@@ -113,6 +120,19 @@ class Caperucita {
         }
     }
 
+    // Objetos
+    recolecta() {
+        if (colision(this.izquierda, this.arriba, this.contorno, "arma")) {
+
+        }
+        if (colision(this.izquierda, this.arriba, this.contorno, "llave")) {
+
+        }
+        if (colision(this.izquierda, this.arriba, this.contorno, "objeto")) {
+
+        }
+    }
+
     // Cambiar imagenes del personaje
     animacion(img) {
         this.capa.css("background-image", "url('img/caperucita/" + img + ".gif')");
@@ -123,9 +143,10 @@ class Caperucita {
         this.img = img;
     }
     compruebaImg() {
-        if ((!teclas.derecha.on && !teclas.agacharse.on && !teclas.izquierda.on && !teclas.saltar.on && !teclas.ataque.on && this.colisionaPorAbajo(10) ||
-                !teclas.saltar.on && this.img == ("jump_" + this.direccion + "_0")) &&
-            this.colisionaPorAbajo(10) && !teclas.ataque.on) {
+        let enSuelo = this.colisionaPorAbajo(10);
+        let nadaPulsado = !teclas.derecha.on && !teclas.agacharse.on && !teclas.izquierda.on;
+        let aterrizando = this.img == ("jump_" + this.direccion + "_0");
+        if ((aterrizando || nadaPulsado) && enSuelo && !teclas.ataque.on && !teclas.saltar.on) {
             this.estatica("idle_" + this.direccion + "_0");
         }
     }

@@ -33,19 +33,20 @@ function controlaTeclas() {
 
 function mueve() {
     if (!teclas.derecha.on && !teclas.izquierda.on) {
-        personaje.velocidadX = 0;
+        personaje.velocidadX = 1;
     }
     if (teclas.izquierda.on) {
         if (teclas.izquierda.t < 100 && teclas.izquierda.t != 0) {
             personaje.estatica("idle_left_0");
             personaje.direccion = "left";
         } else {
-            if (!personaje.colisionaPorIzquierda(10) && personaje.colisionaPorAbajo(10)) {
+            if (!personaje.colisionaPorIzquierda(15) && personaje.colisionaPorAbajo(15)) {
                 personaje.moverIzquierda();
-            } else if (!personaje.colisionaPorIzquierdaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(10)) {
+                personaje.rectificaciones = 0;
+            } else if (!personaje.colisionaPorIzquierdaPuedeArriba(10, 15) && personaje.colisionaPorAbajo(15)) {
                 personaje.moverArriba();
                 personaje.moverIzquierda();
-            } else if (personaje.colisionaPorIzquierdaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(10)) {
+            } else if (personaje.colisionaPorIzquierdaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(15)) {
                 personaje.velocidadX = -10;
             }
         }
@@ -55,20 +56,21 @@ function mueve() {
             personaje.estatica("idle_right_0");
             personaje.direccion = "right";
         } else {
-            if (!personaje.colisionaPorDerecha(10) && personaje.colisionaPorAbajo(10)) {
+            if (!personaje.colisionaPorDerecha(15) && personaje.colisionaPorAbajo(15)) {
                 personaje.moverDerecha();
-            } else if (!personaje.colisionaPorDerechaPuedeArriba(10, 5) && personaje.colisionaPorAbajo(10)) {
+                personaje.rectificaciones = 0;
+            } else if (!personaje.colisionaPorDerechaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(15)) {
                 personaje.moverArriba();
                 personaje.moverDerecha();
-            } else if (personaje.colisionaPorDerechaPuedeArriba(10, 5) && personaje.colisionaPorAbajo(10)) {
+            } else if (personaje.colisionaPorDerechaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(15)) {
                 personaje.velocidadX = 10;
             }
         }
     }
     if (teclas.saltar.on) {
-        personaje.salta();
-        personaje.mirarArriba();
-        teclas.saltar.on = false;
+        if (!personaje.colisionaPorArriba(15) || !personaje.colisionaPorIzquierda(15) || !personaje.colisionaPorDerecha(15)) {
+            personaje.salta();
+        }
     }
     if (teclas.agacharse.on) {
         if (personaje.colisionaPorAbajo(5)) {
