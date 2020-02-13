@@ -5,17 +5,39 @@
     <title>Red R. Hood | The Game</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preload" href="img/fondo/nivel1-0.png" as="image">
 </head>
 
 <body>
+    <!-- Evita que el cambio de imágenes haga parpadear la imagen-->
+    <div class="preload" style="display: none">
+        <img src="img/caperucita/run_left.gif">
+        <img src="img/caperucita/run_right.gif">
+        <img src="img/caperucita/idle_left_0.png">
+        <img src="img/caperucita/idle_right_0.png">
+        <img src="img/caperucita/down_left.gif">
+        <img src="img/caperucita/down_right.gif">
+        <img src="img/caperucita/down_left_0.png">
+        <img src="img/caperucita/down_right_0.png">
+        <img src="img/caperucita/jump_left_0.png">
+        <img src="img/caperucita/jump_right_0.png">
+        <img src="img/caperucita/arr_left_0.png">
+        <img src="img/caperucita/arr_right_0.png">
+        <img src="img/caperucita/fire_left_0.png">
+        <img src="img/caperucita/fire_right_0.png">
+    </div>
+    <!-- Caperucita -->
     <div id="personaje"></div>
+    <!-- Fondo -->
     <div id="fondo"></div>
     <canvas id="canvas" width="1922" height="1081"></canvas>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/dibujaFondo.js"></script>
     <script type="text/javascript" src="js/puntosPersonajes.js"></script>
     <script type="text/javascript" src="js/colisiones.js"></script>
-    <script type="text/javascript" src="js/clases.js"></script>
+    <script type="text/javascript" src="js/caperucita.js"></script>
+    <script type="text/javascript" src="js/enemigos.js"></script>
+    <script type="text/javascript" src="js/controles.js"></script>
     <script type="text/javascript" src="js/principal.js"></script>
 </body>
 
