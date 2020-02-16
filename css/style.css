@@ -5,11 +5,15 @@ body {
     height: 100vh;
     width: 100vw;
     background: #7ac7b7;
+    resize: both;
+    display: block;
+    position: fixed;
+    top: 0;
+    left:0 ;
 }
 
 #personaje {
-    top: 560px;
-    left: 211px;
+    
     width: 150px;
     height: 170px;
     display: block;
@@ -19,14 +23,43 @@ body {
     z-index: 1;
 }
 
-#fondo{
+.rana {
+    width: 70px;
+    height: 68px;
+    display: block;
+    position: absolute;
+    background-image: url("../img/enemigos/rana.gif");
+    background-size: contain;
+    z-index: 1;
+}
+
+#fondo {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-    width: 1920px;
-    height: 1080px;
+    width: 200%;
+    height: 200%;
     z-index: 0;
-   /* background-image: url("../img/fondo/nivel1-0.png");*/
+/*    background-image: url("../img/fondo/nivel0.png");*/
+}
+#overfondo {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    z-index: 3;
+   /* background-image: url("../img/fondo/sobre0.png");*/
 }
 
+#juego {
+    transform-origin: top left;
+    width: 1920px;
+    height: 1080px;
+}
+
+#canvas{
+   /* opacity: 0;*/
+}

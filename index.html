@@ -5,7 +5,8 @@
     <title>Red R. Hood | The Game</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="preload" href="img/fondo/nivel1-0.png" as="image">
+    <link rel="preload" href="img/fondo/nivel0-A-L-N.png" as="image">
+    <link rel="preload" href="img/fondo/sobre0.png" as="image">
 </head>
 
 <body>
@@ -25,16 +26,24 @@
         <img src="img/caperucita/arr_right_0.png">
         <img src="img/caperucita/fire_left_0.png">
         <img src="img/caperucita/fire_right_0.png">
+        <img src="img/fondo/nivel0-N-L-N.png">
+        <img src="img/fondo/nivel1.png">
+        <div class="rana"></div>
     </div>
-    <!-- Caperucita -->
-    <div id="personaje"></div>
-    <!-- Fondo -->
-    <div id="fondo"></div>
-    <canvas id="canvas" width="1922" height="1081"></canvas>
+    <div id="juego">
+        <!-- Caperucita -->
+        <div id="personaje"></div>
+        <!-- Fondo -->
+        <div id="overfondo"></div>
+        <div id="fondo"></div>
+        <canvas id="canvas" width="1922" height="1081"></canvas>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/dibujaFondo.js"></script>
     <script type="text/javascript" src="js/puntosPersonajes.js"></script>
     <script type="text/javascript" src="js/colisiones.js"></script>
+    <script type="text/javascript" src="js/mapas.js"></script>
     <script type="text/javascript" src="js/caperucita.js"></script>
     <script type="text/javascript" src="js/enemigos.js"></script>
     <script type="text/javascript" src="js/controles.js"></script>

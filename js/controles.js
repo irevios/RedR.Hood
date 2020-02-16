@@ -1,3 +1,4 @@
+"use strict";
 var teclas = {
     "saltar": { on: false, key: 87, t: 0 },
     "agacharse": { on: false, key: 83, t: 0 },
@@ -5,6 +6,7 @@ var teclas = {
     "izquierda": { on: false, key: 65, t: 0 },
     "ataque": { on: false, key: 32, t: 0 },
     "usarObjeto": { on: false, key: 69, t: 0 },
+    "cogerObjeto": { on: false, key: 81, t: 0 },
     "arma1": { on: false, key: 49, t: 0 },
     "arma2": { on: false, key: 50, t: 0 },
     "arma3": { on: false, key: 51, t: 0 }
@@ -47,7 +49,7 @@ function mueve() {
                 personaje.moverArriba();
                 personaje.moverIzquierda();
             } else if (personaje.colisionaPorIzquierdaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(15)) {
-                personaje.velocidadX = -10;
+                personaje.velocidadX = -20;
             }
         }
     }
@@ -63,12 +65,12 @@ function mueve() {
                 personaje.moverArriba();
                 personaje.moverDerecha();
             } else if (personaje.colisionaPorDerechaPuedeArriba(10, 10) && personaje.colisionaPorAbajo(15)) {
-                personaje.velocidadX = 10;
+                personaje.velocidadX = 20;
             }
         }
     }
     if (teclas.saltar.on) {
-        if (!personaje.colisionaPorArriba(15) || !personaje.colisionaPorIzquierda(15) || !personaje.colisionaPorDerecha(15)) {
+        if (!personaje.colisionaPorArriba(15)) {
             personaje.salta();
         }
     }
