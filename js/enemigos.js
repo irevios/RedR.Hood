@@ -20,7 +20,6 @@ class Rana extends Personaje {
     }
     moverDerecha() {
         if (!this.colisionaPorDerecha(10)) {
-            console.log("der");
             this.contorno = this.contornoDer;
             this.velocidadX = 7;
             this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -29,7 +28,6 @@ class Rana extends Personaje {
     }
     moverIzquierda() {
         if (!this.colisionaPorIzquierda(10)) {
-            console.log("izq");
             this.contorno = this.contornoIzq;
             this.velocidadX = -7;
             this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");

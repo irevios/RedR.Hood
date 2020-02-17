@@ -22,8 +22,8 @@ $(document).ready(function() {
     personaje.arriba = nivel.posInicialY;
 
     controlaTeclas();
-    setInterval(() => { gravedad() }, 100);
-    setInterval(() => { compruebaNivel() },100);
+    setInterval(gravedad, 50);
+    setInterval(compruebaNivel,100);
 });
 
 function rescala(e, body) {
@@ -33,7 +33,7 @@ function rescala(e, body) {
 
 function gravedad() {
     personaje.gravedad();
-    nivel.enemigos.forEach(e => e.gravedad());
+   // nivel.enemigos.forEach(e => e.gravedad());
 }
 
 function compruebaNivel() {
