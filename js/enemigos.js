@@ -1,12 +1,8 @@
 class Rana extends Personaje {
     constructor(punto) {
-        super($("<div class='rana'></div>").appendTo("#juego"))
-        this.capa.css({ "left": punto.x - this.anchura, "top": punto.y - this.altura });
-        this.izquierda = punto.x + this.anchura;
-        this.arriba = punto.y + this.altura;
-        this.derecha = this.izquierda + this.anchura;
-        this.abajo = this.arriba + this.altura;
-
+        super($("<div class='rana personaje'></div>").appendTo("#juego"))
+        this.capa.css({ "left": punto.x - this.anchura/2, "top": punto.y - this.altura/2 });
+    
         //Colisión
         this.contornoDer = pRanaDer;
         this.contornoIzq = pRanaIzq;
@@ -20,6 +16,7 @@ class Rana extends Personaje {
     }
     moverDerecha() {
         if (!this.colisionaPorDerecha(10)) {
+            º
             this.contorno = this.contornoDer;
             this.velocidadX = 7;
             this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -43,7 +40,6 @@ class Rana extends Personaje {
     }
     moverAleatorio() {
         let num = Math.round(Math.random());
-
         num == 0 ? this.moverDerecha() : this.moverIzquierda();
     }
 }

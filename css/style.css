@@ -12,15 +12,18 @@ body {
     left: 0;
 }
 
-#personaje {
-
-    width: 150px;
-    height: 170px;
+.personaje {
     display: block;
     position: absolute;
-    background-image: url("../img/caperucita/idle_right_0.png");
     background-size: contain;
+    background-repeat: no-repeat;
     z-index: 1;
+}
+
+#caperucita {
+    width: 150px;
+    height: 170px;
+    background-image: url("../img/caperucita/idle_right_0.png");
 }
 
 .rana {
@@ -30,6 +33,7 @@ body {
     position: absolute;
     background-image: url("../img/enemigos/rana.gif");
     background-size: contain;
+    background-repeat: no-repeat;
     z-index: 1;
 }
 

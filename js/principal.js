@@ -34,7 +34,7 @@ function rescala(e, body) {
 
 function gravedad() {
     personaje.gravedad();
-   // nivel.enemigos.forEach(e => e.gravedad());
+    nivel.enemigos.forEach(e => e.gravedad());
 }
 
 function compruebaNivel() {
