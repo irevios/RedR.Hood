@@ -22,6 +22,7 @@ $(document).ready(function() {
     personaje.arriba = nivel.posInicialY;
 
     controlaTeclas();
+
     setInterval(gravedad, 50);
     setInterval(compruebaNivel,100);
 });
