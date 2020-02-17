@@ -34,9 +34,6 @@ function controlaTeclas() {
 }
 
 function mueve() {
-    if (!teclas.derecha.on && !teclas.izquierda.on) {
-        personaje.velocidadX = 1;
-    }
     if (teclas.izquierda.on) {
         if (teclas.izquierda.t < 100 && teclas.izquierda.t != 0) {
             personaje.estatica("idle_left_0");
@@ -70,7 +67,7 @@ function mueve() {
         }
     }
     if (teclas.saltar.on) {
-        if (!personaje.colisionaPorArriba(15)) {
+        if (!personaje.colisionaPorArriba(30)) {
             personaje.salta();
         }
     }

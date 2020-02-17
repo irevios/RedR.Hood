@@ -11,17 +11,31 @@ let colores = {
 }
 
 function colision(x, y, puntos, tipo) {
-    var c = document.getElementById("canvas").getContext('2d');
-    let si = false;
+    let colisiona = false;
     puntos.forEach(p => {
-        let dataPixel = c.getImageData(p[0] - 5 + x, p[1] - 5 + y, 1, 1).data;
+        let dataPixel = ctx.getImageData(p[0] - 5 + x, p[1] - 5 + y, 1, 1).data;
         for (var i = 0; i <= dataPixel.length; i += 4) {
             if (colores[tipo][0] == dataPixel[i] &&
                 colores[tipo][1] == dataPixel[i + 1] &&
                 colores[tipo][2] == dataPixel[i + 2]) {
-                si = true;
+                colisiona = true;
             }
         }
     })
-    return si;
+    return colisiona;
+}
+
+function buscaColor(tipo) {
+    let esColorPedido = [];
+    let dataPixel = ctx.getImageData(0, 0, 1920, 1080).data;
+    for (var i = 0; i <= dataPixel.length; i += 4) {
+        if (colores["enemigos"][0] == dataPixel[i] &&
+            colores["enemigos"][1] == dataPixel[i + 1] &&
+            colores["enemigos"][2] == dataPixel[i + 2]) {
+            let x = (i / 4) % 1920;
+            let y = Math.floor((i / 4) / 1920);
+            esColorPedido.push({ "x": x, "y": y });
+        }
+    }
+    return esColorPedido;
 }

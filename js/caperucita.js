@@ -1,20 +1,46 @@
 "use strict";
-class Caperucita {
+// Clase padre para todos los personajes que se mueven
+class Personaje {
     constructor(capa) {
-        // Inicialización posición
         this.capa = capa;
-        this.altura = capa.outerHeight(true);
-        this.anchura = capa.outerWidth(true);
-        this.izquierda = capa.offset().left;
-        this.arriba = capa.offset().top - capa.outerHeight(true) / 2;
+        this.altura = this.capa.outerHeight(true);
+        this.anchura = this.capa.outerWidth(true);
+        this.izquierda = this.capa.offset().left;
+        this.arriba = this.capa.offset().top - this.capa.outerHeight(true) / 2;
         this.derecha = this.izquierda + this.anchura;
         this.abajo = this.arriba + this.altura;
-
-        // Física
         this.velocidadX = 1;
         this.velocidadY = 0;
-        this.gravity = 3;
+        this.g = 3;
         this.rectificaciones = 0;
+    }
+    // Gravedad
+    gravedad() {
+        let enSuelo = this.colisionaPorAbajo(this.velocidadY + this.g);
+        if (!enSuelo) {
+            this.g = 3;
+            this.velocidadY += this.g;
+            this.capa.animate({ top: this.arriba += this.velocidadY, left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
+        }
+        if (enSuelo && this.velocidadY > 0) {
+            this.velocidadY = 0;
+        }
+    }
+    // Colisiones
+    colisionaPorAbajo(px) { return colision(this.izquierda, this.arriba + px, this.contorno, "terreno") || colision(this.izquierda, this.arriba + px, this.contorno, "puertaCerrada"); }
+    colisionaPorArriba(px) { return colision(this.izquierda, this.arriba - px, this.contorno, "terreno") || colision(this.izquierda, this.arriba - px, this.contorno, "puertaCerrada"); }
+    colisionaPorDerecha(px) { return colision(this.izquierda + px, this.arriba, this.contorno, "terreno") || colision(this.izquierda + px, this.arriba, this.contorno, "puertaCerrada"); }
+    colisionaPorIzquierda(px) { return colision(this.izquierda - px, this.arriba, this.contorno, "terreno") || colision(this.izquierda - px, this.arriba, this.contorno, "puertaCerrada"); }
+    colisionaPorIzquierdaPuedeArriba(pxA, pxB) { return colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes descendentes
+    colisionaPorDerechaPuedeArriba(pxA, pxB) { return colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes ascendentes
+    // Tocar diferentes objetos o partes del mapa
+    tocar(color) { return colision(this.izquierda + 10, this.arriba - 10, this.contorno, color); }
+}
+
+class Caperucita extends Personaje {
+    constructor(capa) {
+        // Inicialización posición
+        super(capa);
 
         // Colisión
         this.contornoDer = pCaperucitaDer;
@@ -27,13 +53,13 @@ class Caperucita {
         this.img = "idle_" + this.direccion + "_0";
 
         // Inventario
-        this.armaEquipada = null;
+        this.armaEquipada = "";
         this.armas = {
             "hacha": false,
             "ballesta": false,
             "pulsera": false
         }
-        this.objetoElegido = null;
+        this.objetoElegido = "";
         this.inventario = {
             "llaveN1": false,
             "llaveN2": false,
@@ -46,29 +72,12 @@ class Caperucita {
     // Físicas
     gravedad() {
         this.compruebaImg();
-        let enSuelo = this.colisionaPorAbajo(this.velocidadY + this.gravity);
-        if (!enSuelo) {
-            if (this.colisionaPorArriba(10)) {
-                this.arriba += 15;
-            }
-            this.gravity = 3;
-            this.velocidadY += this.gravity;
-            this.capa.animate({ top: this.arriba += this.velocidadY, left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
-        }
-        if (enSuelo && this.velocidadY > 0) {
-            this.velocidadY = 0;
+        super.gravedad();
+        if (this.img == "jump_" + this.direccion + "_0" && this.colisionaPorAbajo(this.velocidadY + this.g)) {
+            this.velocidadY = 10;
         }
         this.moverArriba();
     }
-    // Colisiones
-    colisionaPorAbajo(px) { return colision(this.izquierda, this.arriba + px, this.contorno, "terreno") || colision(this.izquierda, this.arriba + px, this.contorno, "puertaCerrada"); }
-    colisionaPorArriba(px) { return colision(this.izquierda, this.arriba - px, this.contorno, "terreno") || colision(this.izquierda, this.arriba - px, this.contorno, "puertaCerrada"); }
-    colisionaPorDerecha(px) { return colision(this.izquierda + px, this.arriba, this.contorno, "terreno") || colision(this.izquierda + px, this.arriba, this.contorno, "puertaCerrada"); }
-    colisionaPorIzquierda(px) { return colision(this.izquierda - px, this.arriba, this.contorno, "terreno") || colision(this.izquierda - px, this.arriba, this.contorno, "puertaCerrada"); }
-    colisionaPorIzquierdaPuedeArriba(pxA, pxB) { return colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes descendentes
-    colisionaPorDerechaPuedeArriba(pxA, pxB) { return colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes ascendentes
-    // Tocar diferentes objetos o partes del mapa
-    tocar(color) { return colision(this.izquierda + 10, this.arriba - 10, this.contorno, color); }
 
     // Movimiento
     moverDerecha() {

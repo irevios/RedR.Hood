@@ -1,11 +1,15 @@
-class Rana {
-    constructor(capa, x, y) {
-        this.capa = capa;
-        this.altura = x;
-        this.anchura = y;
-        this.izquierda = capa.offset().left;
+class Rana extends Personaje {
+    constructor(punto) {
+        super($("<div class='rana'></div>").appendTo("#juego"))
+        this.capa.css({ "left": punto.x - this.anchura, "top": punto.y - this.altura });
+        this.izquierda = punto.x + this.anchura;
+        this.arriba = punto.y + this.altura;
         this.derecha = this.izquierda + this.anchura;
         this.abajo = this.arriba + this.altura;
-        this.arriba = capa.offset().top - capa.outerHeight(true) / 2;
+
+        //Colisión
+        this.contornoDer = pRanaDer;
+        this.contornoIzq = pRanaIzq;
+        this.contorno = this.contornonoDer;
     }
 }

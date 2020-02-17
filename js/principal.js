@@ -12,9 +12,9 @@ $(document).ready(function() {
 
     // Inicialización
     generarMapas();
-    nivel = mapas.N2;
+    nivel = mapas.N0;
     nivel.cambiarFondo();
-
+    nivel.generaEnemigos();
 
     // Inicia el juego
     personaje = new Caperucita($('#personaje'));
@@ -22,16 +22,29 @@ $(document).ready(function() {
     personaje.arriba = nivel.posInicialY;
 
     controlaTeclas();
-    setInterval(() => { personaje.gravedad() }, 50);
+    setInterval(() => { gravedad() }, 50);
     setInterval(() => { compruebaNivel() }, 50);
 });
+
+function rescala(e, body) {
+    let escala = Math.min(body.tamaño.width / $("#juego").outerWidth(), body.tamaño.height / $("#juego").outerHeight());
+    $("#juego").css("transform", "scale(" + escala + ")");
+}
+
+function gravedad() {
+    personaje.gravedad();
+    nivel.enemigos.forEach(e => e.gravedad());
+}
 
 function compruebaNivel() {
     if (personaje.tocar("puerta")) {
         nivel = mapas["N" + (nivel.num + 1)];
+        personaje.capa.css("opacity", "0");
         personaje.izquierda = nivel.posInicialX;
         personaje.arriba = nivel.posInicialY;
+        personaje.capa.css("opacity", "1");
         nivel.cambiarFondo();
+        nivel.generaEnemigos();
     }
     if (personaje.tocar("puertaCerrada") && teclas.usarObjeto.on) {
         if (personaje.objetoElegido == nivel.llave) {
@@ -53,12 +66,4 @@ function compruebaNivel() {
     if (personaje.tocar("vacio")) {
         console.log("memuerosos");
     }
-}
-
-function rescala(e, body) {
-    let escala = Math.min(body.tamaño.width / $("#juego").outerWidth(), body.tamaño.height / $("#juego").outerHeight());
-    $("#juego").css({
-        transform: "scale(" + escala + ")"
-    });
-
 }

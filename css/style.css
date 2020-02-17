@@ -9,11 +9,11 @@ body {
     display: block;
     position: fixed;
     top: 0;
-    left:0 ;
+    left: 0;
 }
 
 #personaje {
-    
+
     width: 150px;
     height: 170px;
     display: block;
@@ -41,8 +41,9 @@ body {
     width: 200%;
     height: 200%;
     z-index: 0;
-/*    background-image: url("../img/fondo/nivel0.png");*/
+    opacity: 0.5;
 }
+
 #overfondo {
     display: block;
     position: absolute;
@@ -51,15 +52,15 @@ body {
     width: 200%;
     height: 200%;
     z-index: 3;
-   /* background-image: url("../img/fondo/sobre0.png");*/
 }
 
 #juego {
     transform-origin: top left;
     width: 1920px;
     height: 1080px;
+    filter: contrast(1.08);
 }
 
-#canvas{
-   /* opacity: 0;*/
+#canvas {
+    opacity: 1;
 }
