@@ -19,7 +19,7 @@ $(document).ready(function() {
     // Inicialización
     rescala();
     generarMapas();
-    nivel = mapas.N2;
+    nivel = mapas.N0;
     nivel.cambiarFondo();
     nivel.generaEnemigos();
 
