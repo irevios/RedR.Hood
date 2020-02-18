@@ -15,10 +15,10 @@ function dibujaNivel0(arma, llave, puerta) {
     // zona enemiga
     ctx.beginPath();
     ctx.moveTo(1275.9, 784.1);
-    ctx.lineTo(1276.8, 1017.4);
-    ctx.lineTo(1919.9, 1017.4);
-    ctx.lineTo(1919.9, 832.9);
-    ctx.bezierCurveTo(1705.8, 792.8, 1492.5, 784.5, 1275.9, 784.1);
+    ctx.lineTo(1276.1, 835.1);
+    ctx.bezierCurveTo(1518.5, 844.9, 1693.5, 873.7, 1859.3, 900.6);
+    ctx.lineTo(1859.1, 822.3);
+    ctx.bezierCurveTo(1665.4, 791.3, 1472.0, 784.5, 1275.9, 784.1);
     ctx.closePath();
     ctx.fillStyle = "rgb(210, 0, 210)";
     ctx.fill();
@@ -114,15 +114,17 @@ function dibujaNivel1(arma, llave, puerta) {
 
     // zona enemiga
     ctx.beginPath();
-    ctx.moveTo(1098.9, 960.7);
-    ctx.lineTo(1138.1, 980.5);
-    ctx.lineTo(1609.0, 944.3);
-    ctx.bezierCurveTo(1727.4, 692.3, 996.4, 872.8, 1098.9, 960.7);
+    ctx.moveTo(1472.6, 815.5);
+    ctx.bezierCurveTo(1304.2, 814.7, 1058.0, 897.8, 1092.3, 953.2);
+    ctx.bezierCurveTo(1098.4, 950.0, 1106.8, 947.2, 1118.2, 944.9);
+    ctx.bezierCurveTo(1265.7, 914.5, 1451.6, 913.9, 1620.6, 909.4);
+    ctx.bezierCurveTo(1632.6, 841.3, 1564.1, 816.0, 1472.6, 815.5);
     ctx.closePath();
     ctx.moveTo(0.0, 833.0);
-    ctx.lineTo(0.0, 1017.3);
-    ctx.lineTo(441.8, 1017.3);
-    ctx.bezierCurveTo(443.2, 792.8, 178.1, 855.1, 0.0, 833.0);
+    ctx.lineTo(0.0, 910.3);
+    ctx.bezierCurveTo(132.9, 931.3, 264.4, 949.3, 425.3, 953.1);
+    ctx.bezierCurveTo(427.6, 953.1, 430.2, 953.0, 433.0, 953.0);
+    ctx.bezierCurveTo(385.8, 805.5, 158.4, 852.7, 0.0, 833.0);
     ctx.closePath();
     ctx.fillStyle = "rgb(210, 0, 210)";
     ctx.fill();
@@ -201,9 +203,9 @@ function dibujaNivel2(arma, llave, puerta) {
     ctx.beginPath();
     ctx.moveTo(362.2, 0.0);
     ctx.lineTo(240.0, 117.1);
-    ctx.lineTo(351.4, 414.3);
-    ctx.lineTo(431.4, 448.6);
-    ctx.bezierCurveTo(431.4, 448.6, 574.3, 445.7, 605.7, 445.7);
+    ctx.lineTo(501.3, 313.9);
+    ctx.lineTo(581.3, 348.2);
+    ctx.bezierCurveTo(581.3, 348.2, 574.3, 445.7, 605.7, 445.7);
     ctx.bezierCurveTo(637.1, 445.7, 808.6, 582.9, 808.6, 602.9);
     ctx.bezierCurveTo(808.6, 622.9, 934.3, 622.9, 954.3, 631.4);
     ctx.bezierCurveTo(974.3, 640.0, 1054.3, 740.0, 1100.0, 748.6);

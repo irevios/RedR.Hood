@@ -4,7 +4,7 @@ body {
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    background: #7ac7b7;
+    background: #000;
     resize: both;
     display: block;
     position: fixed;
@@ -12,6 +12,18 @@ body {
     left: 0;
 }
 
+.cargando{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    background: url("../img/interfaz/loading.gif") center no-repeat #fffdff;
+    background-size: 10em;
+    transition: 1s;
+    opacity: 1;
+}
 .personaje {
     display: block;
     position: absolute;
@@ -21,14 +33,17 @@ body {
 }
 
 #caperucita {
-    width: 150px;
-    height: 170px;
+    width: 190px;
+    height: 201px;
+    margin-top: -38px;
+    background-position: bottom center;
+    background-repeat: no-repeat;
     background-image: url("../img/caperucita/idle_right_0.png");
 }
 
 .rana {
-    width: 70px;
-    height: 68px;
+    width: 43px;
+    height: 40px;
     display: block;
     position: absolute;
     background-image: url("../img/enemigos/rana.gif");
@@ -44,8 +59,9 @@ body {
     left: 0;
     width: 200%;
     height: 200%;
+    background-repeat: no-repeat;
     z-index: 0;
-    /* opacity: 0.5; */
+    /* opacity: 0.5;*/
 }
 
 #overfondo {
@@ -55,7 +71,10 @@ body {
     left: 0;
     width: 200%;
     height: 200%;
+    background-repeat: no-repeat;
     z-index: 3;
+    /* opacity: 0.5;*/
+    pointer-events: none;
 }
 
 #juego {
@@ -63,6 +82,14 @@ body {
     width: 1920px;
     height: 1080px;
     filter: contrast(1.08);
+}
+
+#juego:hover {
+    cursor: url("../img/interfaz/cursor.png"), auto;
+}
+
+.enemigo:hover {
+    cursor: url("../img/interfaz/cursorRojo.png"), auto;
 }
 
 #canvas {

@@ -60,6 +60,13 @@ class Mapa {
         //     this.enemigos.push(new LoboFeroz(i));
         // }
     }
+    eliminaEnemigo(enemigo) {
+        this.enemigos.filter(e => e != enemigo);
+    }
+    eliminaEnemigos() {
+        this.enemigos.forEach(e => { e.capa.remove() });
+        this.enemigos = [];
+    }
 
 }
 

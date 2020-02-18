@@ -122,15 +122,17 @@ class Caperucita extends Personaje {
 
     // Ataques
     hacha() {
-
+        if (this.armaEquipada == "hacha") {
+            this.animacion("axe_" + this.direccion);
+        }
     }
     ballesta() {
-        if (!teclas.derecha.on && !teclas.izquierda.on) {
+        if (this.armaEquipada == "ballesta") {
             this.estatica("arr_" + this.direccion + "_0");
         }
     }
     pulsera() {
-        if (!teclas.derecha.on && !teclas.izquierda.on) {
+        if (this.armaEquipada == "pulsera") {
             this.estatica("fire_" + this.direccion + "_0");
         }
     }

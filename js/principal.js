@@ -4,41 +4,48 @@ let ctx = canvas.getContext("2d");
 let personaje;
 let nivel;
 
-$(document).ready(function() {
-    // Hacer que el juego siempre tenga el tamaño correcto según la pantalla
-    $("body").resizable({ resize: rescala });
-    let tamañoInicial = { tamaño: { width: $("body").width(), height: $("body").height() } }
-    rescala(null, tamañoInicial);
+// Hacer que el juego siempre tenga el tamaño correcto según la pantalla
+$(window).resize((e) => rescala());
+$(window).on('load', () => {
+    setTimeout(function() {
+        $(".cargando").css("opacity", "0");
+        setTimeout(function() {
+            $(".cargando").hide();
+        }, 1000);
+    }, 1000);
+});
 
+$(document).ready(function() {
     // Inicialización
+    rescala();
     generarMapas();
     nivel = mapas.N0;
     nivel.cambiarFondo();
     nivel.generaEnemigos();
 
     // Inicia el juego
-    personaje = new Caperucita($('#personaje'));
+    personaje = new Caperucita($('#caperucita'));
     personaje.izquierda = nivel.posInicialX;
     personaje.arriba = nivel.posInicialY;
 
     controlaTeclas();
 
-    setInterval(gravedad, 50);
-    setInterval(compruebaNivel,100);
+    setInterval(() => {
+        personaje.gravedad();
+        nivel.enemigos.forEach(e => e.gravedad());
+    }, 50);
+    setInterval(compruebaNivel, 100);
+    setInterval(() => { nivel.enemigos.forEach(e => e.moverAleatorio()) }, 1000);
 });
 
-function rescala(e, body) {
-    let escala = Math.min(body.tamaño.width / $("#juego").outerWidth(), body.tamaño.height / $("#juego").outerHeight());
+function rescala() {
+    let escala = Math.min($(window).width() / $("#juego").outerWidth(), $(window).height() / $("#juego").outerHeight());
     $("#juego").css("transform", "scale(" + escala + ")");
-}
-
-function gravedad() {
-    personaje.gravedad();
-    nivel.enemigos.forEach(e => e.gravedad());
 }
 
 function compruebaNivel() {
     if (personaje.tocar("puerta")) {
+        nivel.eliminaEnemigos();
         nivel = mapas["N" + (nivel.num + 1)];
         personaje.capa.css("opacity", "0");
         personaje.izquierda = nivel.posInicialX;

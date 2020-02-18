@@ -4,20 +4,24 @@
 <head>
     <title>Red R. Hood | The Game</title>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/interfaz/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="preload" href="img/fondo/nivel0-A-L-N.png" as="image">
     <link rel="preload" href="img/fondo/sobre0.png" as="image">
 </head>
 
 <body>
+    <div class="cargando"></div>
     <!-- Evita que el cambio de imágenes haga parpadear la imagen-->
     <div class="preload" style="display: none">
         <img src="img/caperucita/run_left.gif">
         <img src="img/caperucita/run_right.gif">
-        <img src="img/caperucita/idle_left_0.png">
-        <img src="img/caperucita/idle_right_0.png">
+        <img src="img/caperucita/axe_left.gif">
+        <img src="img/caperucita/axe_right.gif">
         <img src="img/caperucita/down_left.gif">
         <img src="img/caperucita/down_right.gif">
+        <img src="img/caperucita/idle_left_0.png">
+        <img src="img/caperucita/idle_right_0.png">
         <img src="img/caperucita/down_left_0.png">
         <img src="img/caperucita/down_right_0.png">
         <img src="img/caperucita/jump_left_0.png">
@@ -45,7 +49,7 @@
     </div>
     <div id="juego">
         <!-- Caperucita -->
-        <div id="personaje" class="personaje"></div>
+        <div id="caperucita" class="personaje"></div>
         <!-- Fondo -->
         <div id="overfondo"></div>
         <div id="fondo"></div>

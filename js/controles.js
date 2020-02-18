@@ -14,7 +14,7 @@ var teclas = {
 
 function controlaTeclas() {
     let tiempo;
-    $(document).keydown(function(e) {
+    $(document).keydown((e) => {
         Object.entries(teclas).forEach(([a, b]) => {
             if (e.keyCode == teclas[a].key) {
                 if (!teclas[a].on) { teclas[a].t = new Date().getTime(); };
@@ -23,7 +23,7 @@ function controlaTeclas() {
         });
         mueve();
     });
-    $(document).keyup(function(e) {
+    $(document).keyup((e) => {
         Object.entries(teclas).forEach(([a, b]) => {
             if (e.keyCode == teclas[a].key && teclas[a].on) {
                 teclas[a].on = false;
@@ -78,6 +78,9 @@ function mueve() {
     }
 
     if (teclas.ataque.on) {
-        personaje.pulsera();
+        personaje.hacha();
     }
+}
+
+function controlaMouse() {
 }
