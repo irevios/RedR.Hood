@@ -14,7 +14,7 @@ let colores = {
 function colision(x, y, puntos, tipo) {
     let colisiona = false;
     puntos.forEach(p => {
-        let dataPixel = ctx.getImageData(p[0] - 5 + x, p[1] - 5 + y, 1, 1).data;
+        let dataPixel = ctx.getImageData(p[0] + x, p[1] + y, 1, 1).data;
         for (var i = 0; i <= dataPixel.length; i += 4) {
             if (colores[tipo][0] == dataPixel[i] &&
                 colores[tipo][1] == dataPixel[i + 1] &&

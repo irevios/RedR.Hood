@@ -75,6 +75,6 @@ function compruebaNivel() {
         console.log("memuerosos");
     }
     if (personaje.tocar("enemigo")) {
-        personaje.recibeDaño();
+       // personaje.recibeDaño();
     }
 }

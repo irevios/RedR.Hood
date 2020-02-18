@@ -6,7 +6,7 @@ class Personaje {
         this.altura = this.capa.outerHeight(true);
         this.anchura = this.capa.outerWidth(true);
         this.izquierda = this.capa.offset().left;
-        this.arriba = this.capa.offset().top - this.capa.outerHeight(true) / 2;
+        this.arriba = this.capa.offset().top - this.altura / 2;
         this.derecha = this.izquierda + this.anchura;
         this.abajo = this.arriba + this.altura;
         this.velocidadX = 1;
@@ -17,6 +17,7 @@ class Personaje {
     // Gravedad
     gravedad() {
         let enSuelo = this.colisionaPorAbajo(this.velocidadY + this.g);
+
         if (!enSuelo) {
             this.g = 3;
             this.velocidadY += this.g;
@@ -70,6 +71,7 @@ class Caperucita extends Personaje {
     // Físicas
     gravedad() {
         this.compruebaImg();
+         dibujaMovimiento(this.izquierda,this.arriba,this.contorno);
         super.gravedad();
         if (this.img == "jump_" + this.direccion + "_0" && this.colisionaPorAbajo(this.velocidadY + this.g)) {
             this.velocidadY = 10;
@@ -113,7 +115,7 @@ class Caperucita extends Personaje {
     }
     salta() {
         if (this.colisionaPorAbajo(10)) {
-            this.velocidadY = -30;
+            this.velocidadY = -40;
             this.estatica("jump_" + this.direccion + "_0");
         }
     }

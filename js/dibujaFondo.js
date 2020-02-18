@@ -1,10 +1,9 @@
-function dibujaRana(x, y, puntos) {
+function dibujaMovimiento(x, y, puntos) {
     ctx.save();
     nivel.dibujaFondo();
     ctx.beginPath();
-    ctx.moveTo(x, y);
-    puntos.forEach(p => {
-        ctx.lineTo(p[0] + x, p[1] + y);
+    puntos.forEach((p,i) => {
+      i==0?ctx.moveTo(p[0] + x, p[1] + y) : ctx.lineTo(p[0] + x, p[1] + y);
     });
     ctx.closePath();
     ctx.fillStyle = "rgb(126, 123, 188)";
