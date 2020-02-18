@@ -19,7 +19,7 @@ $(document).ready(function() {
     // Inicialización
     rescala();
     generarMapas();
-    nivel = mapas.N0;
+    nivel = mapas.N2;
     nivel.cambiarFondo();
     nivel.generaEnemigos();
 
@@ -73,5 +73,8 @@ function compruebaNivel() {
     }
     if (personaje.tocar("vacio")) {
         console.log("memuerosos");
+    }
+    if (personaje.tocar("enemigo")) {
+        personaje.recibeDaño();
     }
 }

@@ -14,7 +14,7 @@ class EnemigoTerrestre extends Personaje {
         super.gravedad();
         this.g = 2;
         //if (this.tipo == "rana") {
-            dibujaRana(this.izquierda,this.arriba,this.contorno);
+            //dibujaRana(this.izquierda,this.arriba,this.contorno);
         //}
     }
     moverDerecha() {
