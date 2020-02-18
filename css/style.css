@@ -44,6 +44,7 @@ body {
 .rana {
     width: 43px;
     height: 40px;
+    margin-top: -20px;
     display: block;
     position: absolute;
     background-image: url("../img/enemigos/rana.gif");
@@ -61,7 +62,7 @@ body {
     height: 200%;
     background-repeat: no-repeat;
     z-index: 0;
-    /* opacity: 0.5;*/
+   opacity: 0.5;
 }
 
 #overfondo {
@@ -73,7 +74,7 @@ body {
     height: 200%;
     background-repeat: no-repeat;
     z-index: 3;
-    /* opacity: 0.5;*/
+    opacity: 0.5;
     pointer-events: none;
 }
 

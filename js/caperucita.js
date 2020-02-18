@@ -62,11 +62,9 @@ class Caperucita extends Personaje {
         this.objetoElegido = "";
         this.inventario = {
             "llaveN1": false,
-            "llaveN2": false,
             "llaveN3": false,
-            "llaveN4": false,
             "huesos": 0,
-            "pocion": 0
+            "manzanas": 0
         }
     }
     // Físicas

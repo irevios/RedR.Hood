@@ -1,3 +1,18 @@
+function dibujaRana(x, y, puntos) {
+    ctx.save();
+    nivel.dibujaFondo();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    puntos.forEach(p => {
+        ctx.lineTo(p[0] + x, p[1] + y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = "rgb(126, 123, 188)";
+    ctx.stroke =
+        ctx.fill();
+    ctx.restore();
+}
+
 function dibujaNivel0(arma, llave, puerta) {
     // fondo
     ctx.save();
@@ -10,7 +25,6 @@ function dibujaNivel0(arma, llave, puerta) {
     ctx.closePath();
     ctx.fillStyle = "rgb(255, 255, 255)";
     ctx.fill();
-
 
     // zona enemiga
     ctx.beginPath();
@@ -70,7 +84,6 @@ function dibujaNivel0(arma, llave, puerta) {
     ctx.closePath();
     ctx.fillStyle = arma ? "rgb(255,255,255)" : "rgb(0, 0, 255)";
     ctx.fill();
-    ctx.restore();
 }
 
 function dibujaNivel1(arma, llave, puerta) {
