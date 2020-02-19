@@ -51,7 +51,7 @@ class Caperucita extends Personaje {
         // Dirección
         this.direccion = "right";
         this.mirar = "right";
-        this.img = "idle_" + this.direccion + "_0";
+        this.img = "idle_" + this.direccion;
 
         // Inventario
         this.armaEquipada = "";
@@ -73,7 +73,7 @@ class Caperucita extends Personaje {
     gravedad() {
         this.compruebaImg();
         super.gravedad();
-        if (this.img == "jump_" + this.direccion + "_0" && this.colisionaPorAbajo(this.velocidadY + this.g)) {
+        if (this.img == "jump_" + this.direccion && this.colisionaPorAbajo(this.velocidadY + this.g)) {
             this.velocidadY = 10;
         }
         this.moverArriba();
@@ -106,17 +106,17 @@ class Caperucita extends Personaje {
     }
     mirarArriba() {
         this.mirar = "up";
-        this.estatica("idle_" + this.direccion + "_0");
+        this.estatica("idle_" + this.direccion);
     }
     agachate() {
         if (!teclas.derecha.on && !teclas.izquierda.on) {
-            this.estatica("down_" + this.direccion + "_0");
+            this.estatica("down_" + this.direccion);
         }
     }
     salta() {
         if (this.colisionaPorAbajo(10)) {
             this.velocidadY = -30;
-            this.estatica("jump_" + this.direccion + "_0");
+            this.estatica("jump_" + this.direccion);
         }
     }
 
@@ -128,12 +128,12 @@ class Caperucita extends Personaje {
     }
     ballesta() {
         if (this.armaEquipada == "ballesta") {
-            this.estatica("arr_" + this.direccion + "_0");
+            this.estatica("arr_" + this.direccion);
         }
     }
     pulsera() {
         if (this.armaEquipada == "pulsera") {
-            this.estatica("fire_" + this.direccion + "_0");
+            this.estatica("fire_" + this.direccion);
         }
     }
 
@@ -162,9 +162,9 @@ class Caperucita extends Personaje {
     compruebaImg() {
         let enSuelo = this.colisionaPorAbajo(10);
         let nadaPulsado = !teclas.derecha.on && !teclas.agacharse.on && !teclas.izquierda.on;
-        let aterrizando = this.img == ("jump_" + this.direccion + "_0");
+        let aterrizando = this.img == ("jump_" + this.direccion);
         if ((aterrizando || nadaPulsado) && enSuelo && !teclas.ataque.on && !teclas.saltar.on) {
-            this.estatica("idle_" + this.direccion + "_0");
+            this.estatica("idle_" + this.direccion);
         }
     }
 
@@ -173,5 +173,14 @@ class Caperucita extends Personaje {
         $("#vida i:nth-child(" + this.vida + ")").effect("shake", { direction: "up", distance: 10, times: 2 }).addClass("perdida");
         this.vida -= 1;
     }
-
+    retrocede() {
+        if (this.direccion == "right") {
+            teclas.derecha.on = false;
+            this.velocidadX = -80;
+        } else {
+            teclas.izquierda.on = false;
+            this.velocidadX = 80;
+        }
+        this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
+    }
 }

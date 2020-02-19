@@ -6,7 +6,7 @@ let nivel;
 let modoDebug = false;
 
 
-modoDebug ? $("#fondo,#overfondo").addClass("modoDebug"):"";
+modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
 // Hacer que el juego siempre tenga el tamaño correcto según la pantalla
 $(window).resize((e) => rescala());
 $(window).on('load', () => {
@@ -83,10 +83,11 @@ function compruebaNivel() {
         if (personaje.vida >= 1) {
             personaje.pierdeVida();
         } else {
-            gameover();
+            //gameover();
         }
     }
     if (personaje.tocar("enemigo")) {
-        // personaje.recibeDaño();
+        personaje.pierdeVida();
+        personaje.retrocede();
     }
 }
