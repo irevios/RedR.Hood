@@ -1,45 +1,35 @@
 class EnemigoTerrestre extends Personaje {
-    constructor(punto, tipo, contDer, contIzq) {
+    constructor(punto, tipo, cont) {
         super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
 
         this.tipo = tipo;
-
         //Colisión
-        this.contornoDer = contDer;
-        this.contornoIzq = contIzq;
-        this.contorno = this.contornoDer;
+        this.contorno = cont;
     }
     // Movimiento
     gravedad() {
         super.gravedad();
         this.g = 2;
-        //if (this.tipo == "rana") {
-            //dibujaRana(this.izquierda,this.arriba,this.contorno);
-        //}
     }
     moverDerecha() {
-        if (!this.colisionaPorDerecha(4)) {
-            this.contorno = this.contornoDer;
+        if (!this.colisionaPorDerecha(2)) {
             this.velocidadX = 7;
             this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
         } else {
-            this.contorno = this.contornoIzq;
             this.velocidadX = -7;
-            this.capa.animate({ left: this.izquierda += this.velocidadX , top: this.arriba -= 10}, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
         }
     }
     moverIzquierda() {
-        if (!this.colisionaPorIzquierda(4)) {
-            this.contorno = this.contornoIzq;
+        if (!this.colisionaPorIzquierda(2)) {
             this.velocidadX = -7;
             this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
         } else {
-            this.contorno = this.contornoDer;
             this.velocidadX = 7;
-            this.capa.animate({ left: this.izquierda += this.velocidadX , top: this.arriba -= 10}, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
         }
     }
@@ -57,23 +47,19 @@ class EnemigoTerrestre extends Personaje {
 }
 
 class EnemigoVolador extends Personaje {
-    constructor(punto, tipo, contDer, contIzq, contArr) {
+    constructor(punto, tipo, cont) {
         super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
+        this.tipo = tipo;
         //Colisión
-        this.contornoDer = contDer;
-        this.contornoIzq = contIzq;
-        this.contornoArriba = contArr;
-        this.contorno = this.contornoDer;
+        this.contorno = cont;
     }
     gravedad() {}
     moverDerecha() {
         if (!this.colisionaPorDerecha(5)) {
-            this.contorno = this.contornoDer;
             this.capa.animate({ left: this.izquierda += 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Right.gif)");
         } else {
-            this.contorno = this.contornoIzq;
             this.capa.animate({ left: this.izquierda -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Left.gif)");
@@ -81,12 +67,10 @@ class EnemigoVolador extends Personaje {
     }
     moverIzquierda() {
         if (!this.colisionaPorIzquierda(4)) {
-            this.contorno = this.contornoIzq;
             this.capa.animate({ left: this.izquierda -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Left.gif)");
         } else {
-            this.contorno = this.contornoDer;
             this.capa.animate({ left: this.izquierda += 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Right.gif)");
@@ -94,22 +78,18 @@ class EnemigoVolador extends Personaje {
     }
     moverArriba() {
         if (!this.colisionaPorArriba(5)) {
-            this.contorno = this.contornoArriba;
             this.capa.animate({ top: this.arriba += 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         } else {
-            this.contorno = this.contornoArriba;
             this.capa.animate({ left: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         }
     }
     moverAbajo() {
         if (!this.colisionaPorAbajo(5)) {
-            this.contorno = this.contornoArriba;
             this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         } else {
-            this.contorno = this.contornoArriba;
             this.capa.animate({ left: this.arriba += 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         }

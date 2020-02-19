@@ -12,7 +12,7 @@ body {
     left: 0;
 }
 
-.cargando{
+.cargando {
     position: fixed;
     left: 0;
     top: 0;
@@ -24,6 +24,7 @@ body {
     transition: 1s;
     opacity: 1;
 }
+
 .personaje {
     display: block;
     position: absolute;
@@ -44,7 +45,7 @@ body {
 .rana {
     width: 55px;
     height: 60px;
-    margin-top: -25px;
+    /margin-top: -10px;
     display: block;
     position: absolute;
     background-image: url("../img/enemigos/rana.gif");
@@ -62,7 +63,6 @@ body {
     height: 200%;
     background-repeat: no-repeat;
     z-index: 0;
-  /* opacity: 0.5;*/
 }
 
 #overfondo {
@@ -74,8 +74,34 @@ body {
     height: 200%;
     background-repeat: no-repeat;
     z-index: 3;
-    /*opacity: 0.5;*/
     pointer-events: none;
+}
+
+#fondo.modoDebug,
+#overfondo.modoDebug {
+    opacity: 0.5;
+}
+
+#vida {
+    font-size: 2.5rem;
+    -webkit-text-stroke: 0.2rem #fff;
+    color: #DF2423;
+    position: absolute;
+    padding: 2rem;
+    text-shadow: 0 0 1rem rgba(0, 0, 0, .65);
+    z-index: 10;
+}
+
+#vida i {
+    padding: 0.3rem;
+}
+
+#vida i.perdida {
+    color: #00000000;
+}
+
+.ui-effects-wrapper {
+    display: inline-block;
 }
 
 #juego {

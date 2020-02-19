@@ -48,7 +48,7 @@ class Mapa {
         let puntosPosibles = buscaColor("enemigos");
         for (let i = 0; i < this.enemigosGenerar.rana; i++) {
             let punto = Math.round(Math.random() * puntosPosibles.length);
-            this.enemigos.push(new EnemigoTerrestre(puntosPosibles[punto], "rana", pRanaDer, pRanaIzq));
+            this.enemigos.push(new EnemigoTerrestre(puntosPosibles[punto], "rana", pRana));
         }
         // for (let i = 0; i < this.enemigosGenerar.ganso; i++) {
         //     let punto = Math.round(Math.random() * puntosPosibles.length);
@@ -79,7 +79,7 @@ class Mapa {
 let mapas = { N0: null, N1: null, N2: null, N3: null, N4: null }
 
 function generarMapas() {
-    mapas.N0 = new Mapa(0, 213, 500, 0, false, "hacha", true, dibujaNivel0, { "rana": 2, "ganso": 0, "murcielago": 0, "lobo": 0, "loboFeroz": false });
+    mapas.N0 = new Mapa(0, 213, 500, 0, false, "hacha", true, dibujaNivel0, { "rana": 1, "ganso": 0, "murcielago": 0, "lobo": 0, "loboFeroz": false });
     mapas.N1 = new Mapa(1, 39, 766, 2, "llave1", false, false, dibujaNivel1, { "rana": 1, "ganso": 2, "murcielago": 0, "lobo": 0, "loboFeroz": false });
     mapas.N2 = new Mapa(2, 5, 65, 3, "llave2", "ballesta", true, dibujaNivel2, { "rana": 0, "ganso": 0, "murcielago": 6, "lobo": 0, "loboFeroz": false });
     // mapas.N3 = new Mapa(3, 3, llave3, "pulsera", false,dibujaNivel3);

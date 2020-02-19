@@ -67,11 +67,11 @@ class Caperucita extends Personaje {
             "huesos": 0,
             "manzanas": 0
         }
+        this.vida = 4;
     }
     // Físicas
     gravedad() {
         this.compruebaImg();
-         dibujaMovimiento(this.izquierda,this.arriba,this.contorno);
         super.gravedad();
         if (this.img == "jump_" + this.direccion + "_0" && this.colisionaPorAbajo(this.velocidadY + this.g)) {
             this.velocidadY = 10;
@@ -166,6 +166,12 @@ class Caperucita extends Personaje {
         if ((aterrizando || nadaPulsado) && enSuelo && !teclas.ataque.on && !teclas.saltar.on) {
             this.estatica("idle_" + this.direccion + "_0");
         }
+    }
+
+    // Vida del personaje
+    pierdeVida() {
+        $("#vida i:nth-child(" + this.vida + ")").effect("shake", { direction: "up", distance: 10, times: 2 }).addClass("perdida");
+        this.vida -= 1;
     }
 
 }

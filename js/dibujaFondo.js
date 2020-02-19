@@ -1,20 +1,22 @@
-function dibujaMovimiento(x, y, puntos) {
-    ctx.save();
-    nivel.dibujaFondo();
-    ctx.beginPath();
-    puntos.forEach((p, i) => {
-        i == 0 ? ctx.moveTo(p[0] + x, p[1] + y) : ctx.lineTo(p[0] + x, p[1] + y);
-    });
-    ctx.closePath();
-    ctx.fillStyle = "rgb(126, 123, 188)";
-    ctx.stroke =
-        ctx.fill();
+function dibujaMovimiento(enemigos) {
     ctx.restore();
+    nivel.dibujaFondo();
+    enemigos.forEach(e => {
+        ctx.beginPath();
+        e.contorno.forEach((p, i) => {
+            i == 0 ? ctx.moveTo(p[0] + e.izquierda, p[1] + e.arriba) : ctx.lineTo(p[0] + e.izquierda, p[1] + e.arriba);
+        });
+        ctx.closePath();
+        ctx.fillStyle = "rgb(126, 123, 188)";
+        ctx.fill();
+    })
+    ctx.restore();
+    ctx.save();
 }
 
 function dibujaNivel0(arma, llave, puerta) {
     // fondo
-    ctx.save();
+
     ctx.beginPath();
     ctx.moveTo(0.5, 0.0);
     ctx.lineTo(1920.5, 0.0);
@@ -114,16 +116,27 @@ function dibujaNivel1(arma, llave, puerta) {
     ctx.fill();
 
     // puerta
-    ctx.beginPath();
-    ctx.moveTo(1773.6, 498.8);
-    ctx.lineTo(1768.0, 914.3);
-    ctx.lineTo(1652.8, 912.0);
-    ctx.lineTo(1650.2, 501.1);
-    ctx.lineTo(1773.6, 498.8);
-    ctx.closePath();
-    ctx.fillStyle = puerta ? "rgb(0, 255, 0)" : "rgb(10,130,80)";
-    ctx.fill();
-
+    if (puerta) {
+        ctx.beginPath();
+        ctx.moveTo(1773.6, 498.8);
+        ctx.lineTo(1798.0, 914.3);
+        ctx.lineTo(1682.8, 912.0);
+        ctx.lineTo(1680.2, 501.1);
+        ctx.lineTo(1803.6, 498.8);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(0, 255, 0)";
+        ctx.fill();
+    } else {
+        ctx.beginPath();
+        ctx.moveTo(1773.6, 498.8);
+        ctx.lineTo(1768.0, 914.3);
+        ctx.lineTo(1652.8, 912.0);
+        ctx.lineTo(1650.2, 501.1);
+        ctx.lineTo(1773.6, 498.8);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(10,130,80)";
+        ctx.fill();
+    }
     // zona enemiga
     ctx.beginPath();
     ctx.moveTo(1472.6, 815.5);
@@ -185,7 +198,6 @@ function dibujaNivel1(arma, llave, puerta) {
     ctx.closePath();
     ctx.fillStyle = "rgb(0, 0, 0)";
     ctx.fill();
-    ctx.restore();
 }
 
 function dibujaNivel2(arma, llave, puerta) {
@@ -353,5 +365,4 @@ function dibujaNivel2(arma, llave, puerta) {
     ctx.closePath();
     ctx.fillStyle = "rgb(0, 255, 0)";
     ctx.fill();
-    ctx.restore();
 }

@@ -3,7 +3,10 @@ let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 let personaje;
 let nivel;
+let modoDebug = false;
 
+
+modoDebug ? $("#fondo,#overfondo").addClass("modoDebug"):"";
 // Hacer que el juego siempre tenga el tamaño correcto según la pantalla
 $(window).resize((e) => rescala());
 $(window).on('load', () => {
@@ -18,24 +21,29 @@ $(window).on('load', () => {
 $(document).ready(function() {
     // Inicialización
     rescala();
+
     generarMapas();
     nivel = mapas.N0;
     nivel.cambiarFondo();
-    //nivel.generaEnemigos();
+    nivel.generaEnemigos();
 
     // Inicia el juego
     personaje = new Caperucita($('#caperucita'));
     personaje.izquierda = nivel.posInicialX;
     personaje.arriba = nivel.posInicialY;
+    for (var i = 0; i < personaje.vida; i++) {
+        $("<i class='fa fa-heart' aria-hidden='true'></i>").appendTo("#vida");
+    };
 
     controlaTeclas();
 
     setInterval(() => {
         personaje.gravedad();
-       // nivel.enemigos.forEach(e => e.gravedad());
+        nivel.enemigos.forEach(e => e.gravedad());
+        dibujaMovimiento(nivel.enemigos);
     }, 50);
     setInterval(compruebaNivel, 100);
-    //setInterval(() => { nivel.enemigos.forEach(e => e.moverAleatorio()) }, 1000);
+    setInterval(() => { nivel.enemigos.forEach(e => e.moverAleatorio()) }, 1000);
 });
 
 function rescala() {
@@ -52,7 +60,7 @@ function compruebaNivel() {
         personaje.arriba = nivel.posInicialY;
         personaje.capa.css("opacity", "1");
         nivel.cambiarFondo();
-        //nivel.generaEnemigos();
+        nivel.generaEnemigos();
     }
     if (personaje.tocar("puertaCerrada") && teclas.usarObjeto.on) {
         if (personaje.objetoElegido == nivel.llave) {
@@ -72,9 +80,13 @@ function compruebaNivel() {
         nivel.cambiarFondo();
     }
     if (personaje.tocar("vacio")) {
-        console.log("memuerosos");
+        if (personaje.vida >= 1) {
+            personaje.pierdeVida();
+        } else {
+            gameover();
+        }
     }
     if (personaje.tocar("enemigo")) {
-       // personaje.recibeDaño();
+        // personaje.recibeDaño();
     }
 }
