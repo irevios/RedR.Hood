@@ -21,7 +21,7 @@ $(document).ready(function() {
     generarMapas();
     nivel = mapas.N0;
     nivel.cambiarFondo();
-    nivel.generaEnemigos();
+    //nivel.generaEnemigos();
 
     // Inicia el juego
     personaje = new Caperucita($('#caperucita'));
@@ -32,10 +32,10 @@ $(document).ready(function() {
 
     setInterval(() => {
         personaje.gravedad();
-        nivel.enemigos.forEach(e => e.gravedad());
+       // nivel.enemigos.forEach(e => e.gravedad());
     }, 50);
     setInterval(compruebaNivel, 100);
-    setInterval(() => { nivel.enemigos.forEach(e => e.moverAleatorio()) }, 1000);
+    //setInterval(() => { nivel.enemigos.forEach(e => e.moverAleatorio()) }, 1000);
 });
 
 function rescala() {
@@ -52,7 +52,7 @@ function compruebaNivel() {
         personaje.arriba = nivel.posInicialY;
         personaje.capa.css("opacity", "1");
         nivel.cambiarFondo();
-        nivel.generaEnemigos();
+        //nivel.generaEnemigos();
     }
     if (personaje.tocar("puertaCerrada") && teclas.usarObjeto.on) {
         if (personaje.objetoElegido == nivel.llave) {

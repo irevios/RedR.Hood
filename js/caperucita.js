@@ -115,7 +115,7 @@ class Caperucita extends Personaje {
     }
     salta() {
         if (this.colisionaPorAbajo(10)) {
-            this.velocidadY = -40;
+            this.velocidadY = -30;
             this.estatica("jump_" + this.direccion + "_0");
         }
     }

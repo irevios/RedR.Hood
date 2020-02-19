@@ -2,8 +2,8 @@ function dibujaMovimiento(x, y, puntos) {
     ctx.save();
     nivel.dibujaFondo();
     ctx.beginPath();
-    puntos.forEach((p,i) => {
-      i==0?ctx.moveTo(p[0] + x, p[1] + y) : ctx.lineTo(p[0] + x, p[1] + y);
+    puntos.forEach((p, i) => {
+        i == 0 ? ctx.moveTo(p[0] + x, p[1] + y) : ctx.lineTo(p[0] + x, p[1] + y);
     });
     ctx.closePath();
     ctx.fillStyle = "rgb(126, 123, 188)";
@@ -143,11 +143,11 @@ function dibujaNivel1(arma, llave, puerta) {
 
     // llave
     ctx.beginPath();
-    ctx.moveTo(533.2, 890.6);
-    ctx.bezierCurveTo(543.8, 890.6, 552.4, 899.2, 552.4, 909.9);
-    ctx.bezierCurveTo(552.4, 920.5, 543.8, 929.1, 533.2, 929.1);
-    ctx.bezierCurveTo(522.6, 929.1, 514.0, 920.5, 514.0, 909.9);
-    ctx.bezierCurveTo(514.0, 899.2, 522.6, 890.6, 533.2, 890.6);
+    ctx.moveTo(533.2, 872.1);
+    ctx.bezierCurveTo(554.1, 872.1, 571.0, 889.0, 571.0, 909.9);
+    ctx.bezierCurveTo(571.0, 930.7, 554.1, 947.6, 533.2, 947.6);
+    ctx.bezierCurveTo(512.4, 947.6, 495.5, 930.7, 495.5, 909.9);
+    ctx.bezierCurveTo(495.5, 889.0, 512.4, 872.1, 533.2, 872.1);
     ctx.closePath();
     ctx.fillStyle = llave ? "rgb(255,255,255)" : "rgb(255, 255, 0)";
     ctx.fill();
@@ -253,14 +253,21 @@ function dibujaNivel2(arma, llave, puerta) {
     ctx.bezierCurveTo(432.3, 363.4, 318.3, 414.5, 256.8, 375.3);
     ctx.bezierCurveTo(184.2, 328.8, 116.4, 243.3, 1.0, 202.2);
     ctx.closePath();
-    ctx.moveTo(1747.3, 447.8);
-    ctx.bezierCurveTo(1748.5, 491.4, 1758.2, 529.8, 1748.5, 572.1);
-    ctx.bezierCurveTo(1699.5, 571.9, 1654.7, 567.7, 1614.1, 544.3);
-    ctx.lineTo(1620.4, 556.3);
-    ctx.bezierCurveTo(1645.7, 579.0, 1695.5, 578.7, 1747.1, 577.9);
-    ctx.lineTo(1776.3, 571.6);
-    ctx.lineTo(1762.8, 452.8);
-    ctx.lineTo(1747.3, 447.8);
+    ctx.moveTo(1765.5, 460.2);
+    ctx.bezierCurveTo(1749.7, 458.5, 1752.3, 447.1, 1749.1, 569.0);
+    ctx.bezierCurveTo(1749.1, 570.9, 1747.1, 572.1, 1745.3, 572.1);
+    ctx.bezierCurveTo(1702.0, 571.8, 1627.8, 557.8, 1591.1, 540.0);
+    ctx.bezierCurveTo(1587.7, 538.3, 1584.5, 577.9, 1586.3, 581.3);
+    ctx.lineTo(1585.8, 639.9);
+    ctx.bezierCurveTo(1585.8, 639.9, 1589.8, 644.0, 1589.4, 644.3);
+    ctx.bezierCurveTo(1488.4, 722.9, 1580.6, 662.8, 1623.6, 690.3);
+    ctx.bezierCurveTo(1636.4, 698.5, 1749.9, 605.6, 1750.2, 605.5);
+    ctx.lineTo(1772.8, 572.3);
+    ctx.bezierCurveTo(1774.7, 571.9, 1776.1, 570.1, 1775.9, 568.1);
+    ctx.lineTo(1781.2, 462.1);
+    ctx.bezierCurveTo(1781.0, 460.5, 1779.9, 459.2, 1778.4, 458.8);
+    ctx.lineTo(1770.7, 456.3);
+    ctx.bezierCurveTo(1768.0, 455.4, 1768.2, 460.5, 1765.5, 460.2);
     ctx.closePath();
     ctx.moveTo(1597.4, 630.6);
     ctx.bezierCurveTo(1582.5, 630.9, 1567.4, 634.7, 1557.5, 639.0);
@@ -317,11 +324,17 @@ function dibujaNivel2(arma, llave, puerta) {
 
     // Rama que baja
     ctx.beginPath();
-    ctx.moveTo(1481.0, 446.5);
-    ctx.bezierCurveTo(1423.6, 449.3, 1408.9, 440.7, 1331.4, 433.5);
-    ctx.lineTo(1341.3, 429.7);
-    ctx.bezierCurveTo(1406.5, 429.8, 1427.8, 446.1, 1484.3, 440.5);
-    ctx.lineTo(1481.0, 446.5);
+    ctx.moveTo(1467.0, 452.6);
+    ctx.bezierCurveTo(1422.7, 446.9, 1404.5, 440.8, 1341.5, 434.5);
+    ctx.bezierCurveTo(1339.0, 434.2, 1338.5, 430.7, 1340.9, 429.8);
+    ctx.lineTo(1340.9, 429.8);
+    ctx.bezierCurveTo(1341.2, 429.7, 1341.5, 429.7, 1341.8, 429.7);
+    ctx.bezierCurveTo(1402.1, 429.8, 1480.9, 448.1, 1494.2, 444.4);
+    ctx.bezierCurveTo(1497.1, 443.6, 1500.0, 443.0, 1502.9, 443.0);
+    ctx.lineTo(1508.4, 442.9);
+    ctx.bezierCurveTo(1510.7, 442.9, 1511.7, 445.7, 1510.0, 447.2);
+    ctx.bezierCurveTo(1502.2, 454.0, 1490.3, 456.2, 1479.9, 454.8);
+    ctx.bezierCurveTo(1475.1, 454.1, 1470.7, 453.1, 1467.0, 452.6);
     ctx.closePath();
     ctx.fillStyle = llave ? "rgb(0, 0, 0)" : "rgb(255,255,255)";
     ctx.fill();

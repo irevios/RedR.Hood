@@ -62,7 +62,7 @@ body {
     height: 200%;
     background-repeat: no-repeat;
     z-index: 0;
-   opacity: 0.5;
+  /* opacity: 0.5;*/
 }
 
 #overfondo {
@@ -74,7 +74,7 @@ body {
     height: 200%;
     background-repeat: no-repeat;
     z-index: 3;
-    opacity: 0.5;
+    /*opacity: 0.5;*/
     pointer-events: none;
 }
 
