@@ -23,7 +23,7 @@ $(document).ready(function() {
     rescala();
 
     generarMapas();
-    nivel = mapas.N0;
+    nivel = mapas.N2;
     nivel.cambiarFondo();
     nivel.generaEnemigos();
 
@@ -44,10 +44,10 @@ $(document).ready(function() {
     }, 50);
     setInterval(() => {
         compruebaNivel();
-    }, 200);
-    setInterval(()=>{
-         nivel.enemigos.forEach(e => e.moverAleatorio());
-     },1000);
+    }, 100);
+    setInterval(() => {
+        nivel.enemigos.forEach(e => e.moverAleatorio());
+    }, 1000);
 });
 
 function rescala() {

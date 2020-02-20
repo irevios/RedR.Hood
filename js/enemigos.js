@@ -47,51 +47,45 @@ class EnemigoTerrestre extends Personaje {
 }
 
 class EnemigoVolador extends Personaje {
-    constructor(punto, tipo, cont) {
+    constructor(punto, tipo, cont,num) {
         super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
         this.tipo = tipo;
         //Colisión
         this.contorno = cont;
+         this.color = "126, 123, " + (parseInt(num) + 1 * 5);
     }
     gravedad() {}
     moverDerecha() {
         if (!this.colisionaPorDerecha(5)) {
             this.capa.animate({ left: this.izquierda += 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Right.gif)");
         } else {
             this.capa.animate({ left: this.izquierda -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Left.gif)");
+    
         }
     }
     moverIzquierda() {
         if (!this.colisionaPorIzquierda(4)) {
             this.capa.animate({ left: this.izquierda -= 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Left.gif)");
         } else {
             this.capa.animate({ left: this.izquierda += 10 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + "Right.gif)");
         }
     }
     moverArriba() {
         if (!this.colisionaPorArriba(5)) {
             this.capa.animate({ top: this.arriba += 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         } else {
             this.capa.animate({ left: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         }
     }
     moverAbajo() {
         if (!this.colisionaPorAbajo(5)) {
             this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         } else {
             this.capa.animate({ left: this.arriba += 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("background-image", "url(../img/enemigos/" + tipo + ".gif)");
         }
     }
     moverAleatorio() {
