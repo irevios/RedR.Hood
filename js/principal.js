@@ -3,7 +3,7 @@ let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 let personaje;
 let nivel;
-let modoDebug = true;
+let modoDebug = false;
 
 
 modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
@@ -42,8 +42,12 @@ $(document).ready(function() {
         nivel.enemigos.forEach(e => e.gravedad());
         dibujaMovimiento(nivel.enemigos);
     }, 50);
-    setInterval(compruebaNivel, 100);
-    setInterval(() => { nivel.enemigos.forEach(e => e.moverAleatorio()) }, 1000);
+    setInterval(() => {
+        compruebaNivel();
+    }, 200);
+    setInterval(()=>{
+         nivel.enemigos.forEach(e => e.moverAleatorio());
+     },1000);
 });
 
 function rescala() {
@@ -88,6 +92,6 @@ function compruebaNivel() {
     }
     if (personaje.tocar("enemigo")) {
         personaje.pierdeVida();
-        // personaje.retrocede();
+        personaje.retrocede();
     }
 }

@@ -35,7 +35,7 @@ class Personaje {
     colisionaPorIzquierdaPuedeArriba(pxA, pxB) { return colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes descendentes
     colisionaPorDerechaPuedeArriba(pxA, pxB) { return colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes ascendentes
     // Tocar diferentes objetos o partes del mapa
-    tocar(color) { return colision(this.izquierda + 10, this.arriba - 10, this.contorno, color); }
+    tocar(color, d) { return colision(this.izquierda + 10 + (d != undefined ? (this.direccion == "right" ? d : d * (-1)) : 0), this.arriba - 10, this.contorno, color); }
 }
 
 class Caperucita extends Personaje {
@@ -98,7 +98,6 @@ class Caperucita extends Personaje {
     }
     moverArriba() { // Evita problemas con las inclinaciones
         if ((this.colisionaPorIzquierda(5) || this.colisionaPorDerecha(5)) && this.rectificaciones < 7) {
-            //this.velocidadY = -5;
             this.capa.animate({ top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
             this.rectificaciones++;
         }
@@ -123,10 +122,12 @@ class Caperucita extends Personaje {
     // Ataques
     hacha() {
         this.animacion("axe_" + this.direccion);
-        if (this.tocar("enemigo") != false) {
-            let tocado = nivel.enemigos.filter(e => e.color == "126, 123, " + this.tocar("enemigo"))[0];
-            tocado.capa.remove();
-            nivel.enemigos = nivel.enemigos.filter(e => e != tocado);
+        if (this.tocar("enemigo", 50) != false) {
+            let tocado = nivel.enemigos.filter(e => e.color == "126, 123, " + this.tocar("enemigo", 50))[0];
+            if (tocado != undefined) {
+                tocado.capa[0].remove();
+                nivel.enemigos = nivel.enemigos.filter(e => e != tocado);
+            }
         }
     }
     ballesta() {
@@ -136,19 +137,6 @@ class Caperucita extends Personaje {
     pulsera() {
 
         this.estatica("fire_" + this.direccion);
-    }
-
-    // Objetos
-    recolecta() {
-        if (colision(this.izquierda, this.arriba, this.contorno, "arma")) {
-
-        }
-        if (colision(this.izquierda, this.arriba, this.contorno, "llave")) {
-
-        }
-        if (colision(this.izquierda, this.arriba, this.contorno, "objeto")) {
-
-        }
     }
 
     // Cambiar imagenes del personaje

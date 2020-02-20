@@ -5,7 +5,7 @@ class EnemigoTerrestre extends Personaje {
         this.tipo = tipo;
         //Colisión
         this.contorno = cont;
-        this.color = "126, 123, " + num * 5;
+        this.color = "126, 123, " + (parseInt(num) + 1 * 5);
     }
     // Movimiento
     gravedad() {
@@ -43,10 +43,6 @@ class EnemigoTerrestre extends Personaje {
         for (let i = 0; i < veces; i++) {
             num == 0 ? this.moverDerecha() : this.moverIzquierda();
         }
-    }
-    colisionaCon(otro) {
-        console.log(colisionPersonajes(otro, this));
-        return colisionPersonajes(otro, this);
     }
 }
 
