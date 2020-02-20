@@ -222,18 +222,14 @@ function dibujaNivel2(arma, llave, puerta) {
     // Zona enemiga
     ctx.beginPath();
     ctx.moveTo(362.2, 0.0);
-    ctx.lineTo(240.0, 117.1);
-    ctx.lineTo(501.3, 313.9);
-    ctx.lineTo(581.3, 348.2);
-    ctx.bezierCurveTo(581.3, 348.2, 574.3, 445.7, 605.7, 445.7);
-    ctx.bezierCurveTo(637.1, 445.7, 808.6, 582.9, 808.6, 602.9);
-    ctx.bezierCurveTo(808.6, 622.9, 934.3, 622.9, 954.3, 631.4);
-    ctx.bezierCurveTo(974.3, 640.0, 1054.3, 740.0, 1100.0, 748.6);
-    ctx.bezierCurveTo(1145.7, 757.1, 1154.3, 702.9, 1154.3, 702.9);
-    ctx.lineTo(1368.6, 585.7);
-    ctx.bezierCurveTo(1585.0, 528.4, 1953.5, 928.1, 1895.7, 317.9);
-    ctx.bezierCurveTo(1931.5, 149.7, 1904.3, 53.8, 1840.4, 0.0);
-    ctx.lineTo(362.2, 0.0);
+ctx.moveTo(501.3, 313.9);
+      ctx.lineTo(581.3, 348.2);
+      ctx.bezierCurveTo(581.3, 348.2, 574.3, 445.7, 605.7, 445.7);
+      ctx.bezierCurveTo(637.1, 445.7, 808.6, 582.9, 808.6, 602.9);
+      ctx.bezierCurveTo(808.6, 622.9, 934.3, 622.9, 954.3, 631.4);
+      ctx.bezierCurveTo(1145.8, 790.2, 1146.8, 706.9, 1368.6, 585.7);
+      ctx.bezierCurveTo(1585.0, 528.4, 1901.5, 920.1, 1843.7, 309.9);
+      ctx.bezierCurveTo(1527.2, 63.6, 396.1, -79.9, 501.3, 313.9);
     ctx.closePath();
     ctx.fillStyle = "rgb(210,0,210)";
     ctx.fill();

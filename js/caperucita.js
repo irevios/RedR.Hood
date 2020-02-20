@@ -165,15 +165,15 @@ class Caperucita extends Personaje {
     retrocede() {
         if (this.direccion == "right") {
             teclas.derecha.on = false;
-            this.velocidadX = -80;
+            this.velocidadX = -10;
             if (this.colisionaPorDerecha(80)) {
-                this.velocidadX = 20;
+                this.velocidadX = 10;
             }
         } else {
             teclas.izquierda.on = false;
-            this.velocidadX = 80;
+            this.velocidadX = 10;
             if (this.colisionaPorIzquierda(80)) {
-                this.velocidadX = -20;
+                this.velocidadX = -10;
             }
         }
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");

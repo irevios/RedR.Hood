@@ -23,7 +23,7 @@ $(document).ready(function() {
     rescala();
 
     generarMapas();
-    nivel = mapas.N2;
+    nivel = mapas.N0;
     nivel.cambiarFondo();
     nivel.generaEnemigos();
 

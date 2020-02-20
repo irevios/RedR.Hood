@@ -57,40 +57,40 @@ class EnemigoVolador extends Personaje {
     gravedad() {}
     moverDerecha() {
         if (!this.colisionaPorDerecha(5)) {
-            this.capa.animate({ left: this.izquierda += 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
         } else {
-            this.capa.animate({ left: this.izquierda -= 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
     
         }
     }
     moverIzquierda() {
         if (!this.colisionaPorIzquierda(4)) {
-            this.capa.animate({ left: this.izquierda -= 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(0deg)");
         } else {
-            this.capa.animate({ left: this.izquierda += 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
             this.capa.css("transform", "rotateY(180deg)");
         }
     }
     moverArriba() {
         if (!this.colisionaPorArriba(5)) {
-            this.capa.animate({ top: this.arriba += 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ top: this.arriba += 20 }, { duration: 10, queue: false }, "linear");
         } else {
-            this.capa.animate({ left: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ top: this.arriba -= 20 }, { duration: 10, queue: false }, "linear");
         }
     }
     moverAbajo() {
         if (!this.colisionaPorAbajo(5)) {
-            this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ top: this.arriba -= 20 }, { duration: 10, queue: false }, "linear");
         } else {
-            this.capa.animate({ left: this.arriba += 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ top: this.arriba += 20 }, { duration: 10, queue: false }, "linear");
         }
     }
     moverAleatorio() {
         let num = Math.round(Math.random() * 3);
-        let veces = Math.round(Math.random() * 5);
+        let veces = Math.round(Math.random() * 10);
         for (let i = 0; i < veces; i++) {
             switch (num) {
                 case 0:
