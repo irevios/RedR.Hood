@@ -58,10 +58,6 @@ class Mapa {
             let punto = Math.round(Math.random() * puntosPosibles.length);
             this.enemigos.push(new EnemigoVolador(puntosPosibles[punto], "murcielago", pMurcielago, i));
         }
-        // for (let i = 0; i < this.enemigosGenerar.murcielago; i++) {
-        //     let punto = Math.round(Math.random() * puntosPosibles.length);
-        //     this.enemigos.push(new EnemigoTerrestre(puntosPosibles[punto], "murcielago", pMurcielagoDer, pMurcielagoIzq, pMurcielago));
-        // }
         // for (let i = 0; i < this.enemigosGenerar.lobo; i++) {
         //      let punto = Math.round(Math.random() * puntosPosibles.length);
         //      this.enemigos.push(new EnemigoTerrestre(puntosPosibles[punto], "lobo", pLoboDer, pLoboIzq));
@@ -85,7 +81,7 @@ let mapas = { N0: null, N1: null, N2: null, N3: null, N4: null }
 function generarMapas() {
     mapas.N0 = new Mapa(0, 213, 500, 0, false, "hacha", true, dibujaNivel0, { "rana": 1, "ganso": 0, "murcielago": 0, "lobo": 0, "loboFeroz": false });
     mapas.N1 = new Mapa(1, 39, 766, 2, "llave1", false, false, dibujaNivel1, { "rana": 1, "ganso": 2, "murcielago": 0, "lobo": 0, "loboFeroz": false });
-    mapas.N2 = new Mapa(2, 5, 65, 3, "llave2", "ballesta", true, dibujaNivel2, { "rana": 0, "ganso": 0, "murcielago": 5, "lobo": 0, "loboFeroz": false });
+    mapas.N2 = new Mapa(2, 5, 65, 3, "llave2", "ballesta", true, dibujaNivel2, { "rana": 0, "ganso": 0, "murcielago": 4, "lobo": 0, "loboFeroz": false });
     // mapas.N3 = new Mapa(3, 3, llave3, "pulsera", false,dibujaNivel3);
     // mapas.N4 = new Mapa(4, 0, false, false, false,dibujaNivel4);
 }

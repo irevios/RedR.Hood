@@ -57,42 +57,35 @@ class EnemigoVolador extends Personaje {
     gravedad() {}
     moverDerecha(n) {
         for (let i = 0; i < n; i++) {
-            if (!this.colisionaPorDerecha(5)) {
-                this.capa.animate({ left: this.izquierda += 5 }, { duration: 100, queue: false }, "linear");
+            this.direccion = "right";
+            if (this.tocar("zonaEnemigos", 20,0)) {
+                this.capa.animate({ left: this.izquierda += 10 }, { duration: 100, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(180deg)");
-            } else {
-                this.capa.animate({ left: this.izquierda -= 5 }, { duration: 100, queue: false }, "linear");
-                this.capa.css("transform", "rotateY(0deg)");
-
             }
         }
     }
     moverIzquierda(n) {
         for (let i = 0; i < n; i++) {
-            if (!this.colisionaPorIzquierda(4)) {
-                this.capa.animate({ left: this.izquierda -= 5 }, { duration: 100, queue: false }, "linear");
+            this.direccion = "left";
+            if (this.tocar("zonaEnemigos", -20,0)) {
+                this.capa.animate({ left: this.izquierda -= 10 }, { duration: 100, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(0deg)");
-            } else {
-                this.capa.animate({ left: this.izquierda += 5 }, { duration: 100, queue: false }, "linear");
-                this.capa.css("transform", "rotateY(180deg)");
             }
         }
     }
     moverArriba(n) {
         for (let i = 0; i < n; i++) {
-            if (!this.colisionaPorArriba(5)) {
-                this.capa.animate({ top: this.arriba += 5 }, { duration: 100, queue: false }, "linear");
-            } else {
-                this.capa.animate({ top: this.arriba -= 5 }, { duration: 100, queue: false }, "linear");
+            this.direccion = "right";
+            if (this.tocar("zonaEnemigos", 10, 20)) {
+                this.capa.animate({ top: this.arriba += 10 }, { duration: 100, queue: false }, "linear");
             }
         }
     }
     moverAbajo(n) {
         for (let i = 0; i < n; i++) {
-            if (!this.colisionaPorAbajo(5)) {
-                this.capa.animate({ top: this.arriba -= 5 }, { duration: 100, queue: false }, "linear");
-            } else {
-                this.capa.animate({ top: this.arriba += 5 }, { duration: 100, queue: false }, "linear");
+            this.direccion = "left";
+            if (this.tocar("zonaEnemigos", 10, -20)) {
+                this.capa.animate({ top: this.arriba -= 10 }, { duration: 100, queue: false }, "linear");
             }
         }
     }

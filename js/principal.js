@@ -23,7 +23,7 @@ $(document).ready(function() {
     rescala();
 
     generarMapas();
-    nivel = mapas.N0;
+    nivel = mapas.N2;
     nivel.cambiarFondo();
     nivel.generaEnemigos();
 
@@ -39,7 +39,9 @@ $(document).ready(function() {
 
     setInterval(() => {
         personaje.gravedad();
-        nivel.enemigos.forEach(e => e.gravedad());
+        if (nivel.nivel != 2) {
+            nivel.enemigos.forEach(e => e.gravedad());
+        }
         dibujaMovimiento(nivel.enemigos);
     }, 50);
     setInterval(() => {

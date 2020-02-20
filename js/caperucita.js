@@ -11,7 +11,7 @@ class Personaje {
         this.abajo = this.arriba + this.altura;
         this.velocidadX = 1;
         this.velocidadY = 0;
-        this.g = 3;
+        this.g = 6;
         this.rectificaciones = 0;
     }
     // Gravedad
@@ -35,7 +35,7 @@ class Personaje {
     colisionaPorIzquierdaPuedeArriba(pxA, pxB) { return colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes descendentes
     colisionaPorDerechaPuedeArriba(pxA, pxB) { return colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes ascendentes
     // Tocar diferentes objetos o partes del mapa
-    tocar(color, d) { return colision(this.izquierda + 10 + (d != undefined ? (this.direccion == "right" ? d : d * (-1)) : 0), this.arriba - 10, this.contorno, color); }
+    tocar(color, x, y) { return colision(this.izquierda + 10 + (x != undefined ? (this.direccion == "right" ? x : x * (-1)) : 0), this.arriba - 10 + (y != undefined ? (this.direccion == "right" ? y : y * (-1)) : 0), this.contorno, color); }
 }
 
 class Caperucita extends Personaje {
@@ -44,9 +44,9 @@ class Caperucita extends Personaje {
         super(capa);
 
         // Colisión
-        this.contornoDer = pCaperucitaDer;
-        this.contornoIzq = pCaperucitaIzq;
-        this.contorno = this.contornoDer;
+        this.contornoNormal = pCaperucita;
+        this.contornoAbajo = pCaperucitaAgachada;
+        this.contorno = this.contornoNormal;
 
         // Dirección
         this.direccion = "right";
@@ -80,10 +80,10 @@ class Caperucita extends Personaje {
     }
 
     // Movimiento
-    moverDerecha() {
+    moverDerecha() {    
         this.mirar = "right";
         this.direccion = "right";
-        this.contorno = this.contornoDer;
+        this.contorno = teclas.agacharse.on ? this.contornoAbajo : this.contornoNormal;
         this.velocidadX = 7;
         this.animacion(teclas.agacharse.on ? "down_right" : "run_right");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -91,7 +91,7 @@ class Caperucita extends Personaje {
     moverIzquierda() {
         this.mirar = "left";
         this.direccion = "left";
-        this.contorno = this.contornoIzq;
+        this.contorno = teclas.agacharse.on ? this.contornoAbajo : this.contornoNormal;
         this.velocidadX = -7;
         this.animacion(teclas.agacharse.on ? "down_left" : "run_left");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -109,6 +109,7 @@ class Caperucita extends Personaje {
     }
     agachate() {
         if (!teclas.derecha.on && !teclas.izquierda.on) {
+            this.contorno = this.contornoAbajo;
             this.estatica("down_" + this.direccion);
         }
     }
