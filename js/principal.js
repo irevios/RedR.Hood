@@ -3,7 +3,7 @@ let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 let personaje;
 let nivel;
-let modoDebug = false;
+let modoDebug = true;
 
 
 modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
@@ -88,6 +88,6 @@ function compruebaNivel() {
     }
     if (personaje.tocar("enemigo")) {
         personaje.pierdeVida();
-        personaje.retrocede();
+        // personaje.retrocede();
     }
 }

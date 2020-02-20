@@ -122,19 +122,20 @@ class Caperucita extends Personaje {
 
     // Ataques
     hacha() {
-        if (this.armaEquipada == "hacha") {
-            this.animacion("axe_" + this.direccion);
+        this.animacion("axe_" + this.direccion);
+        if (this.tocar("enemigo") != false) {
+            let tocado = nivel.enemigos.filter(e => e.color == "126, 123, " + this.tocar("enemigo"))[0];
+            tocado.capa.remove();
+            nivel.enemigos = nivel.enemigos.filter(e => e != tocado);
         }
     }
     ballesta() {
-        if (this.armaEquipada == "ballesta") {
-            this.estatica("arr_" + this.direccion);
-        }
+
+        this.estatica("arr_" + this.direccion);
     }
     pulsera() {
-        if (this.armaEquipada == "pulsera") {
-            this.estatica("fire_" + this.direccion);
-        }
+
+        this.estatica("fire_" + this.direccion);
     }
 
     // Objetos
@@ -177,9 +178,15 @@ class Caperucita extends Personaje {
         if (this.direccion == "right") {
             teclas.derecha.on = false;
             this.velocidadX = -80;
+            if (this.colisionaPorDerecha(80)) {
+                this.velocidadX = 20;
+            }
         } else {
             teclas.izquierda.on = false;
             this.velocidadX = 80;
+            if (this.colisionaPorIzquierda(80)) {
+                this.velocidadX = -20;
+            }
         }
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
     }

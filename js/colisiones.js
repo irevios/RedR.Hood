@@ -7,7 +7,7 @@ let colores = {
     "puertaCerrada": [10, 130, 80], // Si tocas una puerta cerrada se abre si tienes la llave // rgb(10,130,80)
     "puerta": [0, 255, 0], // Si tocas una puerta abierta cambia de mapa // rgb(0, 255, 0)
     "zonaEnemigos": [210, 0, 210], // Los enemigos pueden aparecer por esta zona // rgb(210,0,210)
-    "enemigo": [126, 123, 188], // Si tocas un enemigo pierde vida // rgb(126, 123, 188)
+    "enemigo": [126, 123, 1], // Si tocas un enemigo pierde vida // rgb(126, 123, 1)
     "objetos": [0, 210, 255] // Si tocas un arma, la recoges // rgb(0, 210, 155)
 }
 
@@ -16,13 +16,20 @@ function colision(x, y, puntos, tipo) {
     puntos.forEach(p => {
         let dataPixel = ctx.getImageData(p[0] + x, p[1] + y, 1, 1).data;
         for (var i = 0; i <= dataPixel.length; i += 4) {
-            if (colores[tipo][0] == dataPixel[i] &&
-                colores[tipo][1] == dataPixel[i + 1] &&
-                colores[tipo][2] == dataPixel[i + 2]) {
-                colisiona = true;
+            if (tipo != "enemigo") {
+                if (colores[tipo][0] == dataPixel[i] &&
+                    colores[tipo][1] == dataPixel[i + 1] &&
+                    colores[tipo][2] == dataPixel[i + 2]) {
+                    colisiona = true;
+                }
+            } else {
+                if (colores[tipo][0] == dataPixel[i] &&
+                    colores[tipo][1] == dataPixel[i + 1]) {
+                    colisiona = dataPixel[i + 2];
+                }
             }
         }
-    })
+    });
     return colisiona;
 }
 

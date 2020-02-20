@@ -1,41 +1,45 @@
 class EnemigoTerrestre extends Personaje {
-    constructor(punto, tipo, cont) {
+    constructor(punto, tipo, cont, num) {
         super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
 
         this.tipo = tipo;
         //Colisión
         this.contorno = cont;
+        this.color = "126, 123, " + num * 5;
     }
     // Movimiento
     gravedad() {
         super.gravedad();
-        this.g = 2;
     }
     moverDerecha() {
-        if (!this.colisionaPorDerecha(2)) {
-            this.velocidadX = 7;
-            this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("transform", "rotateY(180deg)");
-        } else {
-            this.velocidadX = -7;
-            this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("transform", "rotateY(0deg)");
+        if (this.colisionaPorAbajo(5)) {
+            if (!this.colisionaPorDerecha(5)) {
+                this.velocidadX = 7;
+                this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
+                this.capa.css("transform", "rotateY(180deg)");
+            } else {
+                this.velocidadX = -7;
+                this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
+                this.capa.css("transform", "rotateY(0deg)");
+            }
         }
     }
     moverIzquierda() {
-        if (!this.colisionaPorIzquierda(2)) {
-            this.velocidadX = -7;
-            this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("transform", "rotateY(0deg)");
-        } else {
-            this.velocidadX = 7;
-            this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
-            this.capa.css("transform", "rotateY(180deg)");
+        if (this.colisionaPorAbajo(5)) {
+            if (!this.colisionaPorIzquierda(5)) {
+                this.velocidadX = -7;
+                this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
+                this.capa.css("transform", "rotateY(0deg)");
+            } else {
+                this.velocidadX = 7;
+                this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
+                this.capa.css("transform", "rotateY(180deg)");
+            }
         }
     }
     moverAleatorio() {
         let num = Math.round(Math.random());
-        let veces = Math.round(Math.random() * 5);
+        let veces = Math.round(Math.random() * 10);
         for (let i = 0; i < veces; i++) {
             num == 0 ? this.moverDerecha() : this.moverIzquierda();
         }

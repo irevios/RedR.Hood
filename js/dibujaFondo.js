@@ -1,22 +1,20 @@
 function dibujaMovimiento(enemigos) {
     ctx.restore();
     nivel.dibujaFondo();
-    enemigos.forEach(e => {
+    enemigos.forEach((e) => {
         ctx.beginPath();
         e.contorno.forEach((p, i) => {
             i == 0 ? ctx.moveTo(p[0] + e.izquierda, p[1] + e.arriba) : ctx.lineTo(p[0] + e.izquierda, p[1] + e.arriba);
         });
         ctx.closePath();
-        ctx.fillStyle = "rgb(126, 123, 188)";
+        ctx.fillStyle = "rgb(" + e.color + ")";
         ctx.fill();
     })
-    ctx.restore();
     ctx.save();
 }
 
 function dibujaNivel0(arma, llave, puerta) {
     // fondo
-
     ctx.beginPath();
     ctx.moveTo(0.5, 0.0);
     ctx.lineTo(1920.5, 0.0);
@@ -89,7 +87,6 @@ function dibujaNivel0(arma, llave, puerta) {
 
 function dibujaNivel1(arma, llave, puerta) {
     // fondo
-    ctx.save();
     ctx.beginPath();
     ctx.moveTo(0.5, 0.0);
     ctx.lineTo(1920.5, 0.0);
@@ -201,7 +198,6 @@ function dibujaNivel1(arma, llave, puerta) {
 }
 
 function dibujaNivel2(arma, llave, puerta) {
-    ctx.save();
     ctx.beginPath();
     ctx.moveTo(0.0, 0.0);
     ctx.lineTo(1920.0, 0.0);

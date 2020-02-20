@@ -36,7 +36,7 @@ function controlaTeclas() {
 function mueve() {
     if (teclas.izquierda.on) {
         if (teclas.izquierda.t < 100 && teclas.izquierda.t != 0) {
-            personaje.estatica("idle_left_0");
+            personaje.estatica("idle_left");
             personaje.direccion = "left";
         } else {
             if (!personaje.colisionaPorIzquierda(15) && personaje.colisionaPorAbajo(15)) {
@@ -52,7 +52,7 @@ function mueve() {
     }
     if (teclas.derecha.on) {
         if (teclas.derecha.t < 100 && teclas.derecha.t != 0) {
-            personaje.estatica("idle_right_0");
+            personaje.estatica("idle_right");
             personaje.direccion = "right";
         } else {
             if (!personaje.colisionaPorDerecha(15) && personaje.colisionaPorAbajo(15)) {
@@ -78,9 +78,16 @@ function mueve() {
     }
 
     if (teclas.ataque.on) {
-        personaje.hacha();
+        if (personaje.armaEquipada == "hacha") {
+            personaje.hacha();
+        }
+        if (personaje.armaEquipada == "ballesta") {
+            personaje.dispararBallesta();
+        }
+        if (personaje.armaEquipada == "pulsera") {
+            personaje.dispararFuego();
+        }
     }
 }
 
-function controlaMouse() {
-}
+function controlaMouse() {}
