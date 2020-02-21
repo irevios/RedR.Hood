@@ -1,6 +1,6 @@
 "use strict";
 // Clase padre para todos los personajes que se mueven
-class Personaje {
+class Dinamico {
     constructor(capa) {
         this.capa = capa;
         this.altura = this.capa.outerHeight(true);
@@ -38,7 +38,7 @@ class Personaje {
     tocar(color, x, y) { return colision(this.izquierda + 10 + (x != undefined ? (this.direccion == "right" ? x : x * (-1)) : 0), this.arriba - 10 + (y != undefined ? (this.direccion == "right" ? y : y * (-1)) : 0), this.contorno, color); }
 }
 
-class Caperucita extends Personaje {
+class Caperucita extends Dinamico {
     constructor(capa) {
         // Inicialización posición
         super(capa);
@@ -80,7 +80,7 @@ class Caperucita extends Personaje {
     }
 
     // Movimiento
-    moverDerecha() {    
+    moverDerecha() {
         this.mirar = "right";
         this.direccion = "right";
         this.contorno = teclas.agacharse.on ? this.contornoAbajo : this.contornoNormal;
@@ -132,11 +132,9 @@ class Caperucita extends Personaje {
         }
     }
     ballesta() {
-
         this.estatica("arr_" + this.direccion);
     }
     pulsera() {
-
         this.estatica("fire_" + this.direccion);
     }
 
@@ -178,5 +176,11 @@ class Caperucita extends Personaje {
             }
         }
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
+    }
+}
+
+class Proyectil extends Dinamico {
+    constructor(capa) {
+        super(capa);
     }
 }
