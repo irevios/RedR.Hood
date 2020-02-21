@@ -68,6 +68,7 @@ class Caperucita extends Dinamico {
             "manzanas": 0
         }
         this.vida = 4;
+        this.proyectiles = [];
     }
     // Físicas
     gravedad() {
@@ -133,6 +134,8 @@ class Caperucita extends Dinamico {
     }
     ballesta() {
         this.estatica("arr_" + this.direccion);
+        let flecha = new Proyectil(pRana, "flecha", { x: this.izquierda, y: this.arriba });
+        this.proyectiles.push(flecha);
     }
     pulsera() {
         this.estatica("fire_" + this.direccion);
@@ -180,7 +183,19 @@ class Caperucita extends Dinamico {
 }
 
 class Proyectil extends Dinamico {
-    constructor(capa) {
-        super(capa);
+    constructor(contorno, tipo, punto) {
+        super($("<div class='" + tipo + "' style='left: " + punto.x + "px; top: " + punto.y + "px'></div>").appendTo("#juego"));
+        this.contorno = contorno;
+        this.anguloAnterior = 0;
+    }
+    mover(x, y) {
+        let tx = x - this.izquierda;
+        let ty = y - this.arriba;
+        let angulo = Math.atan2(ty , tx);
+        let a = angulo * (180 / Math.PI);
+        let a2 = a > 0.0 ? a : (360.0 + a);
+        this.anguloAnterior = a2;
+        this.capa.css("transform", "rotate(" + a + "deg)");
+        console.log(this.anguloAnterior);
     }
 }

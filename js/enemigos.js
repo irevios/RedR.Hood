@@ -48,7 +48,7 @@ class EnemigoTerrestre extends Dinamico {
 
 class EnemigoVolador extends Dinamico {
     constructor(punto, tipo, cont, num) {
-        super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
+        super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + /*(*/punto.y /*- 40)*/ + "px'></div>").appendTo("#juego"));
         this.tipo = tipo;
         //Colisión
         this.contorno = cont;

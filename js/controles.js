@@ -65,7 +65,7 @@ function mueve() {
                 personaje.velocidadX = 20;
             }
         }
-    }
+    }   
     if (teclas.saltar.on) {
         if (!personaje.colisionaPorArriba(30)) {
             personaje.salta();
@@ -82,12 +82,16 @@ function mueve() {
             personaje.hacha();
         }
         if (personaje.armaEquipada == "ballesta") {
-            personaje.dispararBallesta();
+            personaje.ballesta();
         }
         if (personaje.armaEquipada == "pulsera") {
-            personaje.dispararFuego();
+            personaje.pulsera();
         }
     }
 }
 
-function controlaMouse() {}
+function controlaMouse() {
+    $("#juego").mousemove((e)=>{
+        personaje.proyectiles[0].mover(e.offsetX,e.offsetY);
+    });
+}

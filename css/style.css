@@ -30,7 +30,7 @@ body {
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: 1;
+    z-index: 2;
 }
 
 #caperucita {
@@ -63,6 +63,17 @@ body {
     background-image: url("../img/enemigos/murcielago.gif");
     background-size: contain;
     background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.flecha {
+    background: blue;
+    width: 2rem;
+    height: 0.3rem;
+    transform-origin: left center;
+    transform: rotate(0);
+    display: block;
+    position: absolute;
     z-index: 1;
 }
 
@@ -102,10 +113,13 @@ body {
     padding: 2rem;
     text-shadow: 0 0 1rem rgba(0, 0, 0, .65);
     z-index: 10;
+    pointer-events: none;
 }
 
 #vida i {
     padding: 0.3rem;
+    pointer-events: none;
+
 }
 
 #vida i.perdida {
