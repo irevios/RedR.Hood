@@ -1,6 +1,6 @@
 class EnemigoTerrestre extends Dinamico {
     constructor(punto, tipo, cont, num) {
-        super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
+        super($("<div class='" + tipo + " dinamico enemigo' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
 
         this.tipo = tipo;
         //Colisión
@@ -48,7 +48,7 @@ class EnemigoTerrestre extends Dinamico {
 
 class EnemigoVolador extends Dinamico {
     constructor(punto, tipo, cont, num) {
-        super($("<div class='" + tipo + " personaje enemigo' style='left: " + punto.x + "px; top: " + /*(*/punto.y /*- 40)*/ + "px'></div>").appendTo("#juego"));
+        super($("<div class='" + tipo + " dinamico enemigo' style='left: " + punto.x + "px; top: " + /*(*/ punto.y /*- 40)*/ + "px'></div>").appendTo("#juego"));
         this.tipo = tipo;
         //Colisión
         this.contorno = cont;
@@ -58,7 +58,7 @@ class EnemigoVolador extends Dinamico {
     moverDerecha(n) {
         for (let i = 0; i < n; i++) {
             this.direccion = "right";
-            if (this.tocar("zonaEnemigos", 25,0)) {
+            if (this.tocar("zonaEnemigos", 25, 0)) {
                 this.capa.animate({ left: this.izquierda += 10 }, { duration: 100, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(180deg)");
             }
@@ -67,7 +67,7 @@ class EnemigoVolador extends Dinamico {
     moverIzquierda(n) {
         for (let i = 0; i < n; i++) {
             this.direccion = "left";
-            if (this.tocar("zonaEnemigos", -5,0)) {
+            if (this.tocar("zonaEnemigos", -5, 0)) {
                 this.capa.animate({ left: this.izquierda -= 10 }, { duration: 100, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(0deg)");
             }

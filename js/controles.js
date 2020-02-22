@@ -91,7 +91,5 @@ function mueve() {
 }
 
 function controlaMouse() {
-    $("#juego").mousemove((e)=>{
-        personaje.proyectiles[0].mover(e.offsetX,e.offsetY);
-    });
+
 }

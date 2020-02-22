@@ -11,13 +11,12 @@ class Dinamico {
         this.abajo = this.arriba + this.altura;
         this.velocidadX = 1;
         this.velocidadY = 0;
-        this.g = 6;
+        this.g = 3;
         this.rectificaciones = 0;
     }
     // Gravedad
     gravedad() {
         let enSuelo = this.colisionaPorAbajo(this.velocidadY + this.g);
-
         if (!enSuelo) {
             this.g = 3;
             this.velocidadY += this.g;
@@ -44,9 +43,7 @@ class Caperucita extends Dinamico {
         super(capa);
 
         // Colisión
-        this.contornoNormal = pCaperucita;
-        this.contornoAbajo = pCaperucitaAgachada;
-        this.contorno = this.contornoNormal;
+        this.contorno = pCaperucita;
 
         // Dirección
         this.direccion = "right";
@@ -84,7 +81,6 @@ class Caperucita extends Dinamico {
     moverDerecha() {
         this.mirar = "right";
         this.direccion = "right";
-        this.contorno = teclas.agacharse.on ? this.contornoAbajo : this.contornoNormal;
         this.velocidadX = 7;
         this.animacion(teclas.agacharse.on ? "down_right" : "run_right");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -92,7 +88,6 @@ class Caperucita extends Dinamico {
     moverIzquierda() {
         this.mirar = "left";
         this.direccion = "left";
-        this.contorno = teclas.agacharse.on ? this.contornoAbajo : this.contornoNormal;
         this.velocidadX = -7;
         this.animacion(teclas.agacharse.on ? "down_left" : "run_left");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -167,15 +162,15 @@ class Caperucita extends Dinamico {
     retrocede() {
         if (this.direccion == "right") {
             teclas.derecha.on = false;
-            this.velocidadX = -10;
+            this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorDerecha(80)) {
-                this.velocidadX = 10;
+                this.capa.animate({ top: this.arriba = 10 }, { duration: 10, queue: false }, "linear");
             }
         } else {
             teclas.izquierda.on = false;
-            this.velocidadX = 10;
+            this.capa.animate({ top: this.arriba = 10 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorIzquierda(80)) {
-                this.velocidadX = -10;
+                this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
             }
         }
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -184,18 +179,17 @@ class Caperucita extends Dinamico {
 
 class Proyectil extends Dinamico {
     constructor(contorno, tipo, punto) {
-        super($("<div class='" + tipo + "' style='left: " + punto.x + "px; top: " + punto.y + "px'></div>").appendTo("#juego"));
+        super($("<div class='" + tipo + " dinamico' style='left: " + punto.x + "px; top: " + punto.y + "px'></div>").appendTo("#juego"));
         this.contorno = contorno;
         this.anguloAnterior = 0;
     }
     mover(x, y) {
         let tx = x - this.izquierda;
         let ty = y - this.arriba;
-        let angulo = Math.atan2(ty , tx);
-        let a = angulo * (180 / Math.PI);
-        let a2 = a > 0.0 ? a : (360.0 + a);
-        this.anguloAnterior = a2;
-        this.capa.css("transform", "rotate(" + a + "deg)");
-        console.log(this.anguloAnterior);
+        let atan = Math.atan2(ty, tx);
+        let atanGrados = atan * (180 / Math.PI);
+        let atanCalculado = atanGrados > 0.0 ? atanGrados : (360.0 + atanGrados);
+        this.angulo = atanCalculado;
+        this.capa.css("transform", "rotate(" + this.angulo + "deg)");
     }
 }

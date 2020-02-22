@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Cousine|Righteous&display=swap');
+
 body {
     margin: 0;
     box-sizing: border-box;
@@ -10,6 +12,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+    user-select: none;
 }
 
 .cargando {
@@ -25,12 +28,11 @@ body {
     opacity: 1;
 }
 
-.personaje {
+.dinamico {
     display: block;
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: 2;
 }
 
 #caperucita {
@@ -38,19 +40,15 @@ body {
     height: 201px;
     margin-top: -50px;
     background-position: bottom center;
-    background-repeat: no-repeat;
     background-image: url("../img/caperucita/idle_right.png");
+    z-index: 2;
 }
 
 .rana {
     width: 55px;
     height: 60px;
     margin-top: -10px;
-    display: block;
-    position: absolute;
     background-image: url("../img/enemigos/rana.gif");
-    background-size: contain;
-    background-repeat: no-repeat;
     z-index: 1;
 }
 
@@ -58,23 +56,38 @@ body {
     width: 55px;
     height: 60px;
     margin: -10px 0 0 9px;
-    display: block;
-    position: absolute;
     background-image: url("../img/enemigos/murcielago.gif");
-    background-size: contain;
-    background-repeat: no-repeat;
     z-index: 1;
 }
 
-.flecha {
-    background: blue;
-    width: 2rem;
-    height: 0.3rem;
+.guia {
+    background: url("../img/interfaz/guia.png");
+    width: 4rem;
+    height: 1.4rem;
     transform-origin: left center;
+    background-position: right center;
     transform: rotate(0);
     display: block;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 100px;
+    top: 50px;
+}
+
+.flecha {
+    background: url("../img/proyectiles/flecha.png");
+    width: 4rem;
+    height: 1.4rem;
+    transform-origin: left center;
+    background-position: right center;
+    transform: rotate(0);
+    display: block;
+    position: absolute;
+    z-index: 2;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #fondo {
@@ -105,14 +118,85 @@ body {
     opacity: 0.5;
 }
 
+.interfaz {
+    position: fixed;
+    display: block;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
+
+#panel {
+    width: fit-content;
+    margin: 0 auto;
+    position: relative;
+    background-color: #0000002e;
+    border-radius: 0px 0 10px 10px;
+    color: white;
+    font-family: 'Righteous', Arial, Verdana, sans-serif;
+}
+
+#ajustes {
+    display: inline-block;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 3.3rem;
+    padding: 0 0 0 1.2rem;
+    height: 100%;
+}
+
+#ajustes i {
+    pointer-events: auto;
+}
+
+#ajustes i:hover {
+    color: #75ccba;
+    cursor: pointer;
+}
+
+.separador {
+    border-bottom: 0.2rem #fff solid;
+    width: 100%;
+    margin: 0 auto;
+    float: none;
+    display: block;
+    position: relative;
+    padding: 0;
+}
+
+#nivel {
+    font-size: 2.5rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    display: inline-block;
+}
+
+.tiempo {
+    padding: 1.2rem 1.2rem 0 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+
+}
+
+#tiempo {
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
+    position: relative;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    font-family: "Cousine";
+}
+
+
 #vida {
+    position: absolute;
     font-size: 2.5rem;
     -webkit-text-stroke: 0.2rem #fff;
     color: #DF2423;
-    position: absolute;
     padding: 2rem;
     text-shadow: 0 0 1rem rgba(0, 0, 0, .65);
-    z-index: 10;
     pointer-events: none;
 }
 

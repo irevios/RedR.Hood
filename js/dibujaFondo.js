@@ -2,6 +2,9 @@ function dibujaMovimiento(enemigos) {
     ctx.restore();
     nivel.dibujaFondo();
     enemigos.forEach((e) => {
+        if (nivel.nivel != 2) {
+            e.gravedad();
+        }
         ctx.beginPath();
         e.contorno.forEach((p, i) => {
             i == 0 ? ctx.moveTo(p[0] + e.izquierda, p[1] + e.arriba) : ctx.lineTo(p[0] + e.izquierda, p[1] + e.arriba);

@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    
     <!-- Evita que el cambio de imágenes haga parpadear la imagen-->
     <div class="preload" style="display: none">
         <img src="img/caperucita/run_left.gif">
@@ -49,18 +48,24 @@
         <img src="img/enemigos/lobo.gif"> -->
     </div>
     <div class="interfaz">
-        <div id="vida">
-         
+        <div id="vida"></div>
+        <div id="panel">
+            <div id="ajustes"><i class="fa fa-cog" aria-hidden="true"></i></div>
+            <div id="nivel">Nivel <span>1</span></div>
+            <div class="separador"></div>
+            <div class="tiempo">Digestión Lobo</div>
+            <div id="tiempo"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>00:00:00</span></div>
         </div>
     </div>
     <div id="juego">
         <!-- Caperucita -->
-        <div id="caperucita" class="personaje"></div>
+        <div id="caperucita" class="dinamico"></div>
         <!-- Fondo -->
         <div id="overfondo"></div>
         <div id="fondo"></div>
         <canvas id="canvas" width="1922" height="1081"></canvas>
-    </div><div class="cargando"></div>
+    </div>
+    <div class="cargando"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/dibujaFondo.js"></script>
