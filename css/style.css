@@ -214,6 +214,7 @@ body {
     border-radius: 0px 0 10px 10px;
     color: white;
     font-family: 'Righteous', Arial, Verdana, sans-serif;
+    z-index:3;
 }
 
 #panel,
@@ -283,6 +284,7 @@ body {
     padding: 2rem;
     text-shadow: 0 0 1rem rgba(0, 0, 0, .65);
     pointer-events: none;
+    z-index:3;
 }
 
 #puntuacion {
@@ -410,4 +412,15 @@ body {
 [role="dialog"] {
     background: white;
     z-index: 999999999999;
+}
+
+#transicion {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

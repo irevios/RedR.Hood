@@ -75,10 +75,10 @@ class Caperucita extends Dinamico {
         this.img = "idle_" + this.direccion;
 
         // Inventario
-        this.armaEquipada = "ballesta";
+        this.armaEquipada = "";
         this.armas = {
             "hacha": false,
-            "ballesta": true,
+            "ballesta": false,
             "pulsera": false
         }
         this.objetoElegido = "";

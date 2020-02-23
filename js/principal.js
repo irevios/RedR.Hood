@@ -53,6 +53,7 @@ function nuevaPartida() {
     partida(0);
     personaje.izquierda = nivel.posInicialX;
     personaje.arriba = nivel.posInicialY;
+    setTimeout(() => $("#transicion").fadeOut(), 600);
 }
 
 function continuar() {
@@ -77,6 +78,7 @@ function continuar() {
         $("#tiempo span").text(d.tiempo);
         partida(d.nivel);
     }
+    setTimeout(() => $("#transicion").fadeOut(), 600);
 }
 
 function partida(n) {
@@ -140,18 +142,23 @@ function rescala() {
     $("#juego").css("transform", "scale(" + escala + ")");
 }
 
+var cambioMapa;
+
 function compruebaNivel() {
-    if (personaje.tocar("puerta")) {
-        nivel.eliminaEnemigos();
-        nivel = mapas["N" + (nivel.num + 1)];
-        personaje.capa.hide();
-        personaje.izquierda = nivel.posInicialX;
-        personaje.arriba = nivel.posInicialY;
-        personaje.capa.show();
-        nivel.cambiarFondo();
-        nivel.generaEnemigos();
-        ganaPuntos(125);
-        actualizaPanel();
+    if (personaje.tocar("puerta") && cambioMapa == null) {
+        $("#transicion").fadeIn(function() {
+            nivel.eliminaEnemigos();
+            nivel = mapas["N" + (nivel.num + 1)];
+            personaje.capa.hide();
+            personaje.izquierda = nivel.posInicialX;
+            personaje.arriba = nivel.posInicialY;
+            personaje.capa.show();
+            nivel.cambiarFondo();
+            nivel.generaEnemigos();
+            ganaPuntos(125);
+            actualizaPanel();
+        });
+        cambioMapa = setTimeout(() => $("#transicion").fadeOut(), 600);
     }
     if (personaje.tocar("vacio")) {
         personaje.pierdeVida();
