@@ -1,6 +1,6 @@
 "use strict";
 // Modo Debug
-let modoDebug = true;
+let modoDebug = false;
 modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
 
 // Canvas

@@ -149,9 +149,9 @@ class Caperucita extends Dinamico {
         }
     }
     ballesta() {
-            clearTimeout(this.flechaDelay);
+        clearTimeout(this.flechaDelay);
         if (this.proyectiles.length >= 1) {
-            this.flechaDelay = setTimeout(()=>this.creaFlecha(), 100);
+            this.flechaDelay = setTimeout(() => this.creaFlecha(), 100);
         } else {
             this.creaFlecha();
 
