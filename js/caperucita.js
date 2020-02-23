@@ -105,7 +105,6 @@ class Caperucita extends Dinamico {
     }
     agachate() {
         if (!teclas.derecha.on && !teclas.izquierda.on) {
-            this.contorno = this.contornoAbajo;
             this.estatica("down_" + this.direccion);
         }
     }
@@ -120,16 +119,12 @@ class Caperucita extends Dinamico {
     hacha() {
         this.animacion("axe_" + this.direccion);
         if (this.tocar("enemigo", 50) != false) {
-            let tocado = nivel.enemigos.filter(e => e.color == "126, 123, " + this.tocar("enemigo", 50))[0];
-            if (tocado != undefined) {
-                tocado.capa[0].remove();
-                nivel.enemigos = nivel.enemigos.filter(e => e != tocado);
-            }
+            nivel.eliminaEnemigo(this.tocar("enemigo", 50));
         }
     }
     ballesta() {
         this.estatica("arr_" + this.direccion);
-        let flecha = new Proyectil(pRana, "flecha", { x: this.izquierda, y: this.arriba });
+        let flecha = new Proyectil(pRana, "flecha", { x: (this.izquierda + (this.anchura / 2) + (this.direccion == "right" ? 50 : -50)), y: this.arriba + 20 });
         this.proyectiles.push(flecha);
     }
     pulsera() {
@@ -156,21 +151,25 @@ class Caperucita extends Dinamico {
 
     // Vida del personaje
     pierdeVida() {
-        $("#vida i:nth-child(" + this.vida + ")").effect("shake", { direction: "up", distance: 10, times: 2 }).addClass("perdida");
+        $("#vida i:nth-child(" + this.vida + "):not(.fa-trophy)").effect("shake", { direction: "up", distance: 10, times: 2 }).addClass("perdida");
         this.vida -= 1;
+        $("#daño").css({
+            "top": this.arriba,
+            "left": this.izquierda + this.anchura - 50
+        }).show().switchClass("blanco", "rojo", 1000, "easeOutBounce", function() { $(this).hide().switchClass("rojo", "blanco") });
     }
     retrocede() {
         if (this.direccion == "right") {
             teclas.derecha.on = false;
-            this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorDerecha(80)) {
-                this.capa.animate({ top: this.arriba = 10 }, { duration: 10, queue: false }, "linear");
+                this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
             }
         } else {
             teclas.izquierda.on = false;
-            this.capa.animate({ top: this.arriba = 10 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorIzquierda(80)) {
-                this.capa.animate({ top: this.arriba -= 10 }, { duration: 10, queue: false }, "linear");
+                this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");
             }
         }
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -180,16 +179,29 @@ class Caperucita extends Dinamico {
 class Proyectil extends Dinamico {
     constructor(contorno, tipo, punto) {
         super($("<div class='" + tipo + " dinamico' style='left: " + punto.x + "px; top: " + punto.y + "px'></div>").appendTo("#juego"));
+        this.izquierda = punto.x;
+        this.arriba = punto.y;
         this.contorno = contorno;
-        this.anguloAnterior = 0;
-    }
-    mover(x, y) {
-        let tx = x - this.izquierda;
-        let ty = y - this.arriba;
-        let atan = Math.atan2(ty, tx);
-        let atanGrados = atan * (180 / Math.PI);
-        let atanCalculado = atanGrados > 0.0 ? atanGrados : (360.0 + atanGrados);
-        this.angulo = atanCalculado;
+        this.angulo = anguloLanzamiento;
         this.capa.css("transform", "rotate(" + this.angulo + "deg)");
+        this.lanzamiento = this.mover();
+    }
+    mover() {
+        clearTimeout(this.lanzamiento);
+        $(this.capa).animate({
+            left: this.izquierda = Math.round(Math.cos(this.angulo * Math.PI / 180) * 30 + this.izquierda),
+            top: this.arriba = Math.round(Math.sin(this.angulo * Math.PI / 180) * 30 + this.arriba)
+        }, { duration: 10, queue: false }, "linear");
+
+        if (this.colisionaPorArriba(10) || this.colisionaPorAbajo(10) || this.colisionaPorIzquierda(10) || this.colisionaPorDerecha(10) || this.tocar("enemigo")) {
+            if(this.tocar("enemigo")!= false){
+                nivel.eliminaEnemigo(this.tocar("enemigo"));
+            }
+            this.capa.remove();
+            personaje.proyectiles = personaje.proyectiles.filter(p => p != this);
+        } else {
+            this.lanzamiento = setTimeout(() => this.mover(), 50);
+        }
+
     }
 }

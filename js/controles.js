@@ -34,6 +34,21 @@ function controlaTeclas() {
 }
 
 function mueve() {
+    if (teclas.ataque.on) {
+        teclas.izquierda.on = false;
+        teclas.derecha.on = false;
+        teclas.saltar.on = false;
+        teclas.agacharse.on = false;
+        if (personaje.armaEquipada == "hacha") {
+            personaje.hacha();
+        }
+        if (personaje.armaEquipada == "ballesta") {
+            personaje.ballesta();
+        }
+        if (personaje.armaEquipada == "pulsera") {
+            personaje.pulsera();
+        }
+    }
     if (teclas.izquierda.on) {
         if (teclas.izquierda.t < 100 && teclas.izquierda.t != 0) {
             personaje.estatica("idle_left");
@@ -65,7 +80,7 @@ function mueve() {
                 personaje.velocidadX = 20;
             }
         }
-    }   
+    }
     if (teclas.saltar.on) {
         if (!personaje.colisionaPorArriba(30)) {
             personaje.salta();
@@ -77,17 +92,7 @@ function mueve() {
         }
     }
 
-    if (teclas.ataque.on) {
-        if (personaje.armaEquipada == "hacha") {
-            personaje.hacha();
-        }
-        if (personaje.armaEquipada == "ballesta") {
-            personaje.ballesta();
-        }
-        if (personaje.armaEquipada == "pulsera") {
-            personaje.pulsera();
-        }
-    }
+
 }
 
 function controlaMouse() {

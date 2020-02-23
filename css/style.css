@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Cousine|Righteous&display=swap');
+@font-face {
+    font-family: "monofonto";
+    src: url("../fonts/monofonto.ttf");
+}
+
+@font-face {
+    font-family: "Righteous";
+    src: url("../fonts/Righteous.ttf");
+}
 
 body {
     margin: 0;
@@ -36,6 +44,7 @@ body {
 }
 
 #caperucita {
+    display: none;
     width: 190px;
     height: 201px;
     margin-top: -50px;
@@ -48,7 +57,6 @@ body {
     width: 55px;
     height: 60px;
     margin-top: -10px;
-    background-image: url("../img/enemigos/rana.gif");
     z-index: 1;
 }
 
@@ -56,7 +64,6 @@ body {
     width: 55px;
     height: 60px;
     margin: -10px 0 0 9px;
-    background-image: url("../img/enemigos/murcielago.gif");
     z-index: 1;
 }
 
@@ -113,6 +120,47 @@ body {
     pointer-events: none;
 }
 
+
+#daño {
+    width: 5rem;
+    height: 4rem;
+    display: none;
+    position: absolute;
+    z-index: 20;
+    padding: 1rem;
+    line-height: 3rem;
+    text-align: center;
+
+}
+
+.rana.bien {
+    background-image: url("../img/enemigos/rana.gif");
+}
+
+.rana.daño {
+    background-image: url("../img/enemigos/ranadaño.png");
+}
+
+.murcielago.bien {
+    background-image: url("../img/enemigos/murcielago.gif");
+}
+
+.murcielago.daño {
+    background-image: url("../img/enemigos/murcielagodaño.png");
+}
+
+#daño.blanco {
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: 1px 1px 13px #E21C20;
+}
+
+#daño.rojo {
+    font-size: 2rem;
+    color: #E21C20;
+    text-shadow: 1px 1px 13px white;
+}
+
 #fondo.modoDebug,
 #overfondo.modoDebug {
     opacity: 0.5;
@@ -137,6 +185,12 @@ body {
     font-family: 'Righteous', Arial, Verdana, sans-serif;
 }
 
+#panel,
+#vida,
+#caperucita {
+    display: none;
+}
+
 #ajustes {
     display: inline-block;
     font-size: 2rem;
@@ -152,7 +206,7 @@ body {
 
 #ajustes i:hover {
     color: #75ccba;
-    cursor: pointer;
+    cursor: url("../img/interfaz/pointer.png"), auto;
 }
 
 .separador {
@@ -186,7 +240,7 @@ body {
     font-size: 2rem;
     padding-bottom: 1rem;
     text-align: center;
-    font-family: "Cousine";
+    font-family: "monofonto";
 }
 
 
@@ -198,6 +252,14 @@ body {
     padding: 2rem;
     text-shadow: 0 0 1rem rgba(0, 0, 0, .65);
     pointer-events: none;
+}
+
+#puntuacion {
+    font-family: "monofonto";
+    -webkit-text-stroke: 0;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 #vida i {
@@ -231,4 +293,64 @@ body {
 
 #canvas {
     opacity: 1;
+}
+
+#inicio {
+    background-image: url("../img/interfaz/fondoTitulo.png");
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 200;
+    cursor: url("../img/interfaz/pointer.png"), auto;
+}
+
+#personajeInicio {
+    background-image: url("../img/interfaz/personajeTitulo.png");
+    display: block;
+    position: relative;
+    width: 42vw;
+    margin: 2vw 4vw;
+    height: 80vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: left;
+    top: calc((100vh - (40vh + 1vw))/ 10);
+}
+
+#titulo {
+    background-image: url(../img/interfaz/titulo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    position: relative;
+    width: 42vw;
+    height: 25vh;
+    float: left;
+    margin: 9vw 4vw 0 0;
+}
+
+#partida {
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    position: relative;
+    padding: 1vw;
+    width: 42vw;
+    height: 45vh;
+    float: left;
+}
+
+#partida div {
+    font-size: 3vw;
+    font-family: "Righteous";
+    text-align: center;
+    color: #202020;
+    padding: 0.2em;
+}
+
+#partida div:hover {
+    border-bottom: #ffffff solid 5px;
+    color: #d82b2b;
+    text-shadow: 0 0 1vw white;
 }

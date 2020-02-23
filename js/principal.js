@@ -1,12 +1,18 @@
 "use strict";
+// Modo Debug
+let modoDebug = false;
+modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
+
+// Canvas
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
+
+// Inicio
 let personaje;
 let nivel;
-let modoDebug = false;
 let anguloLanzamiento = 0;
-let intervaloGravedad, intervaloEnemigos, intervaloMovAleatorio, intervaloTocar, intervaloTiempo;
-modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
+let puntuacion = 0;
+
 // Hacer que el juego siempre tenga el tamaño correcto según la pantalla
 $(window).resize((e) => rescala());
 $(window).on('load', () => {
@@ -18,31 +24,32 @@ $(window).on('load', () => {
     }, 1000);
 });
 
+let intervaloGravedad, intervaloEnemigos, intervaloMovAleatorio, intervaloTocar, intervaloTiempo;
+
 $(document).ready(function() {
     // Inicialización
     rescala();
-
     generarMapas();
     nivel = mapas.N0;
     nivel.cambiarFondo();
-    nivel.generaEnemigos();
     actualizaPanel();
     personaje = new Caperucita($('#caperucita'));
 
+    //nivel.generaEnemigos();
+    // $("#panel, #vida, #caperucita").show();
     // Inicia el juego
     personaje.izquierda = nivel.posInicialX;
     personaje.arriba = nivel.posInicialY;
     for (var i = 0; i < personaje.vida; i++) {
-        $("<i class='fa fa-heart' aria-hidden='true'></i>").appendTo("#vida");
+        $("<i class='fa fa-heart' aria-hidden='true'></i>").insertBefore("#puntuacion");
     };
-
 
     // Intervalos
     gravity();
     enemigos();
     enemigosMovAleatorio();
     compruebaTocar();
-    reloj();
+    // reloj();
 
     // Controles
     controlaMouse();
@@ -87,12 +94,14 @@ function compruebaNivel() {
     if (personaje.tocar("puerta")) {
         nivel.eliminaEnemigos();
         nivel = mapas["N" + (nivel.num + 1)];
-        personaje.capa.css("opacity", "0");
+        personaje.capa.hide();
         personaje.izquierda = nivel.posInicialX;
         personaje.arriba = nivel.posInicialY;
-        personaje.capa.css("opacity", "1");
+        personaje.capa.show();
         nivel.cambiarFondo();
         nivel.generaEnemigos();
+        $("#panel, #vida, #caperucita").show();
+        ganaPuntos(125);
         actualizaPanel();
     }
     if (personaje.tocar("puertaCerrada", 100) && teclas.usarObjeto.on) {
@@ -101,6 +110,7 @@ function compruebaNivel() {
         }
     }
     if (personaje.tocar("arma") && teclas.cogerObjeto.on) {
+        ganaPuntos(20);
         personaje.armas[nivel.arma] = true;
         personaje.armaEquipada = nivel.arma;
         nivel.cogerArma();
@@ -110,13 +120,14 @@ function compruebaNivel() {
         }
     }
     if (personaje.tocar("llave") && teclas.cogerObjeto.on) {
+        ganaPuntos(20);
         personaje.inventario[nivel.llave] = true;
         personaje.objetoElegido = nivel.llave;
         nivel.cogerLLave();
         nivel.cambiarFondo();
     }
     if (personaje.tocar("vacio")) {
-        if (personaje.vida >= 1) {
+        if (personaje.vida != false) {
             personaje.pierdeVida();
         } else {
             //gameover();
@@ -143,7 +154,9 @@ function moverGuia(x, y) {
     let atan = Math.atan2(ty, tx);
     let atanGrados = atan * (180 / Math.PI);
     let atanCalculado = atanGrados > 0.0 ? atanGrados : (360.0 + atanGrados);
-    anguloLanzamiento = atanCalculado;
+    anguloLanzamiento = parseInt(atanCalculado);
+    personaje.direccion = anguloLanzamiento >= 90 && anguloLanzamiento < 270 ? "left" : "right"
+
     $(".guia").css("transform", "rotate(" + anguloLanzamiento + "deg)");
 }
 
@@ -152,11 +165,29 @@ function reloj() {
     let cuenta = parseInt(t[0]) * 60 + parseInt(t[1]);
     if (cuenta <= 0) {
         clearInterval(intervaloTiempo);
+        nivel.eliminaEnemigos();
+        personaje.capa.hide();
+        personaje.izquierda = nivel.posInicialX;
+        personaje.arriba = nivel.posInicialY;
+        personaje.capa.show();
+        nivel.cambiarFondo();
+        nivel.generaEnemigos();
+        actualizaPanel();
+        personaje.pierdeVida();
+        if (personaje.vida > 0) {
+            intervaloTiempo = setTimeout(reloj, 1000);
+        }
         return;
     }
+    cuenta = parseInt(t[0]) * 60 + parseInt(t[1]);
     cuenta--;
     let seg = parseInt(cuenta % 60);
     let min = parseInt(cuenta / 60 % 60);
     $("#tiempo span").text((min < 10 ? ("0" + min) : min) + ":" + (seg < 10 ? ("0" + seg) : seg));
     intervaloTiempo = setTimeout(reloj, 1000);
+}
+
+function ganaPuntos(plus) {
+    puntuacion += plus;
+    $("#puntuacion span").text(("0000000000" + puntuacion).slice(-10));
 }

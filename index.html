@@ -48,16 +48,30 @@
         <img src="img/enemigos/lobo.gif"> -->
     </div>
     <div class="interfaz">
-        <div id="vida"></div>
+        <div id="vida">
+            <div id="puntuacion"><i class="fa fa-trophy" aria-hidden="true"></i><span>0000000000</span></div>
+        </div>
         <div id="panel">
             <div id="ajustes"><i class="fa fa-cog" aria-hidden="true"></i></div>
             <div id="nivel">Nivel <span>1</span></div>
             <div class="separador"></div>
             <div class="tiempo">Digestión Lobo</div>
-            <div id="tiempo"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>00:00:00</span></div>
+            <div id="tiempo"><span>00:00</span> <i class="fa fa-clock-o" aria-hidden="true"></i></div>
+        </div>
+    </div>
+    <div id="inicio">
+        <div id="personajeInicio" style="
+    /* background-image: url(&quot;../&quot;); */
+"></div>
+        <div id="titulo"></div>
+        <div id="partida">
+            <div class="nueva">Nueva Partida</div>
+            <div class="continuar">Continuar</div>
+            <div class="ajustes">Ajustes</div>
         </div>
     </div>
     <div id="juego">
+        <div id='daño' class="blanco">- <i class='fa fa-heartbeat' aria-hidden='true'></i></div>
         <!-- Caperucita -->
         <div id="caperucita" class="dinamico"></div>
         <!-- Fondo -->

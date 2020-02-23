@@ -1,3 +1,4 @@
+"use strict";
 function dibujaMovimiento(enemigos) {
     ctx.restore();
     nivel.dibujaFondo();
@@ -14,6 +15,19 @@ function dibujaMovimiento(enemigos) {
         ctx.fill();
     })
     ctx.save();
+}
+
+function dibujaStart() {
+    // fondo
+    ctx.beginPath();
+    ctx.moveTo(0.5, 0.0);
+    ctx.lineTo(1920.5, 0.0);
+    ctx.lineTo(1920.5, 1080.0);
+    ctx.lineTo(0.5, 1080.0);
+    ctx.lineTo(0.5, 0.0);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fill();
 }
 
 function dibujaNivel0(arma, llave, puerta) {
