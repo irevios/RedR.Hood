@@ -82,14 +82,14 @@ class Caperucita extends Dinamico {
         this.mirar = "right";
         this.direccion = "right";
         this.velocidadX = 7;
-        this.animacion(teclas.agacharse.on ? "down_right" : "run_right");
+        this.animacion(teclasMovimiento.agacharse.on ? "down_right" : "run_right");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
     }
     moverIzquierda() {
         this.mirar = "left";
         this.direccion = "left";
         this.velocidadX = -7;
-        this.animacion(teclas.agacharse.on ? "down_left" : "run_left");
+        this.animacion(teclasMovimiento.agacharse.on ? "down_left" : "run_left");
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
     }
     moverArriba() { // Evita problemas con las inclinaciones
@@ -104,7 +104,7 @@ class Caperucita extends Dinamico {
         this.estatica("idle_" + this.direccion);
     }
     agachate() {
-        if (!teclas.derecha.on && !teclas.izquierda.on) {
+        if (!teclasMovimiento.derecha.on && !teclasMovimiento.izquierda.on) {
             this.estatica("down_" + this.direccion);
         }
     }
@@ -142,9 +142,9 @@ class Caperucita extends Dinamico {
     }
     compruebaImg() {
         let enSuelo = this.colisionaPorAbajo(10);
-        let nadaPulsado = !teclas.derecha.on && !teclas.agacharse.on && !teclas.izquierda.on;
+        let nadaPulsado = !teclasMovimiento.derecha.on && !teclasMovimiento.agacharse.on && !teclasMovimiento.izquierda.on;
         let aterrizando = this.img == ("jump_" + this.direccion);
-        if ((aterrizando || nadaPulsado) && enSuelo && !teclas.ataque.on && !teclas.saltar.on) {
+        if ((aterrizando || nadaPulsado) && enSuelo && !teclasMovimiento.ataque.on && !teclasMovimiento.saltar.on) {
             this.estatica("idle_" + this.direccion);
         }
     }
@@ -160,13 +160,13 @@ class Caperucita extends Dinamico {
     }
     retrocede() {
         if (this.direccion == "right") {
-            teclas.derecha.on = false;
+            teclasMovimiento.derecha.on = false;
             this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorDerecha(80)) {
                 this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
             }
         } else {
-            teclas.izquierda.on = false;
+            teclasMovimiento.izquierda.on = false;
             this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorIzquierda(80)) {
                 this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");

@@ -30,6 +30,7 @@ $(document).ready(function() {
     // Inicialización
     rescala();
     generarMapas();
+    nivel = mapas.N0;
     $("#mensaje").dialog({ appendTo: "body", autoOpen: false });
     //$("#mensaje").dialog("open");
     try {
@@ -49,24 +50,32 @@ $("#partida .nueva").click(nuevaPartida);
 $("#partida .continuar").click(continuar);
 
 function nuevaPartida() {
-    partida(mapas.N0);
-    try {
-        localStorage.setItem("datos", JSON.stringify({ 'nivel': 0, "inventario": personaje.inventario, "armas": personaje.armas, "armaEquipada": personaje.armaEquipada, "puntuacion": puntuacion }));
-    } catch (e) {
-        $(".alerta").show();
-        $(".continuar").hide();
-    }
+    partida(0);
+    personaje.izquierda = nivel.posInicialX;
+    personaje.arriba = nivel.posInicialY;
 }
 
 function continuar() {
     let d = JSON.parse(localStorage.getItem('datos'));
     puntuacion = d.puntuacion;
     ganaPuntos(0);
-    personaje.inventario = d.inventario;
-    personaje.armaEquipada = d.armaEquipada;
+    personaje.arriba = d.posicion.y;
+    personaje.izquierda = d.posicion.x;
+    personaje.vida = d.vida;
+    for (let i = personaje.vida + 1; i <= 4; i++) {
+        $("#vida i:nth-child(" + i + "):not(.fa-trophy)").addClass("perdida");
+    }
+    personaje.armaEquipada = d.aEquipada;
     personaje.armas = d.armas;
+    personaje.inventario = d.objetos;
+    personaje.capa.css({ "top": personaje.arriba, "left": personaje.izquierda });
     if (d.nivel != undefined) {
-        partida(mapas["N" + d.nivel]);
+        nivel.armaCogida = d.nArma;
+        nivel.llaveCogida = d.nLlave;
+        nivel.puertaAbierta = d.nPuerta;
+        nivel.tiempo = d.tiempo;
+        $("#tiempo span").text(d.tiempo);
+        partida(d.nivel);
     }
 }
 
@@ -74,11 +83,10 @@ function partida(n) {
     $("#panel, #vida, #caperucita").show();
     $("#inicio").hide("fade");
     // Mapa
-    nivel = n;
+    nivel = mapas["N" + n];
     nivel.cambiarFondo();
     actualizaPanel();
-    personaje.izquierda = nivel.posInicialX;
-    personaje.arriba = nivel.posInicialY;
+
     // Intervalos
     nivel.generaEnemigos();
     gravity();
@@ -138,31 +146,6 @@ function compruebaNivel() {
         nivel.generaEnemigos();
         ganaPuntos(125);
         actualizaPanel();
-        try {
-            localStorage.setItem("datos", JSON.stringify({ 'nivel': nivel.num, "inventario": personaje.inventario, "armas": personaje.armas, "armaEquipada": personaje.armaEquipada, "puntuacion": puntuacion }));
-        } catch (e) {}
-    }
-    if (personaje.tocar("puertaCerrada", 100) && teclas.usarObjeto.on) {
-        if (personaje.objetoElegido == nivel.llave) {
-            nivel.abrirPuerta();
-        }
-    }
-    if (personaje.tocar("arma") && teclas.cogerObjeto.on) {
-        ganaPuntos(20);
-        personaje.armas[nivel.arma] = true;
-        personaje.armaEquipada = nivel.arma;
-        nivel.cogerArma();
-        nivel.cambiarFondo();
-        if (nivel.arma == "ballesta" || nivel.arma == "pulsera") {
-            muestraGuia();
-        }
-    }
-    if (personaje.tocar("llave") && teclas.cogerObjeto.on) {
-        ganaPuntos(20);
-        personaje.inventario[nivel.llave] = true;
-        personaje.objetoElegido = nivel.llave;
-        nivel.cogerLLave();
-        nivel.cambiarFondo();
     }
     if (personaje.tocar("vacio")) {
         if (personaje.vida != false) {
@@ -175,6 +158,21 @@ function compruebaNivel() {
         personaje.pierdeVida();
         personaje.retrocede();
     }
+    try {
+        localStorage.setItem("datos", JSON.stringify({
+            "nivel": nivel.num,
+            "nArma": nivel.armaCogida,
+            "nLlave": nivel.llaveCogida,
+            "nPuerta": nivel.puertaAbierta,
+            "tiempo": $("#tiempo span").text(),
+            "puntuacion": puntuacion,
+            "posicion": { "x": personaje.izquierda, "y": personaje.arriba },
+            "vida": personaje.vida,
+            "aEquipada": personaje.armaEquipada,
+            "armas": personaje.armas,
+            "objetos": personaje.inventario
+        }));
+    } catch (e) {}
 }
 
 function muestraGuia() {
