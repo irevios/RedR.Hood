@@ -30,31 +30,67 @@ $(document).ready(function() {
     // Inicialización
     rescala();
     generarMapas();
-    nivel = mapas.N0;
-    nivel.cambiarFondo();
-    actualizaPanel();
+    $("#mensaje").dialog({ appendTo: "body", autoOpen: false });
+    //$("#mensaje").dialog("open");
+    try {
+        localStorage.getItem('nivel');
+    } catch (e) {
+        $(".alerta").show();
+        $(".continuar").hide();
+    }
     personaje = new Caperucita($('#caperucita'));
-
-    //nivel.generaEnemigos();
-    // $("#panel, #vida, #caperucita").show();
-    // Inicia el juego
-    personaje.izquierda = nivel.posInicialX;
-    personaje.arriba = nivel.posInicialY;
     for (var i = 0; i < personaje.vida; i++) {
         $("<i class='fa fa-heart' aria-hidden='true'></i>").insertBefore("#puntuacion");
     };
 
+});
+
+$("#partida .nueva").click(nuevaPartida);
+$("#partida .continuar").click(continuar);
+
+function nuevaPartida() {
+    partida(mapas.N0);
+    try {
+        localStorage.setItem("datos", JSON.stringify({ 'nivel': 0, "inventario": personaje.inventario, "armas": personaje.armas, "armaEquipada": personaje.armaEquipada, "puntuacion": puntuacion }));
+    } catch (e) {
+        $(".alerta").show();
+        $(".continuar").hide();
+    }
+}
+
+function continuar() {
+    let d = JSON.parse(localStorage.getItem('datos'));
+    puntuacion = d.puntuacion;
+    ganaPuntos(0);
+    personaje.inventario = d.inventario;
+    personaje.armaEquipada = d.armaEquipada;
+    personaje.armas = d.armas;
+    if (d.nivel != undefined) {
+        partida(mapas["N" + d.nivel]);
+    }
+}
+
+function partida(n) {
+    $("#panel, #vida, #caperucita").show();
+    $("#inicio").hide("fade");
+    // Mapa
+    nivel = n;
+    nivel.cambiarFondo();
+    actualizaPanel();
+    personaje.izquierda = nivel.posInicialX;
+    personaje.arriba = nivel.posInicialY;
     // Intervalos
+    nivel.generaEnemigos();
     gravity();
     enemigos();
+    reloj();
     enemigosMovAleatorio();
     compruebaTocar();
-    // reloj();
-
+    personaje.capa.show();
     // Controles
     controlaMouse();
     controlaTeclas();
-});
+}
 
 function actualizaPanel() {
     $("#nivel span").text(nivel.num + 1);
@@ -100,9 +136,11 @@ function compruebaNivel() {
         personaje.capa.show();
         nivel.cambiarFondo();
         nivel.generaEnemigos();
-        $("#panel, #vida, #caperucita").show();
         ganaPuntos(125);
         actualizaPanel();
+        try {
+            localStorage.setItem("datos", JSON.stringify({ 'nivel': nivel.num, "inventario": personaje.inventario, "armas": personaje.armas, "armaEquipada": personaje.armaEquipada, "puntuacion": puntuacion }));
+        } catch (e) {}
     }
     if (personaje.tocar("puertaCerrada", 100) && teclas.usarObjeto.on) {
         if (personaje.objetoElegido == nivel.llave) {

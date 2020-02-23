@@ -341,7 +341,7 @@ body {
     float: left;
 }
 
-#partida div {
+#partida div:not(.alerta) {
     font-size: 3vw;
     font-family: "Righteous";
     text-align: center;
@@ -349,8 +349,22 @@ body {
     padding: 0.2em;
 }
 
-#partida div:hover {
+#partida div:not(.alerta):hover {
     border-bottom: #ffffff solid 5px;
     color: #d82b2b;
     text-shadow: 0 0 1vw white;
+}
+
+.alerta{
+    display: none;
+    padding: 2vh;
+    text-align: center;
+    font-size: 2vh;
+    color: #bf2323;
+    font-family: "Righteous";
+}
+
+[role="dialog"]{
+    background: white;
+    z-index: 999999999999;
 }
