@@ -1,4 +1,5 @@
 "use strict";
+
 function dibujaMovimiento(enemigos) {
     ctx.restore();
     nivel.dibujaFondo();
@@ -17,21 +18,8 @@ function dibujaMovimiento(enemigos) {
     ctx.save();
 }
 
-function dibujaStart() {
-    // fondo
-    ctx.beginPath();
-    ctx.moveTo(0.5, 0.0);
-    ctx.lineTo(1920.5, 0.0);
-    ctx.lineTo(1920.5, 1080.0);
-    ctx.lineTo(0.5, 1080.0);
-    ctx.lineTo(0.5, 0.0);
-    ctx.closePath();
-    ctx.fillStyle = "rgb(255, 255, 255)";
-    ctx.fill();
-}
-
 function dibujaNivel0(arma, llave, puerta) {
-    // fondo
+    // Fondo
     ctx.beginPath();
     ctx.moveTo(0.5, 0.0);
     ctx.lineTo(1920.5, 0.0);
@@ -42,30 +30,43 @@ function dibujaNivel0(arma, llave, puerta) {
     ctx.fillStyle = "rgb(255, 255, 255)";
     ctx.fill();
 
-    // zona enemiga
+    // Zona enemiga
     ctx.beginPath();
     ctx.moveTo(1275.9, 784.1);
     ctx.lineTo(1276.1, 835.1);
-    ctx.bezierCurveTo(1518.5, 844.9, 1693.5, 873.7, 1859.3, 900.6);
-    ctx.lineTo(1859.1, 822.3);
-    ctx.bezierCurveTo(1665.4, 791.3, 1472.0, 784.5, 1275.9, 784.1);
+    ctx.bezierCurveTo(1518.5, 849.9, 1556.4, 858.7, 1725.7, 877.7);
+    ctx.lineTo(1725.5, 799.5);
+    ctx.bezierCurveTo(1531.8, 768.4, 1472.0, 784.5, 1275.9, 784.1);
     ctx.closePath();
     ctx.fillStyle = "rgb(210, 0, 210)";
     ctx.fill();
 
-    // puerta
-    ctx.beginPath();
-    ctx.moveTo(1920.0, 483.6);
-    ctx.lineTo(1858.0, 485.8);
-    ctx.lineTo(1858.9, 775.4);
-    ctx.lineTo(1859.3, 908.0);
-    ctx.lineTo(1920.0, 910.2);
-    ctx.lineTo(1920.0, 483.6);
-    ctx.closePath();
-    ctx.fillStyle = "rgb(0, 255, 0)";
-    ctx.fill();
+    // Puerta
+    if (puerta) {
+        ctx.beginPath();
+        ctx.moveTo(1920.0, 483.6);
+        ctx.lineTo(1858.0, 485.8);
+        ctx.lineTo(1858.9, 775.4);
+        ctx.lineTo(1859.3, 908.0);
+        ctx.lineTo(1920.0, 910.2);
+        ctx.lineTo(1920.0, 483.6);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(0, 255, 0)";
+        ctx.fill();
+    } else {
+        ctx.beginPath();
+        ctx.moveTo(1920.0, 483.6);
+        ctx.lineTo(1848.4, 485.8);
+        ctx.lineTo(1849.5, 775.4);
+        ctx.lineTo(1850.0, 908.0);
+        ctx.lineTo(1920.0, 910.2);
+        ctx.lineTo(1920.0, 483.6);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(0, 127, 127)";
+        ctx.fill();
+    }
 
-    // terreno
+    // Terreno
     ctx.beginPath();
     ctx.moveTo(0.0, 236.3);
     ctx.lineTo(0.0, 1080.0);
@@ -103,7 +104,7 @@ function dibujaNivel0(arma, llave, puerta) {
 }
 
 function dibujaNivel1(arma, llave, puerta) {
-    // fondo
+    // Fondo
     ctx.beginPath();
     ctx.moveTo(0.5, 0.0);
     ctx.lineTo(1920.5, 0.0);
@@ -114,7 +115,7 @@ function dibujaNivel1(arma, llave, puerta) {
     ctx.fillStyle = "rgb(255, 255, 255)";
     ctx.fill();
 
-    // vacio
+    // Vacio
     ctx.beginPath();
     ctx.moveTo(681.0, 987.0);
     ctx.lineTo(1094.1, 987.0);
@@ -129,7 +130,7 @@ function dibujaNivel1(arma, llave, puerta) {
     ctx.fillStyle = "rgb(255, 0, 0)";
     ctx.fill();
 
-    // puerta
+    // Puerta
     if (puerta) {
         ctx.beginPath();
         ctx.moveTo(1773.6, 498.8);
@@ -151,7 +152,7 @@ function dibujaNivel1(arma, llave, puerta) {
         ctx.fillStyle = "rgb(10,130,80)";
         ctx.fill();
     }
-    // zona enemiga
+    // Zona enemiga
     ctx.beginPath();
     ctx.moveTo(1472.6, 815.5);
     ctx.bezierCurveTo(1304.2, 814.7, 1058.0, 897.8, 1092.3, 953.2);
@@ -168,7 +169,7 @@ function dibujaNivel1(arma, llave, puerta) {
     ctx.fillStyle = "rgb(210, 0, 210)";
     ctx.fill();
 
-    // llave
+    // Llave
     ctx.beginPath();
     ctx.moveTo(533.2, 872.1);
     ctx.bezierCurveTo(554.1, 872.1, 571.0, 889.0, 571.0, 909.9);
@@ -179,7 +180,7 @@ function dibujaNivel1(arma, llave, puerta) {
     ctx.fillStyle = llave ? "rgb(255,255,255)" : "rgb(255, 255, 0)";
     ctx.fill();
 
-    // terreno
+    // Terreno
     ctx.beginPath();
     ctx.moveTo(1765.9, 485.6);
     ctx.bezierCurveTo(1765.6, 485.6, 1765.4, 485.8, 1765.4, 486.1);

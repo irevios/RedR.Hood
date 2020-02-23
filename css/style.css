@@ -53,19 +53,7 @@ body {
     z-index: 2;
 }
 
-.rana {
-    width: 55px;
-    height: 60px;
-    margin-top: -10px;
-    z-index: 1;
-}
 
-.murcielago {
-    width: 55px;
-    height: 60px;
-    margin: -10px 0 0 9px;
-    z-index: 1;
-}
 
 .guia {
     background: url("../img/interfaz/guia.png");
@@ -133,6 +121,13 @@ body {
 
 }
 
+.rana {
+    width: 55px;
+    height: 60px;
+    margin-top: -10px;
+    z-index: 1;
+}
+
 .rana.bien {
     background-image: url("../img/enemigos/rana.gif");
 }
@@ -141,12 +136,48 @@ body {
     background-image: url("../img/enemigos/ranadaño.png");
 }
 
+.murcielago {
+    width: 55px;
+    height: 57px;
+    margin: -10px 0 0 9px;
+    z-index: 1;
+}
+
 .murcielago.bien {
     background-image: url("../img/enemigos/murcielago.gif");
 }
 
 .murcielago.daño {
     background-image: url("../img/enemigos/murcielagodaño.png");
+}
+
+.lobo {
+    width: 307px;
+    height: 130px;
+    z-index: 1;
+}
+
+.lobo.bien {
+    background-image: url("../img/enemigos/lobo.gif");
+}
+
+.lobo.daño {
+    background-image: url("../img/enemigos/lobodaño.png");
+}
+
+.loboFeroz {
+    width: 450px;
+    height: 190px;
+    z-index: 1;
+}
+
+.loboFeroz.bien {
+    background-image: url("../img/enemigos/loboFeroz.gif");
+}
+
+.loboFeroz.daño {
+    background-image: url("../img/enemigos/loboFerozdaño.png");
+
 }
 
 #daño.blanco {
@@ -341,7 +372,15 @@ body {
     float: left;
 }
 
+#partida div:not(.alerta):hover {
+    background: white;
+    color: #d82b2b;
+    text-shadow: 0 0 1vw white;
+    transition: 0.5s ease;
+}
+
 #partida div:not(.alerta) {
+    border-bottom: #ffffff solid 5px;
     font-size: 3vw;
     font-family: "Righteous";
     text-align: center;
@@ -349,13 +388,7 @@ body {
     padding: 0.2em;
 }
 
-#partida div:not(.alerta):hover {
-    border-bottom: #ffffff solid 5px;
-    color: #d82b2b;
-    text-shadow: 0 0 1vw white;
-}
-
-.alerta{
+.alerta {
     display: none;
     padding: 2vh;
     text-align: center;
@@ -364,7 +397,7 @@ body {
     font-family: "Righteous";
 }
 
-[role="dialog"]{
+[role="dialog"] {
     background: white;
     z-index: 999999999999;
 }

@@ -1,6 +1,6 @@
 "use strict";
 // Modo Debug
-let modoDebug = false;
+let modoDebug = true;
 modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
 
 // Canvas
@@ -85,10 +85,10 @@ function partida(n) {
     // Mapa
     nivel = mapas["N" + n];
     nivel.cambiarFondo();
+    nivel.generaEnemigos();
     actualizaPanel();
 
     // Intervalos
-    nivel.generaEnemigos();
     gravity();
     enemigos();
     reloj();
@@ -119,7 +119,13 @@ function enemigos() {
 
 function enemigosMovAleatorio() {
     clearTimeout(intervaloMovAleatorio);
-    nivel.enemigos.forEach(e => e.moverAleatorio());
+    nivel.enemigos.forEach(e => {
+        if (e.tipo == "lobo") {
+            e.seguirPersonaje();
+        } else {
+            e.moverAleatorio();
+        }
+    });
     intervaloMovAleatorio = setTimeout(enemigosMovAleatorio, 200);
 }
 

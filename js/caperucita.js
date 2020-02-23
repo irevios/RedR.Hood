@@ -27,12 +27,36 @@ class Dinamico {
         }
     }
     // Colisiones
-    colisionaPorAbajo(px) { return colision(this.izquierda, this.arriba + px, this.contorno, "terreno") || colision(this.izquierda, this.arriba + px, this.contorno, "puertaCerrada"); }
-    colisionaPorArriba(px) { return colision(this.izquierda, this.arriba - px, this.contorno, "terreno") || colision(this.izquierda, this.arriba - px, this.contorno, "puertaCerrada"); }
-    colisionaPorDerecha(px) { return colision(this.izquierda + px, this.arriba, this.contorno, "terreno") || colision(this.izquierda + px, this.arriba, this.contorno, "puertaCerrada"); }
-    colisionaPorIzquierda(px) { return colision(this.izquierda - px, this.arriba, this.contorno, "terreno") || colision(this.izquierda - px, this.arriba, this.contorno, "puertaCerrada"); }
-    colisionaPorIzquierdaPuedeArriba(pxA, pxB) { return colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes descendentes
-    colisionaPorDerechaPuedeArriba(pxA, pxB) { return colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "terreno") || colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "puertaCerrada"); } // Pendientes ascendentes
+    colisionaPorAbajo(px) {
+        return colision(this.izquierda, this.arriba + px, this.contorno, "terreno") ||
+            colision(this.izquierda, this.arriba + px, this.contorno, "puertaCerrada") ||
+            colision(this.izquierda, this.arriba + px, this.contorno, "troncoBloqueando");
+    }
+    colisionaPorArriba(px) {
+        return colision(this.izquierda, this.arriba - px, this.contorno, "terreno") ||
+            colision(this.izquierda, this.arriba - px, this.contorno, "puertaCerrada") ||
+            colision(this.izquierda, this.arriba - px, this.contorno, "troncoBloqueando");
+    }
+    colisionaPorDerecha(px) {
+        return colision(this.izquierda + px, this.arriba, this.contorno, "terreno") ||
+            colision(this.izquierda + px, this.arriba, this.contorno, "puertaCerrada") ||
+            colision(this.izquierda + px, this.arriba, this.contorno, "troncoBloqueando");
+    }
+    colisionaPorIzquierda(px) {
+        return colision(this.izquierda - px, this.arriba, this.contorno, "terreno") ||
+            colision(this.izquierda - px, this.arriba, this.contorno, "puertaCerrada") ||
+            colision(this.izquierda - px, this.arriba, this.contorno, "troncoBloqueando");
+    }
+    colisionaPorIzquierdaPuedeArriba(pxA, pxB) { // Pendientes descendentes
+        return colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "terreno") ||
+            colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "puertaCerrada") ||
+            colision(this.izquierda - pxA, this.arriba - pxB, this.contorno, "troncoBloqueando");
+    }
+    colisionaPorDerechaPuedeArriba(pxA, pxB) { // Pendientes ascendentes
+        return colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "terreno") ||
+            colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "puertaCerrada") ||
+            colision(this.izquierda + pxA, this.arriba - pxB, this.contorno, "troncoBloqueando");
+    }
     // Tocar diferentes objetos o partes del mapa
     tocar(color, x, y) { return colision(this.izquierda + 10 + (x != undefined ? (this.direccion == "right" ? x : x * (-1)) : 0), this.arriba - 10 + (y != undefined ? (this.direccion == "right" ? y : y * (-1)) : 0), this.contorno, color); }
 }
@@ -118,8 +142,8 @@ class Caperucita extends Dinamico {
     // Ataques
     hacha() {
         this.animacion("axe_" + this.direccion);
-        if (this.tocar("enemigo", 50) != false) {
-            nivel.eliminaEnemigo(this.tocar("enemigo", 50));
+        if (this.tocar("enemigo", 80) != false) {
+            nivel.eliminaEnemigo(this.tocar("enemigo", 80));
         }
     }
     ballesta() {
@@ -194,7 +218,7 @@ class Proyectil extends Dinamico {
         }, { duration: 10, queue: false }, "linear");
 
         if (this.colisionaPorArriba(10) || this.colisionaPorAbajo(10) || this.colisionaPorIzquierda(10) || this.colisionaPorDerecha(10) || this.tocar("enemigo")) {
-            if(this.tocar("enemigo")!= false){
+            if (this.tocar("enemigo") != false) {
                 nivel.eliminaEnemigo(this.tocar("enemigo"));
             }
             this.capa.remove();

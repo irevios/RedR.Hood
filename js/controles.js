@@ -17,7 +17,6 @@ var teclasAccion = {
 function controlaTeclas() {
     let tiempo;
     $(document).keydown((e) => {
-        console.log(e.which);
         Object.entries(teclasMovimiento).forEach(([a, b]) => {
             if (e.which == teclasMovimiento[a].key) {
                 if (!teclasMovimiento[a].on) { teclasMovimiento[a].t = new Date().getTime(); };
@@ -122,7 +121,11 @@ function mueve() {
             personaje.agachate();
         }
     }
-
+    if (teclasMovimiento.ataque.on && personaje.tocar("troncoBloqueando", 50)) {
+        if (personaje.armaEquipada == "hacha") {
+            nivel.abrirPuerta();
+        }
+    }
 
 }
 

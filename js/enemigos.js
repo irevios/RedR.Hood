@@ -1,8 +1,8 @@
 "use strict";
 class EnemigoTerrestre extends Dinamico {
-    constructor(punto, tipo, cont, num) {
+    constructor(punto, tipo, cont, num, velocidad) {
         super($("<div class='" + tipo + " dinamico enemigo bien' style='left: " + punto.x + "px; top: " + (punto.y - 40) + "px'></div>").appendTo("#juego"));
-
+        this.v = velocidad
         this.tipo = tipo;
         //Colisión
         this.contorno = cont;
@@ -15,11 +15,11 @@ class EnemigoTerrestre extends Dinamico {
     moverDerecha() {
         if (this.colisionaPorAbajo(5)) {
             if (!this.colisionaPorDerecha(5)) {
-                this.velocidadX = 7;
+                this.velocidadX = this.v;
                 this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(180deg)");
             } else {
-                this.velocidadX = -7;
+                this.velocidadX = -this.v;
                 this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(0deg)");
             }
@@ -28,11 +28,11 @@ class EnemigoTerrestre extends Dinamico {
     moverIzquierda() {
         if (this.colisionaPorAbajo(5)) {
             if (!this.colisionaPorIzquierda(5)) {
-                this.velocidadX = -7;
+                this.velocidadX = -this.v;
                 this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(0deg)");
             } else {
-                this.velocidadX = 7;
+                this.velocidadX = this.v;
                 this.capa.animate({ left: this.izquierda += this.velocidadX, top: this.arriba -= 5 }, { duration: 10, queue: false }, "linear");
                 this.capa.css("transform", "rotateY(180deg)");
             }
@@ -43,6 +43,13 @@ class EnemigoTerrestre extends Dinamico {
         let veces = Math.round(Math.random() * 10);
         for (let i = 0; i < veces; i++) {
             num == 0 ? this.moverDerecha() : this.moverIzquierda();
+        }
+    }
+    seguirPersonaje() {
+        if (personaje.izquierda < this.izquierda) {
+            this.moverIzquierda();
+        } else {
+            this.moverDerecha();
         }
     }
 }
