@@ -75,10 +75,10 @@ class Caperucita extends Dinamico {
         this.img = "idle_" + this.direccion;
 
         // Inventario
-        this.armaEquipada = "";
+        this.armaEquipada = "ballesta";
         this.armas = {
             "hacha": false,
-            "ballesta": false,
+            "ballesta": true,
             "pulsera": false
         }
         this.objetoElegido = "";
@@ -90,6 +90,8 @@ class Caperucita extends Dinamico {
         }
         this.vida = 4;
         this.proyectiles = [];
+
+        this.flechaDelay;
     }
     // Físicas
     gravedad() {
@@ -147,6 +149,15 @@ class Caperucita extends Dinamico {
         }
     }
     ballesta() {
+            clearTimeout(this.flechaDelay);
+        if (this.proyectiles.length >= 1) {
+            this.flechaDelay = setTimeout(()=>this.creaFlecha(), 100);
+        } else {
+            this.creaFlecha();
+
+        }
+    }
+    creaFlecha() {
         this.estatica("arr_" + this.direccion);
         let flecha = new Proyectil(pRana, "flecha", { x: (this.izquierda + (this.anchura / 2) + (this.direccion == "right" ? 50 : -50)), y: this.arriba + 20 });
         this.proyectiles.push(flecha);
@@ -175,25 +186,29 @@ class Caperucita extends Dinamico {
 
     // Vida del personaje
     pierdeVida() {
-        $("#vida i:nth-child(" + this.vida + "):not(.fa-trophy)").effect("shake", { direction: "up", distance: 10, times: 2 }).addClass("perdida");
-        this.vida -= 1;
-        $("#daño").css({
-            "top": this.arriba,
-            "left": this.izquierda + this.anchura - 50
-        }).show().switchClass("blanco", "rojo", 1000, "easeOutBounce", function() { $(this).hide().switchClass("rojo", "blanco") });
+        if (personaje.vida > 1) {
+            $("#vida i:nth-child(" + this.vida + "):not(.fa-trophy)").effect("shake", { direction: "up", distance: 10, times: 2 }).addClass("perdida");
+            this.vida -= 1;
+            $("#daño").css({
+                "top": this.arriba,
+                "left": this.izquierda + this.anchura - 50
+            }).show().switchClass("blanco", "rojo", 1000, "easeOutBounce", function() { $(this).hide().switchClass("rojo", "blanco") });
+        } else {
+            gameover();
+        }
     }
     retrocede() {
         if (this.direccion == "right") {
             teclasMovimiento.derecha.on = false;
-            this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda -= 100 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorDerecha(80)) {
-                this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
+                this.capa.animate({ left: this.izquierda += 100 }, { duration: 10, queue: false }, "linear");
             }
         } else {
             teclasMovimiento.izquierda.on = false;
-            this.capa.animate({ left: this.izquierda += 20 }, { duration: 10, queue: false }, "linear");
+            this.capa.animate({ left: this.izquierda += 100 }, { duration: 10, queue: false }, "linear");
             if (this.colisionaPorIzquierda(80)) {
-                this.capa.animate({ left: this.izquierda -= 20 }, { duration: 10, queue: false }, "linear");
+                this.capa.animate({ left: this.izquierda -= 100 }, { duration: 10, queue: false }, "linear");
             }
         }
         this.capa.animate({ left: this.izquierda += this.velocidadX }, { duration: 10, queue: false }, "linear");
@@ -213,8 +228,8 @@ class Proyectil extends Dinamico {
     mover() {
         clearTimeout(this.lanzamiento);
         $(this.capa).animate({
-            left: this.izquierda = Math.round(Math.cos(this.angulo * Math.PI / 180) * 30 + this.izquierda),
-            top: this.arriba = Math.round(Math.sin(this.angulo * Math.PI / 180) * 30 + this.arriba)
+            left: this.izquierda = Math.round(Math.cos(this.angulo * Math.PI / 180) * 50 + this.izquierda),
+            top: this.arriba = Math.round(Math.sin(this.angulo * Math.PI / 180) * 50 + this.arriba)
         }, { duration: 10, queue: false }, "linear");
 
         if (this.colisionaPorArriba(10) || this.colisionaPorAbajo(10) || this.colisionaPorIzquierda(10) || this.colisionaPorDerecha(10) || this.tocar("enemigo")) {

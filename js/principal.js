@@ -120,7 +120,7 @@ function enemigos() {
 function enemigosMovAleatorio() {
     clearTimeout(intervaloMovAleatorio);
     nivel.enemigos.forEach(e => {
-        if (e.tipo == "lobo") {
+        if (e.tipo == "lobo" || e.tipo == "loboFeroz") {
             e.seguirPersonaje();
         } else {
             e.moverAleatorio();
@@ -154,11 +154,7 @@ function compruebaNivel() {
         actualizaPanel();
     }
     if (personaje.tocar("vacio")) {
-        if (personaje.vida != false) {
-            personaje.pierdeVida();
-        } else {
-            //gameover();
-        }
+        personaje.pierdeVida();
     }
     if (personaje.tocar("enemigo")) {
         personaje.pierdeVida();
@@ -232,4 +228,9 @@ function reloj() {
 function ganaPuntos(plus) {
     puntuacion += plus;
     $("#puntuacion span").text(("0000000000" + puntuacion).slice(-10));
+}
+
+function gameover() {
+    $("#gameover").show();
+    $("#juego,#interfaz").hide();
 }

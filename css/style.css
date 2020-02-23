@@ -172,7 +172,7 @@ body {
 }
 
 .loboFeroz.bien {
-    background-image: url("../img/enemigos/loboFeroz.gif");
+    background-image: url("../img/enemigos/loboFeroz.png");
 }
 
 .loboFeroz.daño {
@@ -329,6 +329,16 @@ body {
 #inicio {
     background-image: url("../img/interfaz/fondoTitulo.png");
     display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 200;
+    cursor: url("../img/interfaz/pointer.png"), auto;
+}
+
+#gameover {
+    background-image: url("../img/interfaz/gameover.png");
+    display: none;
     position: fixed;
     width: 100vw;
     height: 100vh;
