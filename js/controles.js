@@ -1,14 +1,14 @@
 "use strict";
 var teclasMovimiento = {
-    "saltar": { on: false, key: 32, t: 0 },
+    "saltar": { on: false, key: 87, t: 0 },
     "agacharse": { on: false, key: 83, t: 0 },
     "derecha": { on: false, key: 68, t: 0 },
     "izquierda": { on: false, key: 65, t: 0 },
-    "ataque": { on: false, key: 16, t: 0 }
+    "ataque": { on: false, key: 32, t: 0 }
 };
 var teclasAccion = {
-    "usarObjeto": { on: false, key: 102, t: 0 },
-    "cogerObjeto": { on: false, key: 113, t: 0 },
+    "usarObjeto": { on: false, key: 69, t: 0 },
+    "cogerObjeto": { on: false, key: 81, t: 0 },
     "arma1": { on: false, key: 49, t: 0 },
     "arma2": { on: false, key: 50, t: 0 },
     "arma3": { on: false, key: 51, t: 0 }

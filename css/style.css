@@ -214,7 +214,7 @@ body {
     border-radius: 0px 0 10px 10px;
     color: white;
     font-family: 'Righteous', Arial, Verdana, sans-serif;
-    z-index:3;
+    z-index: 3;
 }
 
 #panel,
@@ -284,7 +284,7 @@ body {
     padding: 2rem;
     text-shadow: 0 0 1rem rgba(0, 0, 0, .65);
     pointer-events: none;
-    z-index:3;
+    z-index: 3;
 }
 
 #puntuacion {
@@ -411,7 +411,17 @@ body {
 
 [role="dialog"] {
     background: white;
+    padding: 2vw;
+    border-radius: 4px;
     z-index: 999999999999;
+}
+
+[role="dialog"] *,
+[role="dialog"],
+span.ui-slider-handle.ui-corner-all.ui-state-default,
+.ui-widget-overlay {
+    cursor: url("../img/interfaz/pointer.png"), auto;
+    outline: none;
 }
 
 #transicion {
@@ -423,4 +433,131 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.ui-dialog-title {
+    font-family: "Righteous";
+    font-size: 2em;
+    text-align: center;
+    width: 100%;
+    display: block;
+    text-transform: uppercase;
+    color: #202020;
+}
+
+i.fa.fa-close {
+    font-size: 1.5em;
+    display: block;
+    position: absolute;
+    right: 1rem;
+    line-height: 2em;
+    color: #202020;
+}
+
+i.fa.fa-close:hover {
+    color: #d82b2b;
+}
+
+#vol {
+    padding: 1em;
+}
+
+#vol>span {
+    font-family: "Roboto Black";
+    padding-right: 0.5em;
+}
+
+#volumen {
+    border: none;
+    border-radius: 50em;
+    background: #F16969;
+    width: 80%;
+    display: inline-block;
+    font-family: "Roboto Black";
+}
+
+.valorVolumen {
+    display: inline-block;
+    font-family: "Roboto Black";
+    padding-left: 0.5em;
+}
+
+#teclas>div>div:focus {
+    background: #d82b2b;
+}
+
+div#dialog {
+    overflow: hidden;
+}
+
+.ui-slider-range.ui-corner-all.ui-widget-header.ui-slider-range-min {
+    background: #d82b2b;
+    border-radius: 50em;
+}
+
+span.ui-slider-handle.ui-corner-all.ui-state-default {
+    border-radius: 50em;
+    background: #ffffff;
+    box-shadow: 0 0 0.2em #202020;
+    border: none;
+    top: -3px;
+}
+
+.ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 0.2em #bf2323 solid;
+}
+
+#teclas>div>div {
+    border-collapse: collapse;
+    margin: 0.5em;
+    border-radius: 50em;
+    background: #7cc4b1;
+}
+
+#teclas>div>div i {
+    border: none;
+    display: block;
+    position: relative;
+    width: 6em;
+    padding: 1em;
+    background: white;
+    box-shadow: 0 0 3px 0px #00000047;
+    border-radius: 51em;
+    font-family: "Roboto black";
+}
+
+#teclas>div>div i {
+    display: block;
+    display: inline-block;
+    box-shadow: 0 0 3px #0000005f;
+    width: auto;
+    padding: 1em;
+    border-radius: 51em;
+    font-family: "Roboto black";
+}
+
+#teclas>div>div i:before {
+    font-family: fontawesome;
+}
+
+
+#teclas>div>div span {
+    display: inline-block;
+    position: absolute;
+    color: #202020;
+    height: 2em;
+    margin-top: 0.5em;
+    text-transform: uppercase;
+    margin-left: 0.5em;
+    font-family: "Roboto black";
+    text-align: center;
+    line-height: 2em;
+}
+
+.col {
+    display: inline-block;
+    width: 49%;
 }
