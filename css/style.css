@@ -561,3 +561,34 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     display: inline-block;
     width: 49%;
 }
+
+#playMusic {
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    color: white;
+    font-size: 2em;
+    bottom: 0;
+    right: 0;
+    background: #6f79776b;
+    border-radius: 50em;
+    margin: 0.5em;
+}
+
+i.fa.fa-music {
+    background: white;
+    padding: 0.4em;
+    color: #202020;
+    border-radius: 50em;
+    font-size: 1em;
+}
+
+i.fa.fa-play,
+i.fa.fa-pause {
+    padding: 0 0.7em 0 0;
+    font-size: 0.7em;
+}
+
+audio {
+    display: none;
+}
