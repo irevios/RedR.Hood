@@ -15,6 +15,10 @@ $(".ajustes").click(function() {
                 $("audio")[0].pause();
                 $("#playMusic i:not('.fa-music')").switchClass("fa-pause", "fa-play");
             }
+            if (ui.value > 0) {
+                $("audio")[0].play();
+                $("#playMusic i:not('.fa-music')").switchClass("fa-play", "fa-pause");
+            }
         }
     });
     $(".derecha span").text(teclasMovimiento.derecha.nom);
@@ -22,11 +26,11 @@ $(".ajustes").click(function() {
     $(".saltar span").text(teclasMovimiento.saltar.nom);
     $(".agacharse span").text(teclasMovimiento.agacharse.nom);
     $(".ataque span").text(teclasMovimiento.ataque.nom);
-    $(".usarObjeto span").text(teclasAccion.usarObjeto.nom);
-    $(".cogerObjeto span").text(teclasAccion.cogerObjeto.nom);
-    $(".arma1 span").text(teclasAccion.arma1.nom);
-    $(".arma2 span").text(teclasAccion.arma2.nom);
-    $(".arma3 span").text(teclasAccion.arma3.nom);
+    $(".usarObjeto span").text(teclasMovimiento.usarObjeto.nom);
+    $(".cogerObjeto span").text(teclasMovimiento.cogerObjeto.nom);
+    $(".arma1 span").text(teclasMovimiento.arma1.nom);
+    $(".arma2 span").text(teclasMovimiento.arma2.nom);
+    $(".arma3 span").text(teclasMovimiento.arma3.nom);
     $("#dialog").dialog("open");
 });
 
@@ -41,83 +45,13 @@ $("#playMusic").click(function() {
     }
 })
 
-$(".derecha").focus(function() {
-    $(".derecha").keydown(function(e) {
+$("#teclas>div>div").focus(function() {
+
+    $(this).keydown(function(e) {
         console.log(e.key);
         let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".derecha span").text(tecla.nom);
-        teclasMovimiento.derecha.key = tecla.key;
-        teclasMovimiento.derecha.nom = tecla.nom;
-    });
-});
-$(".izquierda").focus(function() {
-    $(".izquierda").keydown(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".izquierda span").text(tecla.nom);
-        teclasMovimiento.izquierda.key = tecla.key;
-        teclasMovimiento.izquierda.nom = tecla.nom;
-    });
-});
-$(".saltar").focus(function() {
-    $(".saltar").keydown(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".saltar span").text(tecla.nom);
-        teclasMovimiento.saltar.key = tecla.key;
-        teclasMovimiento.saltar.nom = tecla.nom;
-    });
-});
-$(".agacharse").focus(function() {
-    $(".agacharse").keydown(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".agacharse span").text(tecla.nom);
-        teclasMovimiento.agacharse.key = tecla.key;
-        teclasMovimiento.agacharse.nom = tecla.nom;
-    });
-});
-$(".ataque").focus(function() {
-    $(".ataque").keydown(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".ataque span").text(tecla.nom);
-        teclasMovimiento.ataque.key = tecla.key;
-        teclasMovimiento.ataque.nom = tecla.nom;
-    });
-});
-$(".usarObjeto").focus(function() {
-    $(".usarObjeto").keypress(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".usarObjeto span").text(tecla.nom);
-        teclasAccion.usarObjeto.key = tecla.key;
-        teclasAccion.usarObjeto.nom = tecla.nom;
-    });
-});
-$(".cogerObjeto").focus(function() {
-    $(".cogerObjeto").keypress(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".cogerObjeto span").text(tecla.nom);
-        teclasAccion.cogerObjeto.key = tecla.key;
-        teclasAccion.cogerObjeto.nom = tecla.nom;
-    });
-});
-$(".arma1").focus(function() {
-    $(".arma1").keypress(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".arma1 span").text(tecla.nom);
-        teclasAccion.arma1.key = tecla.key;
-        teclasAccion.arma1.nom = tecla.nom;
-    });
-});
-
-$(".arma2").focus(function() {
-    $(".arma2").keypress(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".arma2 span").text(tecla.nom);
-        teclasAccion.arma2.key = tecla.key;
-    });
-});
-$(".arma3").focus(function() {
-    $(".arma3").keypress(function(e) {
-        let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
-        $(".arma3 span").text(tecla.nom);
-        teclasAccion.arma3.key = tecla.key;
+        $("." + $(this).attr('class') + " span").text(tecla.nom);
+        teclasMovimiento[$(this).attr('class')].key = tecla.key;
+        teclasMovimiento[$(this).attr('class')].nom = tecla.nom;
     });
 });

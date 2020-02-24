@@ -463,15 +463,15 @@ i.fa.fa-close:hover {
 }
 
 #vol>span {
-    font-family: "Roboto Black";
-    padding-right: 0.5em;
+    padding: 0.5em;
+    font-size: 1.5em;
 }
 
 #volumen {
     border: none;
     border-radius: 50em;
     background: #F16969;
-    width: 80%;
+    width: 83%;
     display: inline-block;
     font-family: "Roboto Black";
 }

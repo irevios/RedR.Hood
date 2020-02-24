@@ -4,19 +4,19 @@ var teclasMovimiento = {
     "agacharse": { on: false, key: 83, t: 0, nom: "s" },
     "derecha": { on: false, key: 68, t: 0, nom: "d" },
     "izquierda": { on: false, key: 65, t: 0, nom: "a" },
-    "ataque": { on: false, key: 32, t: 0, nom: "Space" }
-};
-var teclasAccion = {
-    "cogerObjeto": { on: false, key: 113, t: 0, nom: "q" },
-    "usarObjeto": { on: false, key: 101, t: 0, nom: "e" },
+    "ataque": { on: false, key: 32, t: 0, nom: "Space" },
+    "cogerObjeto": { on: false, key: 81, t: 0, nom: "q" },
+    "usarObjeto": { on: false, key: 69, t: 0, nom: "e" },
     "arma1": { on: false, key: 49, t: 0, nom: "1" },
     "arma2": { on: false, key: 50, t: 0, nom: "2" },
     "arma3": { on: false, key: 51, t: 0, nom: "3" }
-}
-
+};
+//var teclasMovimiento = {}
+    
 function controlaTeclas() {
     let tiempo;
     $(document).keydown((e) => {
+        console.log(e.which);
         Object.entries(teclasMovimiento).forEach(([a, b]) => {
             if (e.which == teclasMovimiento[a].key) {
                 if (!teclasMovimiento[a].on) { teclasMovimiento[a].t = new Date().getTime(); };
@@ -33,19 +33,20 @@ function controlaTeclas() {
             }
         });
     });
-    $(document).keypress(e => {
-        console.log(e.which);
-        actua(e.which);
-    });
+    // $(document).down(e => {
+    //     actua(e.which);
+    // });
 }
 
-function actua(key) {
-    if (teclasAccion.usarObjeto.key == key && personaje.tocar("puertaCerrada", 100)) {
+function actua(key) {}
+
+function mueve() {
+    if (teclasMovimiento.usarObjeto.on && personaje.tocar("puertaCerrada", 100)) {
         if (personaje.objetoElegido == nivel.llave) {
             nivel.abrirPuerta();
         }
     }
-    if (teclasAccion.cogerObjeto.key == key && personaje.tocar("arma")) {
+    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("arma")) {
         ganaPuntos(20);
         personaje.armas[nivel.arma] = true;
         personaje.armaEquipada = nivel.arma;
@@ -55,16 +56,13 @@ function actua(key) {
             muestraGuia();
         }
     }
-    if (teclasAccion.cogerObjeto.key == key && personaje.tocar("llave")) {
+    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("llave")) {
         ganaPuntos(20);
         personaje.inventario[nivel.llave] = true;
         personaje.objetoElegido = nivel.llave;
         nivel.cogerLLave();
         nivel.cambiarFondo();
     }
-}
-
-function mueve() {
     if (teclasMovimiento.ataque.on) {
         teclasMovimiento.izquierda.on = false;
         teclasMovimiento.derecha.on = false;

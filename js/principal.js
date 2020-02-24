@@ -146,10 +146,10 @@ function rescala() {
     $("#juego").css("transform", "scale(" + escala + ")");
 }
 
-var cambioMapa;
+var cambioMapa = 0;
 
 function compruebaNivel() {
-    if (personaje.tocar("puerta") && cambioMapa == null) {
+    if (personaje.tocar("puerta") && cambioMapa == 0) {
         $("#transicion").fadeIn(function() {
             nivel.eliminaEnemigos();
             nivel = mapas["N" + (nivel.num + 1)];
@@ -161,8 +161,12 @@ function compruebaNivel() {
             nivel.generaEnemigos();
             ganaPuntos(125);
             actualizaPanel();
+            cambioMapa++;
         });
-        cambioMapa = setTimeout(() => $("#transicion").fadeOut(), 600);
+        cambioMapa = setTimeout(() => {
+            $("#transicion").fadeOut();
+            cambioMapa = 0;
+        }, 600);
     }
     if (personaje.tocar("vacio")) {
         personaje.pierdeVida();
@@ -242,6 +246,8 @@ function ganaPuntos(plus) {
 }
 
 function gameover() {
-    $("#gameover").show();
-    $("#juego,#interfaz").hide();
+    $("#transicion").fadeIn(function() {
+        $("#gameover").show("fade");
+        $("#juego,#interfaz").hide();
+    });
 }
