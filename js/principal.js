@@ -1,6 +1,7 @@
 "use strict";
 // Modo Debug
 let modoDebug = false;
+let nivelInicio = 0;
 modoDebug ? $("#fondo,#overfondo").addClass("modoDebug") : "";
 
 // Canvas
@@ -54,7 +55,7 @@ $("#partida .nueva").click(nuevaPartida);
 $("#partida .continuar").click(continuar);
 
 function nuevaPartida() {
-    partida(0);
+    partida(nivelInicio);
     personaje.izquierda = nivel.posInicialX;
     personaje.arriba = nivel.posInicialY;
     setTimeout(() => $("#transicion").fadeOut(), 600);
@@ -104,6 +105,8 @@ function partida(n) {
     // Controles
     controlaMouse();
     controlaTeclas();
+    muestraGuia();
+    $(".guia").hide();
 }
 
 function actualizaPanel() {
@@ -200,7 +203,6 @@ function muestraGuia() {
         moverGuia(e.pageX, e.pageY);
     });
 }
-
 function moverGuia(x, y) {
     let tx = x - personaje.izquierda;
     let ty = y - personaje.arriba;

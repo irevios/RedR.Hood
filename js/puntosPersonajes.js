@@ -15,6 +15,14 @@ let pCaperucita = [
     [114, 1]
 ];
 
+// Flecha y fuego
+let pProyectil = [
+    [7, 0],
+    [7, 38],
+    [63, 38],
+    [63, 0]
+];
+
 // Ranas
 let pRana = [
     [7, 0],
@@ -22,6 +30,7 @@ let pRana = [
     [63, 38],
     [63, 0]
 ];
+
 
 // Murcielagos
 let pMurcielago = [

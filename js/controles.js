@@ -7,16 +7,16 @@ var teclasMovimiento = {
     "ataque": { on: false, key: 32, t: 0, nom: "Space" },
     "cogerObjeto": { on: false, key: 81, t: 0, nom: "q" },
     "usarObjeto": { on: false, key: 69, t: 0, nom: "e" },
-    "arma1": { on: false, key: 49, t: 0, nom: "1" },
-    "arma2": { on: false, key: 50, t: 0, nom: "2" },
-    "arma3": { on: false, key: 51, t: 0, nom: "3" }
+    "hacha": { on: false, key: 49, t: 0, nom: "1" },
+    "ballesta": { on: false, key: 50, t: 0, nom: "2" },
+    "pulsera": { on: false, key: 51, t: 0, nom: "3" },
+    "modoDebug": { on: false, key: 192, t: 0, nom: "?" }
 };
 //var teclasMovimiento = {}
-    
+
 function controlaTeclas() {
     let tiempo;
     $(document).keydown((e) => {
-        console.log(e.which);
         Object.entries(teclasMovimiento).forEach(([a, b]) => {
             if (e.which == teclasMovimiento[a].key) {
                 if (!teclasMovimiento[a].on) { teclasMovimiento[a].t = new Date().getTime(); };
@@ -41,28 +41,6 @@ function controlaTeclas() {
 function actua(key) {}
 
 function mueve() {
-    if (teclasMovimiento.usarObjeto.on && personaje.tocar("puertaCerrada", 100)) {
-        if (personaje.objetoElegido == nivel.llave) {
-            nivel.abrirPuerta();
-        }
-    }
-    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("arma")) {
-        ganaPuntos(20);
-        personaje.armas[nivel.arma] = true;
-        personaje.armaEquipada = nivel.arma;
-        nivel.cogerArma();
-        nivel.cambiarFondo();
-        if (nivel.arma == "ballesta" || nivel.arma == "pulsera") {
-            muestraGuia();
-        }
-    }
-    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("llave")) {
-        ganaPuntos(20);
-        personaje.inventario[nivel.llave] = true;
-        personaje.objetoElegido = nivel.llave;
-        nivel.cogerLLave();
-        nivel.cambiarFondo();
-    }
     if (teclasMovimiento.ataque.on) {
         teclasMovimiento.izquierda.on = false;
         teclasMovimiento.derecha.on = false;
@@ -123,6 +101,60 @@ function mueve() {
     if (teclasMovimiento.ataque.on && personaje.tocar("troncoBloqueando", 50)) {
         if (personaje.armaEquipada == "hacha") {
             nivel.abrirPuerta();
+        }
+    }
+    if (teclasMovimiento.usarObjeto.on && personaje.tocar("puertaCerrada", 100)) {
+        if (personaje.objetoElegido == nivel.llave) {
+            nivel.abrirPuerta();
+        }
+    }
+    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("arma")) {
+        ganaPuntos(20);
+        personaje.armas[nivel.arma] = true;
+        personaje.armaEquipada = nivel.arma;
+        nivel.cogerArma();
+
+        if (nivel.arma == "ballesta" || nivel.arma == "pulsera") {
+            $(".guia").show();
+        }
+    }
+    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("llave")) {
+        ganaPuntos(20);
+        personaje.inventario[nivel.llave] = true;
+        personaje.objetoElegido = nivel.llave;
+        nivel.cogerLLave();
+
+    }
+    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("objeto")) {
+        ganaPuntos(20);
+        personaje.inventario[nivel.manzana] = true;
+        personaje.vida++;
+        nivel.cogerObjeto();
+
+    }
+    if (teclasMovimiento.hacha.on) {
+        if (personaje.armas.hacha) {
+            personaje.armaEquipada = "hacha";
+            $(".guia").hide();
+        }
+    }
+    if (teclasMovimiento.ballesta.on) {
+        if (personaje.armas.ballesta) {
+            personaje.armaEquipada = "ballesta";
+            $(".guia").show();
+        }
+    }
+    if (teclasMovimiento.pulsera.on) {
+        if (personaje.armas.pulsera) {
+            personaje.armaEquipada = "pulsera";
+            $(".guia").show();
+        }
+    }
+    if (teclasMovimiento.modoDebug.on) {
+        personaje.armas = {
+            "hacha": true,
+            "ballesta": true,
+            "pulsera": true
         }
     }
 

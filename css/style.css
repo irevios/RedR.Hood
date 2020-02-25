@@ -84,7 +84,19 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 }
-
+.fuego {
+    background: url("../img/proyectiles/fuego.gif");
+    width: 6rem;
+    height: 6rem;
+    transform-origin: left center;
+    background-position: right center;
+    transform: rotate(0);
+    display: block;
+    position: absolute;
+    z-index: 2;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 #fondo {
     display: block;
     position: absolute;

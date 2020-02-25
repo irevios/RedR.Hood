@@ -28,9 +28,9 @@ $(".ajustes").click(function() {
     $(".ataque span").text(teclasMovimiento.ataque.nom);
     $(".usarObjeto span").text(teclasMovimiento.usarObjeto.nom);
     $(".cogerObjeto span").text(teclasMovimiento.cogerObjeto.nom);
-    $(".arma1 span").text(teclasMovimiento.arma1.nom);
-    $(".arma2 span").text(teclasMovimiento.arma2.nom);
-    $(".arma3 span").text(teclasMovimiento.arma3.nom);
+    $(".hacha span").text(teclasMovimiento.hacha.nom);
+    $(".ballesta span").text(teclasMovimiento.ballesta.nom);
+    $(".pulsera span").text(teclasMovimiento.pulsera.nom);
     $("#dialog").dialog("open");
 });
 
@@ -48,7 +48,6 @@ $("#playMusic").click(function() {
 $("#teclas>div>div").focus(function() {
 
     $(this).keydown(function(e) {
-        console.log(e.key);
         let tecla = { "key": e.which, "nom": (e.which == 32 ? "Space" : e.key) }
         $("." + $(this).attr('class') + " span").text(tecla.nom);
         teclasMovimiento[$(this).attr('class')].key = tecla.key;

@@ -62,39 +62,31 @@ class EnemigoVolador extends Dinamico {
         this.contorno = cont;
         this.color = "126, 123, " + (parseInt(num) + 1 * 5);
     }
-    gravedad() {}
+    gravedad() {
+        console.log("nope");
+    }
     moverDerecha(n) {
-        for (let i = 0; i < n; i++) {
-            this.direccion = "right";
-            if (this.tocar("zonaEnemigos", 25, 0)) {
-                this.capa.animate({ left: this.izquierda += 10 }, { duration: 100, queue: false }, "linear");
-                this.capa.css("transform", "rotateY(180deg)");
-            }
+        this.direccion = "right";
+        if (this.tocar("zonaEnemigos") && !this.tocar("blanco")) {
+            this.capa.animate({ left: this.izquierda += 10 }, { duration: 100, queue: false }, "linear");
+            this.capa.css("transform", "rotateY(180deg)");
         }
     }
     moverIzquierda(n) {
-        for (let i = 0; i < n; i++) {
-            this.direccion = "left";
-            if (this.tocar("zonaEnemigos", -5, 0)) {
-                this.capa.animate({ left: this.izquierda -= 10 }, { duration: 100, queue: false }, "linear");
-                this.capa.css("transform", "rotateY(0deg)");
-            }
+        this.direccion = "left";
+        if (this.tocar("zonaEnemigos") && !this.tocar("blanco")) {
+            this.capa.animate({ left: this.izquierda -= 10 }, { duration: 100, queue: false }, "linear");
+            this.capa.css("transform", "rotateY(0deg)");
         }
     }
     moverArriba(n) {
-        for (let i = 0; i < n; i++) {
-            this.direccion = "right";
-            if (this.tocar("zonaEnemigos", 10, 20)) {
-                this.capa.animate({ top: this.arriba += 10 }, { duration: 100, queue: false }, "linear");
-            }
+        if (this.tocar("zonaEnemigos") && !this.tocar("blanco")) {
+            this.capa.animate({ top: this.arriba += 10 }, { duration: 100, queue: false }, "linear");
         }
     }
     moverAbajo(n) {
-        for (let i = 0; i < n; i++) {
-            this.direccion = "left";
-            if (this.tocar("zonaEnemigos", 10, -20)) {
-                this.capa.animate({ top: this.arriba -= 10 }, { duration: 100, queue: false }, "linear");
-            }
+        if (this.tocar("zonaEnemigos") && !this.tocar("blanco")) {
+            this.capa.animate({ top: this.arriba -= 10 }, { duration: 100, queue: false }, "linear");
         }
     }
     moverAleatorio() {

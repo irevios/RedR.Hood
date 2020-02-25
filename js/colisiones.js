@@ -9,7 +9,8 @@ let colores = {
     "puerta": [0, 255, 0], // Si tocas una puerta abierta cambia de mapa // rgb(0, 255, 0)
     "zonaEnemigos": [210, 0, 210], // Los enemigos pueden aparecer por esta zona // rgb(210,0,210)
     "enemigo": [126, 123, 1], // Si tocas un enemigo pierde vida // rgb(126, 123, 1)
-    "objetos": [0, 210, 255] // Si tocas un arma, la recoges // rgb(0, 210, 155)
+    "objetos": [0, 210, 255], // Si tocas un arma, la recoges // rgb(0, 210, 155)
+    "blanco": [255, 255, 255] // Espacio en blanco // rgb(255,255,255)
 }
 
 function colision(x, y, puntos, tipo) {

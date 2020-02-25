@@ -22,14 +22,13 @@ class Caperucita extends Dinamico {
         this.objetoElegido = "";
         this.inventario = {
             "llaveN1": false,
-            "llaveN3": false,
-            "huesos": 0,
-            "manzanas": 0
+            "manzana": false
         }
         this.vida = 4;
         this.proyectiles = [];
 
         this.flechaDelay;
+        this.fuegoDelay;
     }
     // Físicas
     gravedad() {
@@ -88,22 +87,27 @@ class Caperucita extends Dinamico {
     }
     ballesta() {
         clearTimeout(this.flechaDelay);
+        this.estatica("arr_" + this.direccion);
         if (this.proyectiles.length >= 1) {
-            this.flechaDelay = setTimeout(() => this.creaFlecha(), 100);
+            this.flechaDelay = setTimeout(() => this.creaProyectil("flecha"), 100);
         } else {
-            this.creaFlecha();
+            this.creaProyectil();
 
         }
     }
-    creaFlecha() {
-        this.estatica("arr_" + this.direccion);
-        let flecha = new Proyectil(pRana, "flecha", { x: (this.izquierda + (this.anchura / 2) + (this.direccion == "right" ? 50 : -50)), y: this.arriba + 20 });
+    pulsera() {
+        clearTimeout(this.fuegoDelay);
+        this.estatica("fire_" + this.direccion);
+        if (this.proyectiles.length >= 1) {
+            this.fuegoDelay = setTimeout(() => this.creaProyectil("fuego"), 100);
+        } else {
+            this.creaProyectil();
+        }
+    }
+    creaProyectil(tipo) {
+        let flecha = new Proyectil(pProyectil, tipo, { x: (this.izquierda + (this.anchura / 2) + (this.direccion == "right" ? 50 : -50)), y: this.arriba + 20 });
         this.proyectiles.push(flecha);
     }
-    pulsera() {
-        this.estatica("fire_" + this.direccion);
-    }
-
     // Cambiar imagenes del personaje
     animacion(img) {
         this.capa.css("background-image", "url('img/caperucita/" + img + ".gif')");
