@@ -24,6 +24,7 @@ Hay dos tipos de controles
 
 - **Ratón**
 * Controla la dirección en la que dispara
+* Dispara flechas o bolas de fuego.
 
 ## Niveles
 Se pasa de nivel de diferentes formas:
