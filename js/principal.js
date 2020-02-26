@@ -169,7 +169,7 @@ function compruebaNivel() {
         cambioMapa = setTimeout(() => {
             $("#transicion").fadeOut();
             cambioMapa = 0;
-        }, 600);
+        }, 1200);
     }
     if (personaje.tocar("vacio")) {
         personaje.pierdeVida();

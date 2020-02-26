@@ -160,12 +160,7 @@ function dibujaNivel1(arma, llave, puerta) {
     ctx.bezierCurveTo(1265.7, 914.5, 1451.6, 913.9, 1620.6, 909.4);
     ctx.bezierCurveTo(1632.6, 841.3, 1564.1, 816.0, 1472.6, 815.5);
     ctx.closePath();
-    ctx.moveTo(0.0, 833.0);
-    ctx.lineTo(0.0, 910.3);
-    ctx.bezierCurveTo(132.9, 931.3, 264.4, 949.3, 425.3, 953.1);
-    ctx.bezierCurveTo(427.6, 953.1, 430.2, 953.0, 433.0, 953.0);
-    ctx.bezierCurveTo(385.8, 805.5, 158.4, 852.7, 0.0, 833.0);
-    ctx.closePath();
+    
     ctx.fillStyle = "rgb(210, 0, 210)";
     ctx.fill();
 
@@ -240,7 +235,7 @@ function dibujaNivel2(arma, llave, puerta) {
     ctx.fillStyle = "rgb(255, 0, 0)";
     ctx.fill();
 
-    // Zona enemig
+    // Zona enemiga
     ctx.beginPath();
     ctx.moveTo(508.0, 24.0);
     ctx.lineTo(508.0, 363.4);
