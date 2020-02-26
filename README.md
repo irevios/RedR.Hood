@@ -48,4 +48,6 @@ Una sencilla interfaz muestra la vida del personaje, su puntuación, el nivel en
 
 Una ventana de ajustes permite controlar el audio y cambiar los controles a gusto del jugador.
 
+Todo el código e imágenes son totalmente originales, no usar sin autorización.
+
 I.E.S. Hermanos Machado | Interfaces | Irene Viñas | Febrero 2020
