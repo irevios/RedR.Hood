@@ -32,6 +32,14 @@ let pRana = [
 ];
 
 
+// Gansos
+let pGanso = [
+    [7, 0],
+    [7, 38],
+    [63, 38],
+    [63, 0]
+];
+
 // Murcielagos
 let pMurcielago = [
     [6, 6],

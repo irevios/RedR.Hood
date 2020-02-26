@@ -91,7 +91,7 @@ class Caperucita extends Dinamico {
         if (this.proyectiles.length >= 1) {
             this.flechaDelay = setTimeout(() => this.creaProyectil("flecha"), 100);
         } else {
-            this.creaProyectil();
+            this.creaProyectil("flecha");
 
         }
     }
@@ -101,7 +101,7 @@ class Caperucita extends Dinamico {
         if (this.proyectiles.length >= 1) {
             this.fuegoDelay = setTimeout(() => this.creaProyectil("fuego"), 100);
         } else {
-            this.creaProyectil();
+            this.creaProyectil("fuego");
         }
     }
     creaProyectil(tipo) {
@@ -139,6 +139,17 @@ class Caperucita extends Dinamico {
             gameover();
         }
     }
+    recuperaVida() {
+        if (personaje.vida < 4) {
+            this.vida += 1;
+            $("#vida i:nth-child(" + this.vida + "):not(.fa-trophy)").effect("shake", { direction: "up", distance: 10, times: 2 }).removeClass("perdida");
+            $("#recuperar").css({
+                "top": this.arriba,
+                "left": this.izquierda + this.anchura - 50
+            }).show().switchClass("blanco", "rojo", 1000, "easeOutBounce", function() { $(this).hide().switchClass("rojo", "blanco") });
+        }
+    }
+    // En caso de recibir daño
     retrocede() {
         if (this.direccion == "right") {
             teclasMovimiento.derecha.on = false;

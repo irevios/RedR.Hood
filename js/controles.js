@@ -123,14 +123,12 @@ function mueve() {
         personaje.inventario[nivel.llave] = true;
         personaje.objetoElegido = nivel.llave;
         nivel.cogerLLave();
-
     }
-    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("objeto")) {
+    if (teclasMovimiento.cogerObjeto.on && personaje.tocar("objetos")) {
         ganaPuntos(20);
         personaje.inventario[nivel.manzana] = true;
-        personaje.vida++;
+        personaje.recuperaVida();
         nivel.cogerObjeto();
-
     }
     if (teclasMovimiento.hacha.on) {
         if (personaje.armas.hacha) {

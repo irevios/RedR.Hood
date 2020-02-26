@@ -203,6 +203,7 @@ function muestraGuia() {
         moverGuia(e.pageX, e.pageY);
     });
 }
+
 function moverGuia(x, y) {
     let tx = x - personaje.izquierda;
     let ty = y - personaje.arriba;
@@ -251,5 +252,16 @@ function gameover() {
     $("#transicion").fadeIn(function() {
         $("#gameover").show("fade");
         $("#juego,#interfaz").hide();
+        clearInterval(intervaloTiempo);
+        $("#tiempo span").text("00:00");
+    });
+}
+
+function escenaFin() {
+    $("#transicion").fadeIn(function() {
+        $("#escenaFin").show("fade");
+        $("#juego,#interfaz").hide();
+        clearInterval(intervaloTiempo);
+        $("#tiempo span").text("00:00");
     });
 }

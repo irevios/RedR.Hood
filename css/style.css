@@ -8,6 +8,11 @@
     src: url("../fonts/Righteous.ttf");
 }
 
+@font-face {
+    font-family: "Roboto Black";
+    src: url("../fonts/Roboto-Black.ttf");
+}
+
 body {
     margin: 0;
     box-sizing: border-box;
@@ -84,6 +89,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 .fuego {
     background: url("../img/proyectiles/fuego.gif");
     width: 6rem;
@@ -97,6 +103,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 #fondo {
     display: block;
     position: absolute;
@@ -133,6 +140,18 @@ body {
 
 }
 
+#recupera {
+    width: 5rem;
+    height: 4rem;
+    display: none;
+    position: absolute;
+    z-index: 20;
+    padding: 1rem;
+    line-height: 3rem;
+    text-align: center;
+
+}
+
 .rana {
     width: 55px;
     height: 60px;
@@ -146,6 +165,21 @@ body {
 
 .rana.daño {
     background-image: url("../img/enemigos/ranadaño.png");
+}
+
+.ganso {
+    width: 55px;
+    height: 96px;
+    margin-top: -36px;
+    z-index: 1;
+}
+
+.ganso.bien {
+    background-image: url("../img/enemigos/ganso.gif");
+}
+
+.ganso.daño {
+    background-image: url("../img/enemigos/gansodaño.png");
 }
 
 .murcielago {
@@ -199,6 +233,17 @@ body {
 }
 
 #daño.rojo {
+    font-size: 2rem;
+    color: #E21C20;
+    text-shadow: 1px 1px 13px white;
+}
+#recupera.blanco {
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: 1px 1px 13px #E21C20;
+}
+
+#recupera.rojo {
     font-size: 2rem;
     color: #E21C20;
     text-shadow: 1px 1px 13px white;
@@ -357,6 +402,20 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 200;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: url("../img/interfaz/pointer.png"), auto;
+}
+
+#escenaFin {
+    background-image: url("../img/interfaz/escenaFin.png");
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 200;
+    background-repeat: no-repeat;
+    background-size: cover;
     cursor: url("../img/interfaz/pointer.png"), auto;
 }
 
@@ -538,7 +597,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     background: white;
     box-shadow: 0 0 3px 0px #00000047;
     border-radius: 51em;
-    font-family: "Roboto black";
+    font-family: "Roboto Black";
 }
 
 #teclas>div>div i {
@@ -548,7 +607,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     width: auto;
     padding: 1em;
     border-radius: 51em;
-    font-family: "Roboto black";
+    font-family: "Roboto Black";
 }
 
 #teclas>div>div i:before {
@@ -564,7 +623,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     margin-top: 0.5em;
     text-transform: uppercase;
     margin-left: 0.5em;
-    font-family: "Roboto black";
+    font-family: "Roboto Black";
     text-align: center;
     line-height: 2em;
 }
