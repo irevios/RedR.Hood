@@ -15,7 +15,13 @@ let anguloLanzamiento = 0;
 let puntuacion = 0;
 
 // Hacer que el juego siempre tenga el tamaño correcto según la pantalla
-$(window).resize((e) => rescala());
+$("#juego").resizable({
+    minHeight: 150,
+    minWidth: 200,
+    aspectRatio: 16 / 9,
+    containment: "body",
+    stop: rescala()
+});
 $(window).on('load', () => {
     setTimeout(function() {
         $(".cargando").css("opacity", "0");
@@ -48,7 +54,6 @@ $(document).ready(function() {
     for (var i = 0; i < personaje.vida; i++) {
         $("<i class='fa fa-heart' aria-hidden='true'></i>").insertBefore("#puntuacion");
     };
-
 });
 
 $("#partida .nueva").click(nuevaPartida);
