@@ -24,6 +24,7 @@ Hay dos tipos de controles
 
 - **Ratón**
 * Controla la dirección en la que dispara
+* Dispara flechas o bolas de fuego.
 
 ## Niveles
 Se pasa de nivel de diferentes formas:
@@ -46,5 +47,7 @@ Una sencilla interfaz muestra la vida del personaje, su puntuación, el nivel en
 ![Ajustes](git/ajustes.png)
 
 Una ventana de ajustes permite controlar el audio y cambiar los controles a gusto del jugador.
+
+Todo el código e imágenes son totalmente originales, no usar sin autorización.
 
 I.E.S. Hermanos Machado | Interfaces | Irene Viñas | Febrero 2020
