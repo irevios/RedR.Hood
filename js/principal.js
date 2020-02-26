@@ -123,7 +123,7 @@ function gravity() {
 function enemigos() {
     clearTimeout(intervaloEnemigos);
     dibujaMovimiento(nivel.enemigos);
-    intervaloEnemigos = setTimeout(enemigos, 200);
+    intervaloEnemigos = setTimeout(enemigos, 100);
 }
 
 function enemigosMovAleatorio() {
