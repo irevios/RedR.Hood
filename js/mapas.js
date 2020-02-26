@@ -91,8 +91,7 @@ class Mapa {
                     ganaPuntos(300);
                     escenaFin();
                 }
-            }
-            if (tocado.tipo == "lobo") {
+            } else if (tocado.tipo == "lobo") {
                 setTimeout(() => tocado.capa.switchClass("daño", "bien", 300, "swing"), 300);
                 if (vidaLobo >= 1) {
                     vidaLobo--;
@@ -104,6 +103,12 @@ class Mapa {
                     ganaPuntos(50);
 
                 }
+            } else {
+                setTimeout(() => {
+                    tocado.capa.remove();
+                    this.enemigos = this.enemigos.filter(e => e != tocado);
+                }, 300);
+                ganaPuntos(25);
             }
         }
     }
