@@ -62,10 +62,6 @@ class Caperucita extends Dinamico {
         }
 
     }
-    mirarArriba() {
-        this.mirar = "up";
-        this.estatica("idle_" + this.direccion);
-    }
     agachate() {
         if (!teclasMovimiento.derecha.on && !teclasMovimiento.izquierda.on) {
             this.estatica("down_" + this.direccion);
