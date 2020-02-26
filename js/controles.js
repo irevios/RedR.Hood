@@ -33,12 +33,7 @@ function controlaTeclas() {
             }
         });
     });
-    // $(document).down(e => {
-    //     actua(e.which);
-    // });
 }
-
-function actua(key) {}
 
 function mueve() {
     if (teclasMovimiento.ataque.on) {
@@ -159,5 +154,11 @@ function mueve() {
 }
 
 function controlaMouse() {
-
+    $("#juego").click(function(){
+        if(personaje.armaEquipada == "ballesta"||personaje.armaEquipada == "pulsera"){
+            teclasMovimiento.ataque.on = true;
+            mueve();
+            teclasMovimiento.ataque.on = false;
+        }
+    })
 }
