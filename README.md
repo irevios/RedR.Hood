@@ -1,53 +1,66 @@
 ![Logo](img/interfaz/titulo.png)
 
-# Red R. Hood
-Proyecto de juego de plataformas creado con Jquery y Canvas, basado en el cuento de caperucita roja.
+**Red R. Hood** is a platformer game developed with **jQuery** and **Canvas**, inspired by the classic tale of Little Red Riding Hood.
 
-### Juega aquí -> [[Jugar](https://redrhood.netlify.com)]
+### Play Now -> [[Play Here](https://redrhood.netlify.app)]
 
-![Nivel](git/nivel.png)
+![Level](git/nivel.png)
 
-## Físcas
-Todos los personajes terrestres de este juego son afectados por una gravedad que les hace ajustarse al terreno irregular. 
+## Features
 
-## Colisiones
-Todas las colisiones del personaje principal con el resto del mapa se indican en el canvas. Se actualiza en un intervalo para tener la hitbox de los enemigos actualizadas.
+### **Physics**
+- All ground-based characters in the game are influenced by gravity, which ensures they adapt realistically to uneven terrain.
 
-## Control
-Hay dos tipos de controles
-- **Teclado**
-* Se controla el movimiento del personaje, pudiendo moverse a los lados, saltar y agacharse.
-* Se recoge objetos
-* Se ataca
-* Se puede cambiar de arma
-* Se puede usar objetos como las llaves
+### **Collisions**
+- The main character's interactions with the environment are precisely tracked on the canvas.
+- The hitboxes for enemies are dynamically updated at regular intervals to ensure accurate collision detection.
 
-- **Ratón**
-* Controla la dirección en la que dispara
-* Dispara flechas o bolas de fuego.
+## Controls
+There are two types of controls available:
 
-## Niveles
-Se pasa de nivel de diferentes formas:
-* **Nivel 1:** Debe conseguir el hacha para cortar el árbol que obstaculiza el camino.
-* **Nivel 2:** Debe conseguir la llave que abre el candado.
-* **Nivel 3:** Debe tirar de la cuerda para llegar a la rama.
+- **Keyboard**
+  - Move the character (left, right, jump, crouch).
+  - Pick up objects.
+  - Attack.
+  - Switch weapons.
+  - Use items like keys.
 
-## Enemigos
-![Lobo](img/enemigos/loboFeroz.png)
+- **Mouse**
+  - Aim in the desired direction.
+  - Shoot arrows or fireballs.
 
-Hay dos tipos:
-* **Terrestres:** Son afectados por la gravedad. Solo se mueven hacia la derecha o izquierda.
-* **Voladores:** Ignoran la gravedad y pueden moverse en 4 direcciones dentro de un área limitada.
+## Levels
+Each level has a unique objective to progress:
 
-Ambos tipos aparecen en los puntos marcados como zona enemiga.
+- **Level 1:** Obtain the axe to cut down the tree blocking the path.
+- **Level 2:** Find the key to unlock the padlock.
+- **Level 3:** Pull the rope to reach the branch.
 
-## Interfaz
-Una sencilla interfaz muestra la vida del personaje, su puntuación, el nivel en el que está y el tiempo que tiene para pasar al siguiente.
+## Enemies
+![Wolf](img/enemigos/loboFeroz.png)
 
-![Ajustes](git/ajustes.png)
+There are two enemy types:
 
-Una ventana de ajustes permite controlar el audio y cambiar los controles a gusto del jugador.
+- **Ground-based:**  
+  - Affected by gravity.  
+  - Move horizontally (left or right).
 
-Todo el código e imágenes son totalmente originales, no usar sin autorización.
+- **Flying:**  
+  - Ignore gravity.  
+  - Can move in four directions within a restricted area.
 
-I.E.S. Hermanos Machado | Interfaces | Irene Viñas | Febrero 2020
+Enemies spawn at designated zones marked as enemy areas.
+
+## Interface
+The user interface provides essential information:
+
+- Player's health.
+- Current score.
+- Active level.
+- Remaining time to complete the level.
+
+![Settings](git/ajustes.png)
+
+A settings window allows players to:
+- Adjust audio levels.
+- Customize controls to suit their preferences.
